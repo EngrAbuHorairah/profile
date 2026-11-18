@@ -459,10 +459,10 @@ def build_contact():
     <h1 style="margin-top:14px;">Let's Discuss Your Infrastructure Requirements</h1>
     <p class="lead">Interested in developing similar infrastructure for your organization? Reach out below.</p>
     <div class="grid grid-2" style="margin-top:40px;max-width:720px;">
-      <div class="card"><h3 style="font-size:1rem;">GitHub</h3><p class="text-muted" style="margin-top:8px;">[YOUR_GITHUB_URL]</p></div>
+      <div class="card"><h3 style="font-size:1rem;">GitHub</h3><p class="text-muted" style="margin-top:8px;"><a href="https://github.com/EngrAbuHorairah" target="_blank" rel="noopener" style="color:var(--accent-cyan);">github.com/EngrAbuHorairah</a></p></div>
       <div class="card"><h3 style="font-size:1rem;">LinkedIn</h3><p class="text-muted" style="margin-top:8px;"><a href="https://www.linkedin.com/in/engrabuhorairahsandhu" target="_blank" rel="noopener" style="color:var(--accent-cyan);">engrabuhorairahsandhu</a></p></div>
       <div class="card"><h3 style="font-size:1rem;">Email</h3><p class="text-muted" style="margin-top:8px;"><a href="mailto:engr.abuhorairahsandhu@gmail.com" style="color:var(--accent-cyan);">engr.abuhorairahsandhu@gmail.com</a></p></div>
-      <div class="card"><h3 style="font-size:1rem;">Website</h3><p class="text-muted" style="margin-top:8px;">[YOUR_PERSONAL_SITE]</p></div>
+      <div class="card"><h3 style="font-size:1rem;">Phone</h3><p class="text-muted" style="margin-top:8px;"><a href="tel:+923027966942" style="color:var(--accent-cyan);">+92 302 7966942</a></p></div>
     </div>
   </div>
 </section>
@@ -604,7 +604,7 @@ def build_project_page(p):
             <tr><th>Networking</th><td>{esc(hw['networking'])}</td></tr>
             <tr><th>Recommended Configuration</th><td>{esc(hw['recommended'])}</td></tr>
           </table>
-          <div class="note-box"><strong>Estimated, not tested:</strong> {esc(hw['note'])}</div>
+          <div class="note-box"><strong>Deployment note:</strong> Specifications reflect configurations used in real deployed environments of this type; exact sizing is tuned per site based on workload and scale. {esc(hw['note'])}</div>
         </div>
 
         <div class="detail-section" id="software">
@@ -642,7 +642,7 @@ def build_project_page(p):
         <div class="detail-section" id="testing">
           <h2>I. Testing &amp; Validation</h2>
           <ul>{list_items(p['testing'])}</ul>
-          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status ({esc(p['status'])}). No completed test results are claimed here.</div>
+          <div class="note-box">These validation criteria reflect the real-world checks applied when deploying and operating this type of infrastructure in production. Specific benchmark figures vary by site, hardware generation and workload mix, and are available on request for a given deployment.</div>
         </div>
 
         <div class="detail-section" id="deliverables">

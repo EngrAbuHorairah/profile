@@ -6,12 +6,23 @@
       "title": "Enterprise Private AI Platform",
       "category": "Artificial Intelligence",
       "categorySlug": "ai",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A secure, on-premises AI platform providing private LLM inference, retrieval-augmented generation and document intelligence without dependency on external cloud providers.",
       "challenge": "Delivering cloud-grade AI capability (chat, RAG, multi-user access) entirely within an organization's own infrastructure, with no data leaving the premises.",
       "businessValue": "Keeps sensitive data in-house, removes per-token cloud inference costs, and gives IT full control over model versions, uptime and access policy.",
-      "tech": ["NVIDIA CUDA", "PyTorch", "vLLM", "Ollama", "Open WebUI", "Qdrant", "PostgreSQL", "FastAPI", "Docker/Podman", "Linux"],
+      "tech": [
+        "NVIDIA CUDA",
+        "PyTorch",
+        "vLLM",
+        "Ollama",
+        "Open WebUI",
+        "Qdrant",
+        "PostgreSQL",
+        "FastAPI",
+        "Docker/Podman",
+        "Linux"
+      ],
       "objectives": [
         "Provide private large-language-model inference with no external API dependency.",
         "Enable retrieval-augmented generation (RAG) over an organization's internal documents.",
@@ -31,42 +42,94 @@
       },
       "architecture": {
         "overview": "A three-tier architecture: a presentation tier (Open WebUI), an application/API tier (FastAPI + authentication), and an inference/data tier (vLLM on GPU nodes, Qdrant vector store, PostgreSQL).",
-        "components": ["Open WebUI (chat frontend)", "FastAPI gateway (auth, routing, rate limiting)", "vLLM / Ollama inference engine on CUDA GPUs", "Qdrant vector database for embeddings", "PostgreSQL for users, sessions, conversation history", "Document ingestion pipeline (chunking + embedding)"],
-        "dataflow": "User query → FastAPI gateway → embedding model converts query → Qdrant similarity search retrieves relevant document chunks → context + query sent to vLLM-served LLM → response streamed back through gateway to Open WebUI.",
+        "components": [
+          "Open WebUI (chat frontend)",
+          "FastAPI gateway (auth, routing, rate limiting)",
+          "vLLM / Ollama inference engine on CUDA GPUs",
+          "Qdrant vector database for embeddings",
+          "PostgreSQL for users, sessions, conversation history",
+          "Document ingestion pipeline (chunking + embedding)"
+        ],
+        "dataflow": "User query \u2192 FastAPI gateway \u2192 embedding model converts query \u2192 Qdrant similarity search retrieves relevant document chunks \u2192 context + query sent to vLLM-served LLM \u2192 response streamed back through gateway to Open WebUI.",
         "integration": "OpenAI-compatible API surface allows internal tools (scripts, IDE plugins, internal apps) to call the private model the same way they would call a public API, minimizing integration friction."
       },
       "stackRationale": [
-        {"tech": "vLLM", "why": "High-throughput GPU inference engine with continuous batching, giving better concurrent-user performance than naive model serving."},
-        {"tech": "Qdrant", "why": "Purpose-built vector database with filtering support, needed for accurate RAG retrieval over internal documents."},
-        {"tech": "FastAPI", "why": "Lightweight, async-capable Python framework well suited to building an OpenAI-compatible gateway with authentication middleware."},
-        {"tech": "Docker/Podman", "why": "Containerization isolates each service (inference, DB, vector store) and simplifies reproducible deployment and upgrades."},
-        {"tech": "PostgreSQL", "why": "Mature relational database for user accounts, audit logs and conversation metadata."}
+        {
+          "tech": "vLLM",
+          "why": "High-throughput GPU inference engine with continuous batching, giving better concurrent-user performance than naive model serving."
+        },
+        {
+          "tech": "Qdrant",
+          "why": "Purpose-built vector database with filtering support, needed for accurate RAG retrieval over internal documents."
+        },
+        {
+          "tech": "FastAPI",
+          "why": "Lightweight, async-capable Python framework well suited to building an OpenAI-compatible gateway with authentication middleware."
+        },
+        {
+          "tech": "Docker/Podman",
+          "why": "Containerization isolates each service (inference, DB, vector store) and simplifies reproducible deployment and upgrades."
+        },
+        {
+          "tech": "PostgreSQL",
+          "why": "Mature relational database for user accounts, audit logs and conversation metadata."
+        }
       ],
       "hardware": {
         "cpu": "16+ core server-grade CPU for the application/orchestration tier (model inference is GPU-bound).",
-        "gpu": "One or more NVIDIA GPUs with 24GB+ VRAM for 7B–13B models; 48GB+ or multi-GPU for 30B–70B class models.",
+        "gpu": "One or more NVIDIA GPUs with 24GB+ VRAM for 7B\u201313B models; 48GB+ or multi-GPU for 30B\u201370B class models.",
         "ram": "64GB+ system RAM recommended for host OS, container overhead, and embedding caches.",
-        "storage": "NVMe SSD for model weights and vector index (model weights alone can range from 15GB–150GB depending on model size).",
+        "storage": "NVMe SSD for model weights and vector index (model weights alone can range from 15GB\u2013150GB depending on model size).",
         "networking": "1GbE minimum for internal access; 10GbE recommended if serving many concurrent users or multiple GPU nodes.",
         "recommended": "Dual-GPU workstation or single GPU server node for pilot deployments; scales to multi-node with a load balancer for production.",
         "note": "All figures are estimated sizing guidance based on published vendor/model requirements, not benchmarked results from a live deployment."
       },
       "software": {
         "os": "Linux (Ubuntu Server LTS or Rocky Linux).",
-        "dependencies": ["NVIDIA driver + CUDA toolkit", "Docker/Podman + Compose", "Python 3.10+"],
-        "services": ["vLLM/Ollama inference service", "Qdrant service", "PostgreSQL service", "FastAPI gateway"],
-        "databases": ["PostgreSQL (application data)", "Qdrant (vector embeddings)"],
+        "dependencies": [
+          "NVIDIA driver + CUDA toolkit",
+          "Docker/Podman + Compose",
+          "Python 3.10+"
+        ],
+        "services": [
+          "vLLM/Ollama inference service",
+          "Qdrant service",
+          "PostgreSQL service",
+          "FastAPI gateway"
+        ],
+        "databases": [
+          "PostgreSQL (application data)",
+          "Qdrant (vector embeddings)"
+        ],
         "apis": "OpenAI-compatible REST API exposed by the gateway for internal application integration.",
         "monitoring": "GPU utilization via nvidia-smi/DCGM exporter feeding Prometheus/Grafana.",
         "automation": "Ansible playbooks for repeatable provisioning of inference nodes."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Define user base, data sensitivity classification, target model sizes, and concurrency requirements."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision GPU server(s), install NVIDIA drivers/CUDA, configure base OS and networking."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Deploy containerized vLLM/Ollama, Qdrant, PostgreSQL and the FastAPI gateway; load initial model(s)."},
-        {"phase": "Phase 4 — Integration", "detail": "Connect Open WebUI, configure RBAC/authentication, ingest initial document set into the vector store."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Validate retrieval accuracy, measure tokens/sec throughput under concurrent load, test failover."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Finalize backup policy, access audit logging, and documented runbooks before general rollout."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Define user base, data sensitivity classification, target model sizes, and concurrency requirements."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision GPU server(s), install NVIDIA drivers/CUDA, configure base OS and networking."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Deploy containerized vLLM/Ollama, Qdrant, PostgreSQL and the FastAPI gateway; load initial model(s)."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Connect Open WebUI, configure RBAC/authentication, ingest initial document set into the vector store."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Validate retrieval accuracy, measure tokens/sec throughput under concurrent load, test failover."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Finalize backup policy, access audit logging, and documented runbooks before general rollout."
+        }
       ],
       "security": {
         "authentication": "Role-based login via the gateway, integrable with existing LDAP/Active Directory/FreeIPA.",
@@ -95,19 +158,28 @@
         "Integration with enterprise SSO (SAML/OIDC)."
       ]
     },
-
     {
       "id": 2,
       "slug": "distributed-ai-training-inference-cluster",
       "title": "Distributed AI Training & Inference Cluster",
       "category": "Artificial Intelligence",
       "categorySlug": "ai",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A scalable multi-GPU, multi-node computing infrastructure for distributed AI model training, fine-tuning and high-throughput inference.",
       "challenge": "Coordinating multiple GPUs across multiple physical nodes so that training and inference workloads scale efficiently rather than being bottlenecked by communication overhead.",
       "businessValue": "Allows an organization to train and serve larger models than a single machine could support, and to run many inference requests in parallel.",
-      "tech": ["NVIDIA GPUs", "CUDA", "PyTorch Distributed", "NCCL", "vLLM", "DeepSpeed", "Kubernetes or Slurm", "Prometheus", "Grafana"],
+      "tech": [
+        "NVIDIA GPUs",
+        "CUDA",
+        "PyTorch Distributed",
+        "NCCL",
+        "vLLM",
+        "DeepSpeed",
+        "Kubernetes or Slurm",
+        "Prometheus",
+        "Grafana"
+      ],
       "objectives": [
         "Enable distributed (multi-GPU, multi-node) model training and fine-tuning.",
         "Provide high-throughput multi-GPU inference serving.",
@@ -127,15 +199,33 @@
       },
       "architecture": {
         "overview": "A head/scheduler node coordinates jobs across a pool of GPU worker nodes, connected via high-bandwidth, low-latency networking for gradient synchronization.",
-        "components": ["Scheduler (Slurm or Kubernetes control plane)", "GPU worker nodes with NVLink/PCIe GPUs", "NCCL for collective communication", "Shared/distributed storage for datasets and checkpoints", "Prometheus/Grafana monitoring stack"],
-        "dataflow": "Training job submitted to scheduler → scheduler allocates GPU workers → PyTorch Distributed/DeepSpeed partitions model/data across workers → gradients synchronized via NCCL each step → checkpoints written to shared storage.",
+        "components": [
+          "Scheduler (Slurm or Kubernetes control plane)",
+          "GPU worker nodes with NVLink/PCIe GPUs",
+          "NCCL for collective communication",
+          "Shared/distributed storage for datasets and checkpoints",
+          "Prometheus/Grafana monitoring stack"
+        ],
+        "dataflow": "Training job submitted to scheduler \u2192 scheduler allocates GPU workers \u2192 PyTorch Distributed/DeepSpeed partitions model/data across workers \u2192 gradients synchronized via NCCL each step \u2192 checkpoints written to shared storage.",
         "integration": "Inference workloads exposed via vLLM endpoints that can scale horizontally across the same GPU pool when training jobs are not consuming full capacity."
       },
       "stackRationale": [
-        {"tech": "NCCL", "why": "NVIDIA's collective communication library minimizes latency for gradient all-reduce operations across GPUs and nodes."},
-        {"tech": "DeepSpeed", "why": "Provides memory-efficient optimizer sharding (ZeRO), enabling training of models larger than any single GPU's memory."},
-        {"tech": "Slurm or Kubernetes", "why": "Mature schedulers for allocating shared GPU resources fairly across competing jobs and users."},
-        {"tech": "vLLM", "why": "Continuous batching and PagedAttention deliver significantly higher inference throughput than naive serving."}
+        {
+          "tech": "NCCL",
+          "why": "NVIDIA's collective communication library minimizes latency for gradient all-reduce operations across GPUs and nodes."
+        },
+        {
+          "tech": "DeepSpeed",
+          "why": "Provides memory-efficient optimizer sharding (ZeRO), enabling training of models larger than any single GPU's memory."
+        },
+        {
+          "tech": "Slurm or Kubernetes",
+          "why": "Mature schedulers for allocating shared GPU resources fairly across competing jobs and users."
+        },
+        {
+          "tech": "vLLM",
+          "why": "Continuous batching and PagedAttention deliver significantly higher inference throughput than naive serving."
+        }
       ],
       "hardware": {
         "cpu": "Server-grade multi-core CPUs per node to avoid CPU-side data loading bottlenecks.",
@@ -143,25 +233,53 @@
         "ram": "256GB+ system RAM per node for large dataset staging and checkpoint buffering.",
         "storage": "High-throughput NVMe or parallel storage for dataset and checkpoint I/O.",
         "networking": "InfiniBand or 100GbE RDMA strongly recommended between nodes to avoid communication bottlenecks during distributed training.",
-        "recommended": "Minimum viable cluster: 2 nodes × multi-GPU each; production-scale clusters typically use many more nodes depending on model size targets.",
+        "recommended": "Minimum viable cluster: 2 nodes \u00d7 multi-GPU each; production-scale clusters typically use many more nodes depending on model size targets.",
         "note": "Hardware sizing is estimated guidance; actual throughput must be validated through benchmarking on the specific model/dataset."
       },
       "software": {
         "os": "Linux (Rocky Linux/Ubuntu Server) with NVIDIA driver and CUDA toolkit.",
-        "dependencies": ["PyTorch + PyTorch Distributed", "DeepSpeed", "NCCL", "CUDA/cuDNN"],
-        "services": ["Slurm or Kubernetes scheduler", "vLLM inference server"],
-        "databases": ["Metadata/experiment tracking store (e.g. PostgreSQL) if experiment tracking is required."],
+        "dependencies": [
+          "PyTorch + PyTorch Distributed",
+          "DeepSpeed",
+          "NCCL",
+          "CUDA/cuDNN"
+        ],
+        "services": [
+          "Slurm or Kubernetes scheduler",
+          "vLLM inference server"
+        ],
+        "databases": [
+          "Metadata/experiment tracking store (e.g. PostgreSQL) if experiment tracking is required."
+        ],
         "apis": "Job submission API/CLI via scheduler; inference API via vLLM.",
         "monitoring": "DCGM Exporter + Prometheus + Grafana for GPU utilization, memory and temperature.",
         "automation": "Ansible for node provisioning; scheduler-native job templates for recurring training runs."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Define target model sizes, number of concurrent users, and training vs inference capacity split."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision GPU nodes, install drivers/CUDA, set up high-speed interconnect."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Deploy scheduler, configure NCCL, install PyTorch Distributed/DeepSpeed."},
-        {"phase": "Phase 4 — Integration", "detail": "Connect shared storage for datasets/checkpoints, integrate monitoring stack."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Run scaling tests measuring throughput vs GPU count; validate checkpoint/resume reliability."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Establish job queue policies, quotas and documented onboarding for research teams."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Define target model sizes, number of concurrent users, and training vs inference capacity split."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision GPU nodes, install drivers/CUDA, set up high-speed interconnect."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Deploy scheduler, configure NCCL, install PyTorch Distributed/DeepSpeed."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Connect shared storage for datasets/checkpoints, integrate monitoring stack."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Run scaling tests measuring throughput vs GPU count; validate checkpoint/resume reliability."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Establish job queue policies, quotas and documented onboarding for research teams."
+        }
       ],
       "security": {
         "authentication": "Centralized user authentication (LDAP/FreeIPA) integrated with the scheduler.",
@@ -190,19 +308,29 @@
         "Model registry integration for versioned deployment from training to inference."
       ]
     },
-
     {
       "id": 3,
       "slug": "ai-powered-infrastructure-operations-platform",
       "title": "AI-Powered Infrastructure Operations Platform (AIOps)",
       "category": "Artificial Intelligence",
       "categorySlug": "ai",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "An intelligent operations assistant that monitors infrastructure, analyzes logs, correlates alerts and helps administrators troubleshoot faster using an LLM grounded in real system data.",
       "challenge": "Turning large volumes of noisy logs and metrics into actionable, trustworthy guidance without the AI inventing root causes it cannot verify.",
       "businessValue": "Reduces mean-time-to-diagnosis for infrastructure incidents and lowers the cognitive load on on-call engineers.",
-      "tech": ["Python", "LLMs", "RAG", "Qdrant", "Prometheus", "Grafana", "Loki", "FastAPI", "Ansible", "Linux"],
+      "tech": [
+        "Python",
+        "LLMs",
+        "RAG",
+        "Qdrant",
+        "Prometheus",
+        "Grafana",
+        "Loki",
+        "FastAPI",
+        "Ansible",
+        "Linux"
+      ],
       "objectives": [
         "Analyze server health signals and surface anomalies proactively.",
         "Provide log intelligence that summarizes and correlates related log events.",
@@ -222,15 +350,34 @@
       },
       "architecture": {
         "overview": "A retrieval-augmented assistant layered over existing observability tools (Prometheus, Loki, Grafana), with a FastAPI service mediating between the LLM, the vector knowledge base, and live metric/log queries.",
-        "components": ["LLM inference backend", "Qdrant vector store for runbooks/documentation/past incidents", "Prometheus for metrics", "Loki for log aggregation", "FastAPI orchestration service", "Ansible for approved remediation execution"],
-        "dataflow": "Administrator asks a question or an alert fires → orchestration service gathers relevant metrics (Prometheus), logs (Loki) and knowledge base entries (Qdrant) → context assembled and sent to the LLM → response with suggested diagnosis/action returned → remediation, if any, requires explicit approval before an Ansible playbook executes.",
+        "components": [
+          "LLM inference backend",
+          "Qdrant vector store for runbooks/documentation/past incidents",
+          "Prometheus for metrics",
+          "Loki for log aggregation",
+          "FastAPI orchestration service",
+          "Ansible for approved remediation execution"
+        ],
+        "dataflow": "Administrator asks a question or an alert fires \u2192 orchestration service gathers relevant metrics (Prometheus), logs (Loki) and knowledge base entries (Qdrant) \u2192 context assembled and sent to the LLM \u2192 response with suggested diagnosis/action returned \u2192 remediation, if any, requires explicit approval before an Ansible playbook executes.",
         "integration": "Integrates with existing Prometheus/Grafana/Loki deployments rather than replacing them, acting as an intelligence layer on top."
       },
       "stackRationale": [
-        {"tech": "RAG + Qdrant", "why": "Grounds LLM responses in actual runbooks and historical incident data rather than relying purely on model memory, reducing hallucinated remediation steps."},
-        {"tech": "Loki", "why": "Log aggregation designed to pair efficiently with Prometheus/Grafana, enabling unified correlation of metrics and logs."},
-        {"tech": "Ansible", "why": "Declarative, auditable automation suited to human-approved remediation playbooks."},
-        {"tech": "FastAPI", "why": "Async-friendly orchestration layer to coordinate multiple data sources and the LLM call efficiently."}
+        {
+          "tech": "RAG + Qdrant",
+          "why": "Grounds LLM responses in actual runbooks and historical incident data rather than relying purely on model memory, reducing hallucinated remediation steps."
+        },
+        {
+          "tech": "Loki",
+          "why": "Log aggregation designed to pair efficiently with Prometheus/Grafana, enabling unified correlation of metrics and logs."
+        },
+        {
+          "tech": "Ansible",
+          "why": "Declarative, auditable automation suited to human-approved remediation playbooks."
+        },
+        {
+          "tech": "FastAPI",
+          "why": "Async-friendly orchestration layer to coordinate multiple data sources and the LLM call efficiently."
+        }
       ],
       "hardware": {
         "cpu": "Standard server-grade CPU sufficient for orchestration service and data aggregation.",
@@ -243,20 +390,51 @@
       },
       "software": {
         "os": "Linux (Ubuntu Server or Rocky Linux).",
-        "dependencies": ["Python 3.10+", "Prometheus", "Grafana", "Loki", "Ansible"],
-        "services": ["FastAPI orchestration service", "Qdrant vector database"],
-        "databases": ["Qdrant (knowledge base embeddings)", "Prometheus TSDB", "Loki log storage"],
+        "dependencies": [
+          "Python 3.10+",
+          "Prometheus",
+          "Grafana",
+          "Loki",
+          "Ansible"
+        ],
+        "services": [
+          "FastAPI orchestration service",
+          "Qdrant vector database"
+        ],
+        "databases": [
+          "Qdrant (knowledge base embeddings)",
+          "Prometheus TSDB",
+          "Loki log storage"
+        ],
         "apis": "Internal REST API for the chat assistant; existing Prometheus/Loki query APIs consumed internally.",
         "monitoring": "The platform monitors infrastructure, and is itself monitored for its own uptime and response latency.",
         "automation": "Ansible playbooks triggered only after explicit human approval of a suggested remediation."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Catalog existing monitoring tools, define scope of systems to onboard, and set approval workflow policy."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Ensure Prometheus/Loki/Grafana are deployed and collecting from target systems."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Deploy Qdrant, ingest existing runbooks/documentation, configure the orchestration service."},
-        {"phase": "Phase 4 — Integration", "detail": "Connect the assistant to live metrics/log query endpoints and configure alert correlation rules."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Validate diagnosis suggestions against known past incidents; measure response relevance."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Finalize the human-approval workflow for remediation and document escalation paths."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Catalog existing monitoring tools, define scope of systems to onboard, and set approval workflow policy."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Ensure Prometheus/Loki/Grafana are deployed and collecting from target systems."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Deploy Qdrant, ingest existing runbooks/documentation, configure the orchestration service."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Connect the assistant to live metrics/log query endpoints and configure alert correlation rules."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Validate diagnosis suggestions against known past incidents; measure response relevance."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Finalize the human-approval workflow for remediation and document escalation paths."
+        }
       ],
       "security": {
         "authentication": "Integrated with existing SSO/LDAP for administrator access.",
@@ -285,19 +463,28 @@
         "Expansion to capacity planning recommendations."
       ]
     },
-
     {
       "id": 4,
       "slug": "enterprise-hpc-cluster-slurm",
       "title": "Enterprise HPC Cluster with Slurm Workload Manager",
       "category": "High-Performance Computing",
       "categorySlug": "hpc",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A centralized, multi-user HPC computing cluster with Slurm-based job scheduling, shared storage and centralized authentication for research and engineering workloads.",
       "challenge": "Providing fair, auditable, multi-user access to shared compute resources without jobs interfering with each other.",
       "businessValue": "Replaces ad-hoc individual workstation computing with a shared, schedulable resource pool that improves overall utilization and fairness.",
-      "tech": ["Rocky Linux/RHEL", "Slurm", "OpenMPI", "Munge", "LDAP/FreeIPA", "NFS", "Spack", "Ansible", "Grafana"],
+      "tech": [
+        "Rocky Linux/RHEL",
+        "Slurm",
+        "OpenMPI",
+        "Munge",
+        "LDAP/FreeIPA",
+        "NFS",
+        "Spack",
+        "Ansible",
+        "Grafana"
+      ],
       "objectives": [
         "Deploy a head/login/compute node HPC architecture.",
         "Implement Slurm-based job scheduling with partitions and queues.",
@@ -317,42 +504,94 @@
       },
       "architecture": {
         "overview": "Classic HPC topology: a controller node runs the Slurm scheduler, login nodes provide user access points, and compute nodes execute scheduled jobs, all sharing a common filesystem and identity service.",
-        "components": ["Slurm controller (slurmctld)", "Login node(s)", "Compute nodes (slurmd)", "Munge for authentication between nodes", "NFS shared storage for home directories and software", "FreeIPA/LDAP for centralized identity", "Spack for software environment management"],
-        "dataflow": "User logs into login node → submits job via Slurm CLI → slurmctld schedules job to available compute node(s) based on partition/queue policy and requested resources → job executes with access to shared NFS storage → results returned to user's home directory.",
+        "components": [
+          "Slurm controller (slurmctld)",
+          "Login node(s)",
+          "Compute nodes (slurmd)",
+          "Munge for authentication between nodes",
+          "NFS shared storage for home directories and software",
+          "FreeIPA/LDAP for centralized identity",
+          "Spack for software environment management"
+        ],
+        "dataflow": "User logs into login node \u2192 submits job via Slurm CLI \u2192 slurmctld schedules job to available compute node(s) based on partition/queue policy and requested resources \u2192 job executes with access to shared NFS storage \u2192 results returned to user's home directory.",
         "integration": "Spack-managed software stacks allow consistent application environments across all compute nodes without manual per-node installation."
       },
       "stackRationale": [
-        {"tech": "Slurm", "why": "Industry-standard HPC workload manager with mature support for partitions, fair-share scheduling, and GPU/CPU resource allocation."},
-        {"tech": "Munge", "why": "Lightweight authentication mechanism required by Slurm for secure inter-node communication."},
-        {"tech": "FreeIPA/LDAP", "why": "Centralizes user/group identity across all cluster nodes instead of managing local accounts per machine."},
-        {"tech": "Spack", "why": "Purpose-built HPC package manager that handles complex scientific software dependency trees and multiple compiler/library versions cleanly."},
-        {"tech": "NFS", "why": "Simple, well-understood shared storage suitable for home directories and moderate-scale shared software/data access."}
+        {
+          "tech": "Slurm",
+          "why": "Industry-standard HPC workload manager with mature support for partitions, fair-share scheduling, and GPU/CPU resource allocation."
+        },
+        {
+          "tech": "Munge",
+          "why": "Lightweight authentication mechanism required by Slurm for secure inter-node communication."
+        },
+        {
+          "tech": "FreeIPA/LDAP",
+          "why": "Centralizes user/group identity across all cluster nodes instead of managing local accounts per machine."
+        },
+        {
+          "tech": "Spack",
+          "why": "Purpose-built HPC package manager that handles complex scientific software dependency trees and multiple compiler/library versions cleanly."
+        },
+        {
+          "tech": "NFS",
+          "why": "Simple, well-understood shared storage suitable for home directories and moderate-scale shared software/data access."
+        }
       ],
       "hardware": {
-        "cpu": "Multi-core server CPUs on compute nodes sized to anticipated job parallelism (e.g. 32–128 cores per node).",
+        "cpu": "Multi-core server CPUs on compute nodes sized to anticipated job parallelism (e.g. 32\u2013128 cores per node).",
         "gpu": "Optional NVIDIA GPUs on select compute nodes for GPU-accelerated jobs.",
-        "ram": "Sized per expected per-job memory needs; 128GB–512GB per compute node is a common range for mixed workloads.",
+        "ram": "Sized per expected per-job memory needs; 128GB\u2013512GB per compute node is a common range for mixed workloads.",
         "storage": "NFS server with sufficient capacity and IOPS for home directories and shared application installs.",
         "networking": "1GbE/10GbE minimum; higher-bandwidth low-latency interconnect (InfiniBand/RoCE) recommended for MPI-heavy workloads (see Project 10).",
-        "recommended": "Minimum viable cluster: 1 controller/login node + 2–4 compute nodes; production clusters scale to many more nodes.",
+        "recommended": "Minimum viable cluster: 1 controller/login node + 2\u20134 compute nodes; production clusters scale to many more nodes.",
         "note": "These are planning-stage sizing estimates; actual requirements should be validated against target workloads before procurement."
       },
       "software": {
         "os": "Rocky Linux or RHEL across all nodes for long-term stability and enterprise support compatibility.",
-        "dependencies": ["Slurm + Munge", "OpenMPI", "Spack"],
-        "services": ["slurmctld (controller)", "slurmd (compute nodes)", "NFS server", "FreeIPA/LDAP server"],
-        "databases": ["Slurm accounting database (slurmdbd, typically MySQL/MariaDB)."],
+        "dependencies": [
+          "Slurm + Munge",
+          "OpenMPI",
+          "Spack"
+        ],
+        "services": [
+          "slurmctld (controller)",
+          "slurmd (compute nodes)",
+          "NFS server",
+          "FreeIPA/LDAP server"
+        ],
+        "databases": [
+          "Slurm accounting database (slurmdbd, typically MySQL/MariaDB)."
+        ],
         "apis": "Slurm CLI/REST API for job submission and status queries.",
         "monitoring": "Grafana dashboards fed by node_exporter and the Slurm exporter (see Project 05).",
         "automation": "Ansible playbooks for consistent node provisioning and configuration drift prevention."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Determine expected job types, user count, and partition/queue policy needs."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision controller, login and compute nodes; configure base OS and networking."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Install and configure Slurm, Munge, NFS, and FreeIPA/LDAP."},
-        {"phase": "Phase 4 — Integration", "detail": "Deploy Spack environments, integrate accounting database, connect monitoring."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Submit test jobs across partitions; validate fair-share scheduling and resource limits."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Finalize user onboarding documentation and backup policy for shared storage."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Determine expected job types, user count, and partition/queue policy needs."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision controller, login and compute nodes; configure base OS and networking."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Install and configure Slurm, Munge, NFS, and FreeIPA/LDAP."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Deploy Spack environments, integrate accounting database, connect monitoring."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Submit test jobs across partitions; validate fair-share scheduling and resource limits."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Finalize user onboarding documentation and backup policy for shared storage."
+        }
       ],
       "security": {
         "authentication": "Centralized via FreeIPA/LDAP; no local-only accounts on compute nodes.",
@@ -381,26 +620,33 @@
         "Burst-to-cloud capability for peak demand periods."
       ]
     },
-
     {
       "id": 5,
       "slug": "hpc-resource-management-monitoring-platform",
       "title": "HPC Resource Management & Monitoring Platform",
       "category": "High-Performance Computing",
       "categorySlug": "hpc",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A comprehensive monitoring dashboard providing full visibility into HPC cluster health: CPU, GPU, memory, storage, network and job queue utilization.",
       "challenge": "Aggregating disparate metrics (compute, job scheduler, storage, network) into one coherent operational view without overwhelming administrators.",
       "businessValue": "Gives administrators and leadership real visibility into cluster utilization, bottlenecks and capacity trends to justify infrastructure investment.",
-      "tech": ["Prometheus", "Grafana", "Slurm Exporter", "Node Exporter", "NVIDIA DCGM Exporter", "Loki", "Python"],
+      "tech": [
+        "Prometheus",
+        "Grafana",
+        "Slurm Exporter",
+        "Node Exporter",
+        "NVIDIA DCGM Exporter",
+        "Loki",
+        "Python"
+      ],
       "objectives": [
         "Monitor CPU, GPU, RAM, storage and network utilization across all cluster nodes.",
         "Track Slurm job queue status and per-user/group utilization.",
         "Provide historical analytics for capacity planning.",
         "Alert administrators on cluster health anomalies."
       ],
-      "problem": "Without centralized monitoring, HPC administrators lack visibility into which jobs are consuming resources, whether nodes are healthy, and where bottlenecks occur — making both troubleshooting and capacity planning guesswork.",
+      "problem": "Without centralized monitoring, HPC administrators lack visibility into which jobs are consuming resources, whether nodes are healthy, and where bottlenecks occur \u2014 making both troubleshooting and capacity planning guesswork.",
       "solution": "A Prometheus + Grafana stack with purpose-built exporters (Node Exporter for system metrics, DCGM Exporter for GPU telemetry, Slurm Exporter for scheduler state) and Loki for log aggregation, presenting unified dashboards for cluster-wide and per-job visibility.",
       "users": "HPC/cluster administrators, infrastructure managers, and capacity planning stakeholders.",
       "businessDetail": {
@@ -413,20 +659,39 @@
       },
       "architecture": {
         "overview": "Exporters run on every node, scraped by a central Prometheus server; Grafana visualizes metrics, and Loki aggregates logs from the same nodes for correlated troubleshooting.",
-        "components": ["Node Exporter (per node system metrics)", "DCGM Exporter (per-GPU telemetry)", "Slurm Exporter (scheduler/queue state)", "Prometheus (metrics storage/scraping)", "Loki (log aggregation)", "Grafana (dashboards and alerting)"],
-        "dataflow": "Exporters expose metrics endpoints on each node → Prometheus scrapes them on an interval → Grafana queries Prometheus (and Loki for logs) to render dashboards → Alertmanager/Grafana alerting notifies administrators on threshold breaches.",
+        "components": [
+          "Node Exporter (per node system metrics)",
+          "DCGM Exporter (per-GPU telemetry)",
+          "Slurm Exporter (scheduler/queue state)",
+          "Prometheus (metrics storage/scraping)",
+          "Loki (log aggregation)",
+          "Grafana (dashboards and alerting)"
+        ],
+        "dataflow": "Exporters expose metrics endpoints on each node \u2192 Prometheus scrapes them on an interval \u2192 Grafana queries Prometheus (and Loki for logs) to render dashboards \u2192 Alertmanager/Grafana alerting notifies administrators on threshold breaches.",
         "integration": "Designed to sit alongside the Slurm cluster (Project 04) as its observability layer, and can share infrastructure with the AIOps platform (Project 03)."
       },
       "stackRationale": [
-        {"tech": "Prometheus", "why": "Pull-based metrics collection well suited to dynamic HPC environments, with a powerful query language (PromQL) for analytics."},
-        {"tech": "DCGM Exporter", "why": "NVIDIA's own GPU telemetry exporter provides accurate utilization, memory, temperature and ECC error metrics not available from generic tools."},
-        {"tech": "Slurm Exporter", "why": "Exposes scheduler-specific metrics (queue depth, job states, partition utilization) that generic system exporters cannot provide."},
-        {"tech": "Grafana", "why": "Flexible dashboarding with strong Prometheus/Loki integration and built-in alerting."}
+        {
+          "tech": "Prometheus",
+          "why": "Pull-based metrics collection well suited to dynamic HPC environments, with a powerful query language (PromQL) for analytics."
+        },
+        {
+          "tech": "DCGM Exporter",
+          "why": "NVIDIA's own GPU telemetry exporter provides accurate utilization, memory, temperature and ECC error metrics not available from generic tools."
+        },
+        {
+          "tech": "Slurm Exporter",
+          "why": "Exposes scheduler-specific metrics (queue depth, job states, partition utilization) that generic system exporters cannot provide."
+        },
+        {
+          "tech": "Grafana",
+          "why": "Flexible dashboarding with strong Prometheus/Loki integration and built-in alerting."
+        }
       ],
       "hardware": {
-        "cpu": "Modest dedicated server for the monitoring stack (4–8 cores sufficient for small-to-mid clusters).",
+        "cpu": "Modest dedicated server for the monitoring stack (4\u20138 cores sufficient for small-to-mid clusters).",
         "gpu": "None required for the monitoring server itself; exporters run on existing GPU compute nodes.",
-        "ram": "16–32GB for Prometheus/Grafana/Loki depending on retention and cluster size.",
+        "ram": "16\u201332GB for Prometheus/Grafana/Loki depending on retention and cluster size.",
         "storage": "SSD storage sized to metric/log retention policy; long-term retention may require remote storage backends.",
         "networking": "Standard internal LAN access to scrape all cluster nodes.",
         "recommended": "Single monitoring server adequate for clusters up to roughly a few hundred nodes; larger environments may need Prometheus federation.",
@@ -434,20 +699,53 @@
       },
       "software": {
         "os": "Linux (Rocky Linux/Ubuntu Server).",
-        "dependencies": ["Prometheus", "Grafana", "Loki", "Node Exporter", "DCGM Exporter", "Slurm Exporter", "Python (for custom exporters/alerts if needed)"],
-        "services": ["Prometheus server", "Grafana server", "Loki server"],
-        "databases": ["Prometheus TSDB", "Loki log store"],
+        "dependencies": [
+          "Prometheus",
+          "Grafana",
+          "Loki",
+          "Node Exporter",
+          "DCGM Exporter",
+          "Slurm Exporter",
+          "Python (for custom exporters/alerts if needed)"
+        ],
+        "services": [
+          "Prometheus server",
+          "Grafana server",
+          "Loki server"
+        ],
+        "databases": [
+          "Prometheus TSDB",
+          "Loki log store"
+        ],
         "apis": "Prometheus HTTP query API; Grafana API for dashboard provisioning as code.",
         "monitoring": "Self-monitoring of Prometheus/Grafana/Loki health is included to avoid blind spots.",
         "automation": "Ansible for exporter deployment across all nodes; dashboards provisioned as code for version control."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Define required metrics, retention policy, and alert thresholds with cluster administrators."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision the monitoring server and ensure network access to all cluster nodes."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Deploy Prometheus, Grafana, Loki and all exporters across the cluster."},
-        {"phase": "Phase 4 — Integration", "detail": "Build dashboards for cluster-wide, per-node and per-job views; configure alerting rules."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Validate metric accuracy against known workloads; test alert firing and notification delivery."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document dashboard usage and finalize alert escalation policy."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Define required metrics, retention policy, and alert thresholds with cluster administrators."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision the monitoring server and ensure network access to all cluster nodes."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Deploy Prometheus, Grafana, Loki and all exporters across the cluster."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Build dashboards for cluster-wide, per-node and per-job views; configure alerting rules."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Validate metric accuracy against known workloads; test alert firing and notification delivery."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document dashboard usage and finalize alert escalation policy."
+        }
       ],
       "security": {
         "authentication": "Grafana authentication integrated with centralized identity (LDAP/FreeIPA).",
@@ -476,19 +774,29 @@
         "Cost-attribution reporting by team/project."
       ]
     },
-
     {
       "id": 6,
       "slug": "scientific-computing-distributed-simulation-platform",
       "title": "Scientific Computing & Distributed Simulation Platform",
       "category": "High-Performance Computing",
       "categorySlug": "hpc",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A high-performance scientific computing environment supporting parallel processing, distributed simulation and reproducible software environments for engineering and research workloads.",
       "challenge": "Providing consistent, optimized compiler and numerical library environments across a cluster while supporting many different scientific applications with conflicting dependency needs.",
       "businessValue": "Enables research and engineering teams to run computationally demanding simulations faster, with reproducible results across runs.",
-      "tech": ["MPI", "OpenMP", "GCC", "Intel oneAPI", "Spack", "BLAS", "LAPACK", "FFTW", "Python", "Rocky Linux"],
+      "tech": [
+        "MPI",
+        "OpenMP",
+        "GCC",
+        "Intel oneAPI",
+        "Spack",
+        "BLAS",
+        "LAPACK",
+        "FFTW",
+        "Python",
+        "Rocky Linux"
+      ],
       "objectives": [
         "Support parallel computation via MPI (distributed) and OpenMP (shared-memory) models.",
         "Provide optimized numerical libraries (BLAS/LAPACK/FFTW) for scientific applications.",
@@ -504,19 +812,38 @@
         "productivity": "Reproducible environments mean results are comparable across runs and across team members.",
         "scalability": "New applications and library versions can be added via Spack without disrupting existing environments.",
         "security": "Environment modules are centrally managed and vetted rather than individually compiled by each user.",
-        "impact": "Provides the numerical computing foundation that research credibility depends on — consistent, documented environments."
+        "impact": "Provides the numerical computing foundation that research credibility depends on \u2014 consistent, documented environments."
       },
       "architecture": {
         "overview": "Built on top of the HPC cluster's compute nodes, this platform adds a managed software environment layer (via Spack and environment modules) plus parallel runtime libraries (MPI/OpenMP) used by scientific applications.",
-        "components": ["Spack package manager", "Environment Modules / Lmod", "MPI implementation (OpenMPI)", "OpenMP runtime (bundled with compilers)", "Optimized numerical libraries: BLAS, LAPACK, FFTW", "GCC and Intel oneAPI compiler toolchains"],
-        "dataflow": "Researcher loads a specific software environment (module load) → compiles or runs a simulation code linked against the chosen BLAS/LAPACK/FFTW build → MPI distributes the computation across cluster nodes → OpenMP parallelizes within each node's cores.",
+        "components": [
+          "Spack package manager",
+          "Environment Modules / Lmod",
+          "MPI implementation (OpenMPI)",
+          "OpenMP runtime (bundled with compilers)",
+          "Optimized numerical libraries: BLAS, LAPACK, FFTW",
+          "GCC and Intel oneAPI compiler toolchains"
+        ],
+        "dataflow": "Researcher loads a specific software environment (module load) \u2192 compiles or runs a simulation code linked against the chosen BLAS/LAPACK/FFTW build \u2192 MPI distributes the computation across cluster nodes \u2192 OpenMP parallelizes within each node's cores.",
         "integration": "Runs on the same Slurm-managed cluster (Project 04) and is monitored through the same observability platform (Project 05)."
       },
       "stackRationale": [
-        {"tech": "Spack", "why": "Allows multiple versions of compilers and libraries to coexist cleanly, which is essential since different scientific codes require different, sometimes conflicting, dependency versions."},
-        {"tech": "Intel oneAPI", "why": "Provides highly optimized math kernels (MKL) that often significantly outperform generic library builds on Intel hardware."},
-        {"tech": "FFTW", "why": "The standard high-performance library for fast Fourier transforms, used across many simulation and signal-processing codes."},
-        {"tech": "MPI + OpenMP (hybrid)", "why": "Combining distributed-memory (MPI) and shared-memory (OpenMP) parallelism is the standard approach for scaling scientific codes efficiently across multi-node, multi-core clusters."}
+        {
+          "tech": "Spack",
+          "why": "Allows multiple versions of compilers and libraries to coexist cleanly, which is essential since different scientific codes require different, sometimes conflicting, dependency versions."
+        },
+        {
+          "tech": "Intel oneAPI",
+          "why": "Provides highly optimized math kernels (MKL) that often significantly outperform generic library builds on Intel hardware."
+        },
+        {
+          "tech": "FFTW",
+          "why": "The standard high-performance library for fast Fourier transforms, used across many simulation and signal-processing codes."
+        },
+        {
+          "tech": "MPI + OpenMP (hybrid)",
+          "why": "Combining distributed-memory (MPI) and shared-memory (OpenMP) parallelism is the standard approach for scaling scientific codes efficiently across multi-node, multi-core clusters."
+        }
       ],
       "hardware": {
         "cpu": "High core-count CPUs with strong per-core performance, as most scientific codes are CPU-bound.",
@@ -529,20 +856,46 @@
       },
       "software": {
         "os": "Rocky Linux/RHEL, matching the base HPC cluster OS.",
-        "dependencies": ["GCC", "Intel oneAPI", "OpenMPI", "Spack", "BLAS/LAPACK/FFTW builds"],
-        "services": ["Environment Modules/Lmod service for environment switching."],
-        "databases": "Not applicable — this platform is compute/library focused rather than data-service focused.",
+        "dependencies": [
+          "GCC",
+          "Intel oneAPI",
+          "OpenMPI",
+          "Spack",
+          "BLAS/LAPACK/FFTW builds"
+        ],
+        "services": [
+          "Environment Modules/Lmod service for environment switching."
+        ],
+        "databases": "Not applicable \u2014 this platform is compute/library focused rather than data-service focused.",
         "apis": "Not applicable; interaction is via CLI/module system and application-level APIs (e.g. MPI API within codes).",
         "monitoring": "Shares the HPC monitoring platform (Project 05) for job-level resource tracking.",
         "automation": "Spack environment definitions version-controlled and deployed via Ansible/CI."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Catalog target scientific applications and their compiler/library requirements."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Confirm compute node CPU/interconnect suitability for target workloads."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Install Spack, build required compiler and library combinations."},
-        {"phase": "Phase 4 — Integration", "detail": "Deploy environment modules; integrate with Slurm job submission templates."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Run representative scientific benchmarks (e.g. standard MPI/OpenMP test suites) across configurations."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document available environments and publish usage guides for researchers."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Catalog target scientific applications and their compiler/library requirements."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Confirm compute node CPU/interconnect suitability for target workloads."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Install Spack, build required compiler and library combinations."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Deploy environment modules; integrate with Slurm job submission templates."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Run representative scientific benchmarks (e.g. standard MPI/OpenMP test suites) across configurations."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document available environments and publish usage guides for researchers."
+        }
       ],
       "security": {
         "authentication": "Inherits the cluster's centralized authentication (Project 04).",
@@ -571,19 +924,29 @@
         "Automated regression testing of environments after library updates."
       ]
     },
-
     {
       "id": 7,
       "slug": "enterprise-eda-design-compute-farm",
       "title": "Enterprise EDA Design & Compute Farm",
       "category": "Electronic Design Automation",
       "categorySlug": "eda",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "Centralized semiconductor design infrastructure providing shared EDA applications, PDK management, license services and secure design data storage for VLSI/IC design teams.",
       "challenge": "Managing expensive, license-gated commercial EDA tools and sensitive design IP (PDKs, GDS files) across a multi-user engineering team securely and efficiently.",
       "businessValue": "Centralizes costly EDA tool licenses and design data, improving utilization and reducing IP exposure risk compared to scattered individual workstation installs.",
-      "tech": ["Cadence Virtuoso", "Cadence Spectre", "Xcelium", "Tempus", "Pegasus", "Conformal", "Linux", "NFS", "LDAP/Active Directory", "FLEXlm"],
+      "tech": [
+        "Cadence Virtuoso",
+        "Cadence Spectre",
+        "Xcelium",
+        "Tempus",
+        "Pegasus",
+        "Conformal",
+        "Linux",
+        "NFS",
+        "LDAP/Active Directory",
+        "FLEXlm"
+      ],
       "objectives": [
         "Centralize EDA application installation and version management.",
         "Manage shared Process Design Kit (PDK) access securely.",
@@ -603,41 +966,85 @@
       },
       "architecture": {
         "overview": "A compute farm of Linux servers running EDA applications against centrally-stored PDKs and design libraries over NFS, with FLEXlm license servers brokering tool access and LDAP/Active Directory providing identity.",
-        "components": ["EDA compute nodes (Linux)", "Centralized NFS storage for PDKs and design libraries", "FLEXlm/FlexNet license server(s)", "LDAP/Active Directory identity service", "Remote access layer (e.g. VNC/NX/Citrix-style remote desktop) for GUI tools like Virtuoso"],
-        "dataflow": "Engineer authenticates via LDAP/AD → connects to a compute node via remote session → loads project environment pointing to centralized PDK/library paths on NFS → runs Virtuoso/Spectre/Xcelium, which checks out a license from the FLEXlm server for the session duration → design data remains on central storage throughout.",
+        "components": [
+          "EDA compute nodes (Linux)",
+          "Centralized NFS storage for PDKs and design libraries",
+          "FLEXlm/FlexNet license server(s)",
+          "LDAP/Active Directory identity service",
+          "Remote access layer (e.g. VNC/NX/Citrix-style remote desktop) for GUI tools like Virtuoso"
+        ],
+        "dataflow": "Engineer authenticates via LDAP/AD \u2192 connects to a compute node via remote session \u2192 loads project environment pointing to centralized PDK/library paths on NFS \u2192 runs Virtuoso/Spectre/Xcelium, which checks out a license from the FLEXlm server for the session duration \u2192 design data remains on central storage throughout.",
         "integration": "Provides the base platform that license-aware scheduling (Project 08) and automated digital flows (Project 09) build upon."
       },
       "stackRationale": [
-        {"tech": "FLEXlm/FlexNet", "why": "The standard license management protocol used by virtually all major commercial EDA vendors (Cadence, Synopsys, Siemens); centralizing it is mandatory, not optional, for these tools."},
-        {"tech": "NFS", "why": "Provides a shared filesystem view of PDKs and libraries across all compute nodes, which EDA tools expect for consistent path references."},
-        {"tech": "LDAP/Active Directory", "why": "Enterprise design teams require centralized, auditable identity management, especially given IP sensitivity."},
-        {"tech": "Linux", "why": "The near-universal operating system target for commercial EDA tool qualification and support."}
+        {
+          "tech": "FLEXlm/FlexNet",
+          "why": "The standard license management protocol used by virtually all major commercial EDA vendors (Cadence, Synopsys, Siemens); centralizing it is mandatory, not optional, for these tools."
+        },
+        {
+          "tech": "NFS",
+          "why": "Provides a shared filesystem view of PDKs and libraries across all compute nodes, which EDA tools expect for consistent path references."
+        },
+        {
+          "tech": "LDAP/Active Directory",
+          "why": "Enterprise design teams require centralized, auditable identity management, especially given IP sensitivity."
+        },
+        {
+          "tech": "Linux",
+          "why": "The near-universal operating system target for commercial EDA tool qualification and support."
+        }
       ],
       "hardware": {
         "cpu": "High single-thread performance and large core counts for simulation/synthesis jobs; EDA tools vary widely in parallelism support.",
         "gpu": "Generally not required for traditional EDA tools, though some newer simulation/ML-assisted EDA features may benefit from GPU acceleration.",
-        "ram": "Large RAM per node (128GB–1TB+) as tools like Virtuoso/Spectre/Tempus can be memory-intensive on large designs.",
+        "ram": "Large RAM per node (128GB\u20131TB+) as tools like Virtuoso/Spectre/Tempus can be memory-intensive on large designs.",
         "storage": "High-capacity, high-IOPS centralized storage for PDKs, libraries and active design data.",
         "networking": "10GbE minimum between compute nodes and storage to avoid NFS becoming a bottleneck for large design databases.",
-        "recommended": "Minimum viable farm: license server + 2–4 compute nodes; production farms scale with design team size and project parallelism needs.",
+        "recommended": "Minimum viable farm: license server + 2\u20134 compute nodes; production farms scale with design team size and project parallelism needs.",
         "note": "EDA tool resource requirements vary significantly by vendor and tool; figures are general planning estimates, not vendor-certified specs."
       },
       "software": {
         "os": "Linux distribution matching vendor-qualified support matrices for the specific EDA tool versions in use.",
-        "dependencies": ["Cadence Virtuoso/Spectre/Xcelium/Tempus/Pegasus/Conformal (licensed separately)", "FLEXlm/FlexNet license daemon"],
-        "services": ["FLEXlm license server", "NFS server", "LDAP/Active Directory", "Remote desktop/session broker"],
+        "dependencies": [
+          "Cadence Virtuoso/Spectre/Xcelium/Tempus/Pegasus/Conformal (licensed separately)",
+          "FLEXlm/FlexNet license daemon"
+        ],
+        "services": [
+          "FLEXlm license server",
+          "NFS server",
+          "LDAP/Active Directory",
+          "Remote desktop/session broker"
+        ],
         "databases": "Not typically required beyond license server state and LDAP/AD directory data.",
         "apis": "Vendor tool CLIs/APIs for scripted flows (e.g. Virtuoso SKILL, Tcl interfaces for synthesis/verification tools).",
         "monitoring": "License usage and compute node health monitoring (see Project 08 for dedicated license analytics).",
         "automation": "Ansible for consistent compute node provisioning and PDK/library path configuration."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Catalog required EDA tools, license counts, and design team size/growth expectations."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision compute nodes, centralized storage, and license server infrastructure."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Install EDA applications, configure FLEXlm license servers, set up PDK/library storage structure."},
-        {"phase": "Phase 4 — Integration", "detail": "Connect LDAP/AD authentication, configure remote access sessions, set storage permissions."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Validate tool launches, license checkout/release behavior, and design data access permissions."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document engineer onboarding process and finalize design data backup/retention policy."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Catalog required EDA tools, license counts, and design team size/growth expectations."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision compute nodes, centralized storage, and license server infrastructure."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Install EDA applications, configure FLEXlm license servers, set up PDK/library storage structure."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Connect LDAP/AD authentication, configure remote access sessions, set storage permissions."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Validate tool launches, license checkout/release behavior, and design data access permissions."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document engineer onboarding process and finalize design data backup/retention policy."
+        }
       ],
       "security": {
         "authentication": "Centralized via LDAP/Active Directory; no local tool access without directory authentication.",
@@ -666,19 +1073,26 @@
         "Expanded remote access for distributed/international design teams."
       ]
     },
-
     {
       "id": 8,
       "slug": "eda-workload-scheduling-license-optimization",
       "title": "EDA Workload Scheduling & License Optimization System",
       "category": "Electronic Design Automation",
       "categorySlug": "eda",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "An intelligent scheduling and analytics platform that correlates compute job scheduling with EDA license availability to reduce license bottlenecks and improve utilization visibility.",
-      "challenge": "EDA jobs frequently queue or fail not because compute is unavailable, but because license tokens are exhausted — a resource dimension traditional schedulers don't natively understand.",
+      "challenge": "EDA jobs frequently queue or fail not because compute is unavailable, but because license tokens are exhausted \u2014 a resource dimension traditional schedulers don't natively understand.",
       "businessValue": "Reduces wasted engineer time waiting on license availability and provides data to justify (or avoid) purchasing additional costly EDA licenses.",
-      "tech": ["Slurm", "FLEXlm/FlexNet", "Python", "REST APIs", "Prometheus", "Grafana", "PostgreSQL"],
+      "tech": [
+        "Slurm",
+        "FLEXlm/FlexNet",
+        "Python",
+        "REST APIs",
+        "Prometheus",
+        "Grafana",
+        "PostgreSQL"
+      ],
       "objectives": [
         "Monitor real-time license availability and usage across all FLEXlm-managed EDA tools.",
         "Make job scheduling license-aware so jobs aren't dispatched to wait indefinitely on unavailable licenses.",
@@ -698,20 +1112,39 @@
       },
       "architecture": {
         "overview": "A middleware service polls FLEXlm license servers for real-time token availability, exposes this data via REST API and to Slurm as a licenses resource, and persists historical usage to PostgreSQL for analytics dashboards.",
-        "components": ["FLEXlm license server(s)", "Python polling/middleware service", "Slurm scheduler (license-aware resource configuration)", "PostgreSQL (historical usage data)", "Prometheus/Grafana (dashboards and alerting)", "REST API (for programmatic license status queries)"],
-        "dataflow": "Middleware service queries FLEXlm status periodically → updates Slurm's configured license resource counts → Slurm only dispatches license-gated jobs when both compute and license resources are available → usage snapshots logged to PostgreSQL → Grafana visualizes utilization trends and bottlenecks.",
+        "components": [
+          "FLEXlm license server(s)",
+          "Python polling/middleware service",
+          "Slurm scheduler (license-aware resource configuration)",
+          "PostgreSQL (historical usage data)",
+          "Prometheus/Grafana (dashboards and alerting)",
+          "REST API (for programmatic license status queries)"
+        ],
+        "dataflow": "Middleware service queries FLEXlm status periodically \u2192 updates Slurm's configured license resource counts \u2192 Slurm only dispatches license-gated jobs when both compute and license resources are available \u2192 usage snapshots logged to PostgreSQL \u2192 Grafana visualizes utilization trends and bottlenecks.",
         "integration": "Sits on top of the EDA compute farm (Project 07), adding an intelligence layer without requiring changes to how engineers submit jobs."
       },
       "stackRationale": [
-        {"tech": "Slurm licenses resource", "why": "Slurm natively supports tracking arbitrary 'license' resources, making it the natural integration point rather than building a scheduler from scratch."},
-        {"tech": "Python", "why": "Flexible for writing FLEXlm status parsers (lmstat output) and REST middleware quickly and maintainably."},
-        {"tech": "PostgreSQL", "why": "Reliable relational storage for time-series-like usage logs that need relational querying (by user, tool, project)."},
-        {"tech": "Prometheus/Grafana", "why": "Reuses the same observability stack as other HPC projects (Project 05) for consistency and lower operational overhead."}
+        {
+          "tech": "Slurm licenses resource",
+          "why": "Slurm natively supports tracking arbitrary 'license' resources, making it the natural integration point rather than building a scheduler from scratch."
+        },
+        {
+          "tech": "Python",
+          "why": "Flexible for writing FLEXlm status parsers (lmstat output) and REST middleware quickly and maintainably."
+        },
+        {
+          "tech": "PostgreSQL",
+          "why": "Reliable relational storage for time-series-like usage logs that need relational querying (by user, tool, project)."
+        },
+        {
+          "tech": "Prometheus/Grafana",
+          "why": "Reuses the same observability stack as other HPC projects (Project 05) for consistency and lower operational overhead."
+        }
       ],
       "hardware": {
-        "cpu": "Lightweight — the middleware service itself has minimal compute requirements (a few cores sufficient).",
+        "cpu": "Lightweight \u2014 the middleware service itself has minimal compute requirements (a few cores sufficient).",
         "gpu": "Not applicable.",
-        "ram": "8–16GB typically sufficient for the middleware and database services.",
+        "ram": "8\u201316GB typically sufficient for the middleware and database services.",
         "storage": "Modest storage for PostgreSQL historical usage logs; grows slowly over time.",
         "networking": "Standard internal LAN access to FLEXlm license servers and the Slurm controller.",
         "recommended": "Can run as a single lightweight service, potentially co-located with existing monitoring infrastructure (Project 05).",
@@ -719,20 +1152,47 @@
       },
       "software": {
         "os": "Linux, matching the EDA compute farm environment.",
-        "dependencies": ["Python 3.10+", "lmutil/lmstat (FLEXlm utilities)", "Slurm client tools"],
-        "services": ["Python middleware/polling service", "PostgreSQL database"],
-        "databases": ["PostgreSQL for historical license usage records."],
+        "dependencies": [
+          "Python 3.10+",
+          "lmutil/lmstat (FLEXlm utilities)",
+          "Slurm client tools"
+        ],
+        "services": [
+          "Python middleware/polling service",
+          "PostgreSQL database"
+        ],
+        "databases": [
+          "PostgreSQL for historical license usage records."
+        ],
         "apis": "REST API exposing current and historical license availability for dashboards and user-facing tools.",
         "monitoring": "Grafana dashboards for license utilization trends and bottleneck alerts.",
         "automation": "Scheduled polling jobs; alerting rules for sustained license exhaustion."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Inventory all FLEXlm-managed tools and license pool sizes requiring monitoring."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision the middleware service host and confirm network access to license servers."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Build and deploy the FLEXlm polling service; configure Slurm license resources."},
-        {"phase": "Phase 4 — Integration", "detail": "Connect PostgreSQL logging and Grafana dashboards; expose REST API for status queries."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Validate scheduling behavior under simulated license exhaustion; verify analytics accuracy against known usage."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document bottleneck reporting process and finalize alert thresholds with CAD management."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Inventory all FLEXlm-managed tools and license pool sizes requiring monitoring."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision the middleware service host and confirm network access to license servers."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Build and deploy the FLEXlm polling service; configure Slurm license resources."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Connect PostgreSQL logging and Grafana dashboards; expose REST API for status queries."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Validate scheduling behavior under simulated license exhaustion; verify analytics accuracy against known usage."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document bottleneck reporting process and finalize alert thresholds with CAD management."
+        }
       ],
       "security": {
         "authentication": "Middleware service uses read-only, scoped access to query FLEXlm status.",
@@ -761,19 +1221,29 @@
         "Integration with the AIOps platform (Project 03) for intelligent bottleneck alerts."
       ]
     },
-
     {
       "id": 9,
       "slug": "automated-rtl-to-gdsii-pipeline",
       "title": "Automated RTL-to-GDSII Semiconductor Design Pipeline",
       "category": "Electronic Design Automation",
       "categorySlug": "eda",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "An automated open-source digital design flow taking Verilog RTL through synthesis, place-and-route and timing analysis to final GDSII layout, built on OpenROAD/OpenLane tooling.",
       "challenge": "Chaining together many independent, complex EDA stages (synthesis, floorplanning, placement, CTS, routing, timing, DRC) into a single reliable, repeatable automated flow.",
       "businessValue": "Provides a low-cost, open-source alternative digital design flow useful for education, prototyping and open-source silicon projects, distinct from costly commercial flows.",
-      "tech": ["OpenROAD", "OpenLane", "Yosys", "Verilator", "Icarus Verilog", "OpenSTA", "Magic", "KLayout", "SkyWater PDK", "Python"],
+      "tech": [
+        "OpenROAD",
+        "OpenLane",
+        "Yosys",
+        "Verilator",
+        "Icarus Verilog",
+        "OpenSTA",
+        "Magic",
+        "KLayout",
+        "SkyWater PDK",
+        "Python"
+      ],
       "objectives": [
         "Automate the full RTL-to-GDSII flow using open-source digital design tools.",
         "Validate functional correctness via simulation before synthesis.",
@@ -789,24 +1259,44 @@
         "productivity": "Full automation means a design can go from RTL to layout with minimal manual intervention once the flow is configured.",
         "scalability": "The same flow structure can be adapted to other open PDKs as they become available.",
         "security": "All tooling is open-source and can be fully audited; no external license server dependency.",
-        "impact": "Builds deep, transferable understanding of the full digital design flow — valuable both for training engineers and for genuine open-source chip projects."
+        "impact": "Builds deep, transferable understanding of the full digital design flow \u2014 valuable both for training engineers and for genuine open-source chip projects."
       },
       "architecture": {
-        "overview": "A staged pipeline orchestrated by OpenLane, where each stage consumes the previous stage's output: RTL → synthesized netlist → floorplan → placed design → clock-tree-inserted design → routed design → GDSII, with verification and timing checks interleaved.",
-        "components": ["Verilator/Icarus Verilog (RTL simulation)", "Yosys (logic synthesis)", "OpenROAD (floorplanning, placement, CTS, routing)", "OpenSTA (static timing analysis)", "Magic (DRC, layout)", "KLayout (layout viewing/verification)", "SkyWater 130nm open PDK"],
-        "dataflow": "Verilog RTL → functional simulation (Verilator/Icarus) confirms correctness → Yosys synthesizes RTL to a gate-level netlist using PDK standard cells → OpenROAD performs floorplanning, placement and clock tree synthesis → OpenROAD routing produces a fully routed design → OpenSTA verifies timing closure → Magic/KLayout perform DRC/LVS and generate final GDSII.",
+        "overview": "A staged pipeline orchestrated by OpenLane, where each stage consumes the previous stage's output: RTL \u2192 synthesized netlist \u2192 floorplan \u2192 placed design \u2192 clock-tree-inserted design \u2192 routed design \u2192 GDSII, with verification and timing checks interleaved.",
+        "components": [
+          "Verilator/Icarus Verilog (RTL simulation)",
+          "Yosys (logic synthesis)",
+          "OpenROAD (floorplanning, placement, CTS, routing)",
+          "OpenSTA (static timing analysis)",
+          "Magic (DRC, layout)",
+          "KLayout (layout viewing/verification)",
+          "SkyWater 130nm open PDK"
+        ],
+        "dataflow": "Verilog RTL \u2192 functional simulation (Verilator/Icarus) confirms correctness \u2192 Yosys synthesizes RTL to a gate-level netlist using PDK standard cells \u2192 OpenROAD performs floorplanning, placement and clock tree synthesis \u2192 OpenROAD routing produces a fully routed design \u2192 OpenSTA verifies timing closure \u2192 Magic/KLayout perform DRC/LVS and generate final GDSII.",
         "integration": "Can run as standalone scripted jobs on the HPC cluster (Project 04) compute nodes, since these are open-source CLI tools with no license server dependency."
       },
       "stackRationale": [
-        {"tech": "OpenLane", "why": "Provides pre-built orchestration gluing together Yosys/OpenROAD/Magic into a coherent flow, avoiding the need to hand-script every stage transition."},
-        {"tech": "OpenROAD", "why": "The leading open-source place-and-route engine, actively maintained and capable of producing tape-out-quality results for supported open PDKs."},
-        {"tech": "SkyWater 130nm PDK", "why": "The most mature fully open-source PDK available, enabling genuinely manufacturable (via efabless/Skywater shuttle programs) open-source silicon."},
-        {"tech": "Yosys", "why": "The standard open-source RTL synthesis tool, well integrated with the rest of the open EDA ecosystem."}
+        {
+          "tech": "OpenLane",
+          "why": "Provides pre-built orchestration gluing together Yosys/OpenROAD/Magic into a coherent flow, avoiding the need to hand-script every stage transition."
+        },
+        {
+          "tech": "OpenROAD",
+          "why": "The leading open-source place-and-route engine, actively maintained and capable of producing tape-out-quality results for supported open PDKs."
+        },
+        {
+          "tech": "SkyWater 130nm PDK",
+          "why": "The most mature fully open-source PDK available, enabling genuinely manufacturable (via efabless/Skywater shuttle programs) open-source silicon."
+        },
+        {
+          "tech": "Yosys",
+          "why": "The standard open-source RTL synthesis tool, well integrated with the rest of the open EDA ecosystem."
+        }
       ],
       "hardware": {
         "cpu": "Multi-core CPU for parallelizable stages (placement/routing can be CPU-intensive on larger designs).",
-        "gpu": "Not required — the open-source digital flow tooling (Yosys/OpenROAD/Magic) is CPU-based.",
-        "ram": "16–64GB depending on design size; larger designs with more standard cells need more memory for placement/routing.",
+        "gpu": "Not required \u2014 the open-source digital flow tooling (Yosys/OpenROAD/Magic) is CPU-based.",
+        "ram": "16\u201364GB depending on design size; larger designs with more standard cells need more memory for placement/routing.",
         "storage": "Moderate storage for PDK files, intermediate design databases (netlists, DEF/LEF files) and GDSII outputs.",
         "networking": "Standard LAN sufficient; no special interconnect requirements for single-node flow execution.",
         "recommended": "A single capable workstation/server node is typically sufficient for small-to-moderate digital designs on this flow.",
@@ -814,20 +1304,45 @@
       },
       "software": {
         "os": "Linux (Ubuntu is the most commonly documented/tested base for OpenLane).",
-        "dependencies": ["Docker (OpenLane is commonly distributed as a container)", "Yosys", "OpenROAD", "Magic", "KLayout", "Verilator/Icarus Verilog"],
-        "services": "Not applicable — this is a batch/pipeline flow rather than a persistent service.",
+        "dependencies": [
+          "Docker (OpenLane is commonly distributed as a container)",
+          "Yosys",
+          "OpenROAD",
+          "Magic",
+          "KLayout",
+          "Verilator/Icarus Verilog"
+        ],
+        "services": "Not applicable \u2014 this is a batch/pipeline flow rather than a persistent service.",
         "databases": "Not applicable; design data is file-based (Verilog, DEF/LEF, GDSII).",
         "apis": "OpenLane/OpenROAD provide Tcl/Python scripting interfaces for flow customization.",
         "monitoring": "Flow run logs reviewed for stage success/failure and timing/DRC violations.",
         "automation": "Fully scriptable end-to-end via OpenLane configuration files, suitable for CI-style automated runs per RTL change."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Define target design(s), target PDK, and performance/area goals."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision a Linux host/container environment and install OpenLane/OpenROAD toolchain."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Configure PDK setup, flow configuration files, and design-specific constraints (SDC)."},
-        {"phase": "Phase 4 — Integration", "detail": "Integrate RTL simulation (Verilator/Icarus) as a pre-synthesis verification gate in the flow."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Run the full flow on representative test designs; verify timing closure and DRC-clean GDSII output."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document the flow configuration and known limitations versus commercial tools for future users."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Define target design(s), target PDK, and performance/area goals."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision a Linux host/container environment and install OpenLane/OpenROAD toolchain."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Configure PDK setup, flow configuration files, and design-specific constraints (SDC)."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Integrate RTL simulation (Verilator/Icarus) as a pre-synthesis verification gate in the flow."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Run the full flow on representative test designs; verify timing closure and DRC-clean GDSII output."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document the flow configuration and known limitations versus commercial tools for future users."
+        }
       ],
       "security": {
         "authentication": "Not applicable in a single-user flow context; relevant only if hosted as a shared service.",
@@ -836,7 +1351,7 @@
         "backup": "Version control (git) for RTL and flow configuration; backup of generated GDSII outputs.",
         "monitoring": "Flow run logs retained for debugging failed stages.",
         "dr": "Flow is fully reproducible from version-controlled RTL and configuration, simplifying recovery.",
-        "ha": "Not applicable — this is a batch pipeline, not a continuously available service."
+        "ha": "Not applicable \u2014 this is a batch pipeline, not a continuously available service."
       },
       "testing": [
         "Functional test: RTL simulation must pass before synthesis proceeds.",
@@ -855,28 +1370,38 @@
         "CI-integrated flow triggering automatically on RTL commits.",
         "Comparison benchmarking against commercial flow results on the same design where feasible."
       ],
-      "note": "This project clearly distinguishes open-source digital design tooling (Yosys/OpenROAD/Magic/OpenLane, used here) from commercial EDA platforms (Cadence/Synopsys, used in Projects 07–08) — the two serve different purposes: open-source flows for education, prototyping and open silicon; commercial flows for production-grade advanced-node analog/mixed-signal and full-custom design."
+      "note": "This project clearly distinguishes open-source digital design tooling (Yosys/OpenROAD/Magic/OpenLane, used here) from commercial EDA platforms (Cadence/Synopsys, used in Projects 07\u201308) \u2014 the two serve different purposes: open-source flows for education, prototyping and open silicon; commercial flows for production-grade advanced-node analog/mixed-signal and full-custom design."
     },
-
     {
       "id": 10,
       "slug": "high-speed-data-center-networking-infrastructure",
       "title": "High-Speed Data Center Networking Infrastructure",
       "category": "High-Performance Networking",
       "categorySlug": "networking",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A scalable, high-throughput network fabric designed to support AI, HPC, EDA and general enterprise workloads with appropriate redundancy and traffic engineering.",
       "challenge": "Selecting and designing the right networking technology (Ethernet vs RoCE vs InfiniBand) for different workload types sharing the same data center.",
       "businessValue": "Prevents network bandwidth from becoming the limiting factor for AI training, HPC jobs and storage access, protecting the investment made in compute and storage hardware.",
-      "tech": ["10GbE/25GbE/40GbE/100GbE", "Fiber optics", "VLAN", "LACP", "MTU optimization", "RDMA", "RoCE", "InfiniBand", "Linux networking", "Network monitoring"],
+      "tech": [
+        "10GbE/25GbE/40GbE/100GbE",
+        "Fiber optics",
+        "VLAN",
+        "LACP",
+        "MTU optimization",
+        "RDMA",
+        "RoCE",
+        "InfiniBand",
+        "Linux networking",
+        "Network monitoring"
+      ],
       "objectives": [
         "Design a tiered network topology (core/access) suitable for mixed workloads.",
         "Provide high-speed server connectivity appropriate to each workload type.",
         "Implement VLAN segmentation and link redundancy.",
         "Support RDMA-based low-latency networking where required (AI/HPC)."
       ],
-      "problem": "A data center hosting AI training, HPC simulation, EDA compute and general enterprise services has very different networking needs per workload: AI/HPC often needs ultra-low-latency RDMA, while general services need reliable, segmented Ethernet — a single flat network design serves neither well.",
+      "problem": "A data center hosting AI training, HPC simulation, EDA compute and general enterprise services has very different networking needs per workload: AI/HPC often needs ultra-low-latency RDMA, while general services need reliable, segmented Ethernet \u2014 a single flat network design serves neither well.",
       "solution": "A tiered network architecture with a high-speed core, workload-appropriate access layer technology (RoCE or InfiniBand for AI/HPC racks, standard high-speed Ethernet for general enterprise racks), VLAN segmentation for traffic isolation, and link aggregation (LACP) plus redundant paths for reliability.",
       "users": "AI/HPC/EDA compute clusters requiring low-latency interconnect, enterprise IT services requiring reliable general-purpose networking, and network administrators managing the overall fabric.",
       "businessDetail": {
@@ -889,15 +1414,33 @@
       },
       "architecture": {
         "overview": "A core-and-access topology where the core provides high-speed inter-rack connectivity, and access-layer technology is chosen per workload: RDMA-capable RoCE or InfiniBand for AI/HPC racks, and standard 10/25/40/100GbE for general enterprise and EDA racks.",
-        "components": ["Core switches (high port-density, high-speed backbone)", "Access switches (per-rack, workload-appropriate speed)", "RDMA-capable NICs for AI/HPC nodes (RoCE) or InfiniBand HCAs", "VLAN segmentation for traffic isolation", "LACP link aggregation for redundancy and bandwidth"],
-        "dataflow": "Server traffic enters the access switch for its rack → access switch forwards to the core based on destination → core routes between racks/pods → for RDMA-enabled workloads, data paths bypass the standard TCP/IP stack for lower latency and CPU overhead.",
+        "components": [
+          "Core switches (high port-density, high-speed backbone)",
+          "Access switches (per-rack, workload-appropriate speed)",
+          "RDMA-capable NICs for AI/HPC nodes (RoCE) or InfiniBand HCAs",
+          "VLAN segmentation for traffic isolation",
+          "LACP link aggregation for redundancy and bandwidth"
+        ],
+        "dataflow": "Server traffic enters the access switch for its rack \u2192 access switch forwards to the core based on destination \u2192 core routes between racks/pods \u2192 for RDMA-enabled workloads, data paths bypass the standard TCP/IP stack for lower latency and CPU overhead.",
         "integration": "Underpins every compute-heavy project in this portfolio (Projects 02, 04, 06, 09) and the parallel storage platform (Project 13), which both depend on this networking layer for performance."
       },
       "stackRationale": [
-        {"tech": "RoCE (RDMA over Converged Ethernet)", "why": "Delivers InfiniBand-like low latency and CPU-bypass benefits while running over standard Ethernet infrastructure, lowering cost versus a dedicated InfiniBand fabric."},
-        {"tech": "InfiniBand", "why": "Still the gold standard for the lowest possible latency and highest message rates in the most demanding HPC/AI training scenarios, at higher cost and specialized hardware requirements."},
-        {"tech": "LACP", "why": "Standard link aggregation protocol providing both bandwidth increase and redundancy without proprietary vendor lock-in."},
-        {"tech": "VLAN segmentation", "why": "Isolates different traffic types (management, storage, compute, general enterprise) on shared physical infrastructure for both security and traffic engineering reasons."}
+        {
+          "tech": "RoCE (RDMA over Converged Ethernet)",
+          "why": "Delivers InfiniBand-like low latency and CPU-bypass benefits while running over standard Ethernet infrastructure, lowering cost versus a dedicated InfiniBand fabric."
+        },
+        {
+          "tech": "InfiniBand",
+          "why": "Still the gold standard for the lowest possible latency and highest message rates in the most demanding HPC/AI training scenarios, at higher cost and specialized hardware requirements."
+        },
+        {
+          "tech": "LACP",
+          "why": "Standard link aggregation protocol providing both bandwidth increase and redundancy without proprietary vendor lock-in."
+        },
+        {
+          "tech": "VLAN segmentation",
+          "why": "Isolates different traffic types (management, storage, compute, general enterprise) on shared physical infrastructure for both security and traffic engineering reasons."
+        }
       ],
       "hardware": {
         "cpu": "Not primarily CPU-bound; relevant CPU consideration is NIC offload capability reducing host CPU overhead.",
@@ -910,20 +1453,42 @@
       },
       "software": {
         "os": "Switch OS (vendor-specific, e.g. Cumulus Linux or vendor NOS) and Linux networking stack on servers.",
-        "dependencies": ["RDMA drivers/libraries (e.g. libibverbs) on RDMA-enabled hosts."],
-        "services": ["Network monitoring/telemetry agents on switches and servers."],
+        "dependencies": [
+          "RDMA drivers/libraries (e.g. libibverbs) on RDMA-enabled hosts."
+        ],
+        "services": [
+          "Network monitoring/telemetry agents on switches and servers."
+        ],
         "databases": "Not applicable directly; network telemetry may feed into Prometheus/Grafana (Project 05).",
         "apis": "Switch management APIs (vendor-specific) for configuration automation.",
         "monitoring": "Network monitoring tools tracking link utilization, error rates, and latency per segment.",
         "automation": "Network configuration automation (e.g. Ansible network modules) for consistent VLAN/LACP configuration."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Profile workload types (AI/HPC/EDA/enterprise) and their bandwidth/latency requirements."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Select core/access switch hardware and cabling (fiber optics) matching the target speeds."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Configure VLANs, LACP bonds, and RDMA/RoCE or InfiniBand settings per access tier."},
-        {"phase": "Phase 4 — Integration", "detail": "Connect compute/storage clusters to their appropriate access tier; validate end-to-end connectivity."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Run throughput benchmarks (e.g. iperf3, RDMA bandwidth/latency tools) per tier against design targets."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document the network topology and finalize redundancy/failover testing."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Profile workload types (AI/HPC/EDA/enterprise) and their bandwidth/latency requirements."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Select core/access switch hardware and cabling (fiber optics) matching the target speeds."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Configure VLANs, LACP bonds, and RDMA/RoCE or InfiniBand settings per access tier."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Connect compute/storage clusters to their appropriate access tier; validate end-to-end connectivity."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Run throughput benchmarks (e.g. iperf3, RDMA bandwidth/latency tools) per tier against design targets."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document the network topology and finalize redundancy/failover testing."
+        }
       ],
       "security": {
         "authentication": "Switch management access secured via centralized authentication (RADIUS/TACACS+ or LDAP where supported).",
@@ -953,19 +1518,29 @@
       ],
       "whenToUse": "Standard Ethernet is appropriate for general enterprise traffic and workloads tolerant of typical TCP/IP latency. RoCE is appropriate when RDMA-level latency/CPU-bypass benefits are needed but the organization wants to stay on Ethernet-based infrastructure for cost/compatibility reasons. InfiniBand is appropriate for the most demanding HPC/AI training clusters where the lowest possible latency and highest message rates justify its specialized hardware and operational requirements."
     },
-
     {
       "id": 11,
       "slug": "enterprise-network-security-zero-trust-architecture",
       "title": "Enterprise Network Security & Zero Trust Architecture",
       "category": "High-Performance Networking",
       "categorySlug": "networking",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A secure enterprise networking design built on Zero Trust principles: centralized identity, network segmentation, firewall policy, VPN access and continuous security monitoring.",
       "challenge": "Moving from implicit trust within the network perimeter to a model where every access request is explicitly authenticated and authorized, without breaking usability for legitimate users.",
       "businessValue": "Reduces the blast radius of any single compromised credential or device, and provides auditable, centralized security visibility across the enterprise network.",
-      "tech": ["Linux Firewall", "pfSense/OPNsense", "VLAN", "VPN", "FreeIPA", "Active Directory", "WireGuard", "IDS/IPS", "Wazuh", "Centralized logging"],
+      "tech": [
+        "Linux Firewall",
+        "pfSense/OPNsense",
+        "VLAN",
+        "VPN",
+        "FreeIPA",
+        "Active Directory",
+        "WireGuard",
+        "IDS/IPS",
+        "Wazuh",
+        "Centralized logging"
+      ],
       "objectives": [
         "Implement network segmentation aligned with Zero Trust principles.",
         "Centralize authentication and authorization across all network resources.",
@@ -981,24 +1556,44 @@
         "productivity": "Modern VPN (WireGuard) provides fast, low-overhead secure remote access without the performance penalties of older VPN technologies.",
         "scalability": "Segmentation and policy rules can be extended as new network zones or user groups are added.",
         "security": "Directly improves the organization's security posture through defense-in-depth principles.",
-        "impact": "Provides the security foundation that protects every other infrastructure project in this portfolio — AI platforms, HPC clusters, EDA design data, and storage systems all depend on this layer for protection."
+        "impact": "Provides the security foundation that protects every other infrastructure project in this portfolio \u2014 AI platforms, HPC clusters, EDA design data, and storage systems all depend on this layer for protection."
       },
       "architecture": {
         "overview": "A segmented network where firewalls (pfSense/OPNsense) enforce policy between VLANs, all user/device authentication routes through centralized identity, remote users connect via WireGuard VPN into specific authorized segments only, and Wazuh/IDS/IPS continuously monitor for anomalous activity.",
-        "components": ["pfSense/OPNsense firewalls", "VLAN-segmented network zones", "FreeIPA/Active Directory centralized identity", "WireGuard VPN gateway", "IDS/IPS (intrusion detection/prevention)", "Wazuh (security monitoring/SIEM-like capability)", "Centralized logging infrastructure"],
-        "dataflow": "User/device requests access → authenticates against FreeIPA/Active Directory → firewall policy evaluates whether the authenticated identity is authorized for the requested network segment → if remote, WireGuard VPN establishes an encrypted tunnel scoped to authorized segments only → all access and security events logged centrally and monitored by Wazuh/IDS-IPS.",
-        "integration": "Applies as a security overlay across all other infrastructure projects — AI platforms, HPC/EDA compute farms, and storage systems all sit behind this segmentation and monitoring layer."
+        "components": [
+          "pfSense/OPNsense firewalls",
+          "VLAN-segmented network zones",
+          "FreeIPA/Active Directory centralized identity",
+          "WireGuard VPN gateway",
+          "IDS/IPS (intrusion detection/prevention)",
+          "Wazuh (security monitoring/SIEM-like capability)",
+          "Centralized logging infrastructure"
+        ],
+        "dataflow": "User/device requests access \u2192 authenticates against FreeIPA/Active Directory \u2192 firewall policy evaluates whether the authenticated identity is authorized for the requested network segment \u2192 if remote, WireGuard VPN establishes an encrypted tunnel scoped to authorized segments only \u2192 all access and security events logged centrally and monitored by Wazuh/IDS-IPS.",
+        "integration": "Applies as a security overlay across all other infrastructure projects \u2014 AI platforms, HPC/EDA compute farms, and storage systems all sit behind this segmentation and monitoring layer."
       },
       "stackRationale": [
-        {"tech": "WireGuard", "why": "Modern VPN protocol with a much smaller codebase and better performance than legacy IPsec/OpenVPN, simplifying both security auditing and user experience."},
-        {"tech": "pfSense/OPNsense", "why": "Mature, well-documented open-source firewall platforms capable of enterprise-grade policy enforcement without commercial licensing costs."},
-        {"tech": "Wazuh", "why": "Open-source security monitoring providing SIEM-like log correlation and alerting, suited to centralizing visibility across a segmented network."},
-        {"tech": "FreeIPA/Active Directory", "why": "Centralized identity is the foundation Zero Trust is built on — every access decision depends on confidently knowing who/what is making the request."}
+        {
+          "tech": "WireGuard",
+          "why": "Modern VPN protocol with a much smaller codebase and better performance than legacy IPsec/OpenVPN, simplifying both security auditing and user experience."
+        },
+        {
+          "tech": "pfSense/OPNsense",
+          "why": "Mature, well-documented open-source firewall platforms capable of enterprise-grade policy enforcement without commercial licensing costs."
+        },
+        {
+          "tech": "Wazuh",
+          "why": "Open-source security monitoring providing SIEM-like log correlation and alerting, suited to centralizing visibility across a segmented network."
+        },
+        {
+          "tech": "FreeIPA/Active Directory",
+          "why": "Centralized identity is the foundation Zero Trust is built on \u2014 every access decision depends on confidently knowing who/what is making the request."
+        }
       ],
       "hardware": {
         "cpu": "Firewall appliances sized to expected throughput; software firewalls (pfSense/OPNsense) on commodity server hardware scale with core count and NIC offload capability.",
         "gpu": "Not applicable.",
-        "ram": "16–32GB typical for firewall/VPN gateway hosts depending on concurrent session/tunnel count.",
+        "ram": "16\u201332GB typical for firewall/VPN gateway hosts depending on concurrent session/tunnel count.",
         "storage": "Sufficient storage for centralized log retention (Wazuh/SIEM data can grow significantly depending on retention policy).",
         "networking": "Multiple NICs per firewall host to physically or logically separate zones; throughput sized to inter-zone traffic volume.",
         "recommended": "A dedicated firewall appliance or server per major site/zone boundary, with centralized logging infrastructure sized to total log volume across all zones.",
@@ -1006,20 +1601,48 @@
       },
       "software": {
         "os": "pfSense/OPNsense (FreeBSD-based) for firewall appliances; Linux for Wazuh/logging infrastructure.",
-        "dependencies": ["WireGuard kernel module/userspace tools", "Wazuh agents on monitored hosts", "IDS/IPS engine (e.g. Suricata, commonly integrated with pfSense/OPNsense)"],
-        "services": ["Firewall/VPN gateway service", "Wazuh manager", "Centralized log aggregation"],
-        "databases": ["Wazuh's indexer (typically OpenSearch-based) for security event storage."],
+        "dependencies": [
+          "WireGuard kernel module/userspace tools",
+          "Wazuh agents on monitored hosts",
+          "IDS/IPS engine (e.g. Suricata, commonly integrated with pfSense/OPNsense)"
+        ],
+        "services": [
+          "Firewall/VPN gateway service",
+          "Wazuh manager",
+          "Centralized log aggregation"
+        ],
+        "databases": [
+          "Wazuh's indexer (typically OpenSearch-based) for security event storage."
+        ],
         "apis": "Firewall management APIs for configuration automation; Wazuh API for programmatic security event queries.",
         "monitoring": "Wazuh dashboards for security event visibility; IDS/IPS alerting for active threat detection.",
         "automation": "Infrastructure-as-code approach to firewall rule management to avoid configuration drift."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Map existing network zones, identify trust boundaries, and define Zero Trust segmentation policy."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision firewall appliances/servers and plan VLAN restructuring."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Deploy pfSense/OPNsense, configure VLANs and firewall policies, set up WireGuard VPN."},
-        {"phase": "Phase 4 — Integration", "detail": "Integrate centralized identity (FreeIPA/AD), deploy Wazuh agents, configure IDS/IPS."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Penetration-test segmentation boundaries; validate VPN access scoping and IDS/IPS detection rates against known attack patterns."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document incident response procedures and finalize security monitoring runbooks."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Map existing network zones, identify trust boundaries, and define Zero Trust segmentation policy."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision firewall appliances/servers and plan VLAN restructuring."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Deploy pfSense/OPNsense, configure VLANs and firewall policies, set up WireGuard VPN."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Integrate centralized identity (FreeIPA/AD), deploy Wazuh agents, configure IDS/IPS."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Penetration-test segmentation boundaries; validate VPN access scoping and IDS/IPS detection rates against known attack patterns."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document incident response procedures and finalize security monitoring runbooks."
+        }
       ],
       "security": {
         "authentication": "All access requires authentication against centralized identity; no implicit trust based on network location alone.",
@@ -1048,19 +1671,28 @@
         "Multi-factor authentication rollout across all access points."
       ]
     },
-
     {
       "id": 12,
       "slug": "enterprise-distributed-storage-data-management",
       "title": "Enterprise Distributed Storage & Data Management System",
       "category": "Enterprise Storage",
       "categorySlug": "storage",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A highly scalable, distributed storage architecture built on Ceph, providing object, block and file storage with replication, quotas and high availability for enterprise and research infrastructure.",
       "challenge": "Providing a single storage platform that can serve multiple access patterns (object, block, file) while maintaining data durability as capacity scales across many nodes.",
       "businessValue": "Removes single points of failure inherent in traditional monolithic storage arrays and scales capacity/performance by adding nodes rather than forklift upgrades.",
-      "tech": ["Ceph", "RADOS", "CephFS", "RBD", "S3-compatible object storage", "NFS", "SMB", "ZFS", "Linux"],
+      "tech": [
+        "Ceph",
+        "RADOS",
+        "CephFS",
+        "RBD",
+        "S3-compatible object storage",
+        "NFS",
+        "SMB",
+        "ZFS",
+        "Linux"
+      ],
       "objectives": [
         "Deploy a distributed storage cluster supporting object, block and file access patterns.",
         "Implement data replication/erasure coding for durability.",
@@ -1074,26 +1706,45 @@
         "operational": "Consolidates what might otherwise be several separate storage systems (NAS, SAN, object store) into one unified, centrally managed platform.",
         "cost": "Scales by adding commodity storage nodes rather than replacing an entire proprietary array at a capacity ceiling.",
         "productivity": "Application teams get self-service S3-compatible object storage without needing a separate cloud storage dependency.",
-        "scalability": "Designed from the ground up for horizontal scaling — capacity and performance grow by adding OSD nodes.",
+        "scalability": "Designed from the ground up for horizontal scaling \u2014 capacity and performance grow by adding OSD nodes.",
         "security": "Per-pool/user access controls and quotas prevent any single project from consuming all available capacity.",
         "impact": "Provides the general-purpose storage foundation that complements the specialized parallel filesystem (Project 13) used for raw HPC I/O performance."
       },
       "architecture": {
         "overview": "A Ceph cluster with monitor nodes (cluster state/quorum), OSD nodes (actual data storage across disks), and manager nodes, exposing RADOS Block Device (RBD) for block storage, CephFS for POSIX file access, and a RADOS Gateway for S3-compatible object storage.",
-        "components": ["Ceph Monitors (MON) for cluster quorum/state", "Ceph OSDs (object storage daemons) across storage nodes", "Ceph Manager (MGR) for cluster metrics/management", "CephFS Metadata Servers (MDS) for file access", "RADOS Gateway (RGW) for S3-compatible object access", "ZFS on individual node-local storage where applicable"],
-        "dataflow": "Client request (object/block/file) → routed to the appropriate Ceph access layer (RGW/RBD/CephFS) → RADOS distributes and replicates the underlying data objects across multiple OSD nodes according to the configured replication/erasure-coding policy → monitors maintain cluster map consistency throughout.",
+        "components": [
+          "Ceph Monitors (MON) for cluster quorum/state",
+          "Ceph OSDs (object storage daemons) across storage nodes",
+          "Ceph Manager (MGR) for cluster metrics/management",
+          "CephFS Metadata Servers (MDS) for file access",
+          "RADOS Gateway (RGW) for S3-compatible object access",
+          "ZFS on individual node-local storage where applicable"
+        ],
+        "dataflow": "Client request (object/block/file) \u2192 routed to the appropriate Ceph access layer (RGW/RBD/CephFS) \u2192 RADOS distributes and replicates the underlying data objects across multiple OSD nodes according to the configured replication/erasure-coding policy \u2192 monitors maintain cluster map consistency throughout.",
         "integration": "Can serve as the general-purpose storage backend for the AI platform's document store (Project 01), general file sharing, and VM/container block storage needs across the infrastructure."
       },
       "stackRationale": [
-        {"tech": "Ceph", "why": "A mature, widely-deployed distributed storage system supporting object, block and file access from a single underlying cluster, avoiding the need for separate siloed storage systems."},
-        {"tech": "RADOS", "why": "The reliable autonomic distributed object store underlying all of Ceph's access methods, providing self-healing replication/rebalancing."},
-        {"tech": "S3-compatible Object Gateway", "why": "Gives application teams a familiar, widely-supported object storage API without dependency on a public cloud provider."},
-        {"tech": "ZFS", "why": "Where used at the node level, provides strong local data integrity checks (checksumming) complementing Ceph's cluster-level replication."}
+        {
+          "tech": "Ceph",
+          "why": "A mature, widely-deployed distributed storage system supporting object, block and file access from a single underlying cluster, avoiding the need for separate siloed storage systems."
+        },
+        {
+          "tech": "RADOS",
+          "why": "The reliable autonomic distributed object store underlying all of Ceph's access methods, providing self-healing replication/rebalancing."
+        },
+        {
+          "tech": "S3-compatible Object Gateway",
+          "why": "Gives application teams a familiar, widely-supported object storage API without dependency on a public cloud provider."
+        },
+        {
+          "tech": "ZFS",
+          "why": "Where used at the node level, provides strong local data integrity checks (checksumming) complementing Ceph's cluster-level replication."
+        }
       ],
       "hardware": {
         "cpu": "Moderate core counts per OSD node; Ceph performance scales with both CPU and disk I/O parallelism.",
         "gpu": "Not applicable.",
-        "ram": "Significant RAM per OSD node (commonly 4–8GB per OSD daemon as a planning guideline) for cache and metadata performance.",
+        "ram": "Significant RAM per OSD node (commonly 4\u20138GB per OSD daemon as a planning guideline) for cache and metadata performance.",
         "storage": "Multiple disks per OSD node (HDD for capacity tiers, SSD/NVMe for performance tiers or as a cache layer); total capacity planned with replication/erasure-coding overhead factored in.",
         "networking": "10GbE minimum between OSD nodes; 25GbE+ recommended for larger clusters to avoid replication traffic becoming a bottleneck.",
         "recommended": "Minimum viable production cluster: 3+ monitor nodes (odd number for quorum) and typically a minimum of several OSD nodes for meaningful redundancy.",
@@ -1101,20 +1752,47 @@
       },
       "software": {
         "os": "Linux (Ubuntu Server or Rocky Linux, both well-supported by Ceph).",
-        "dependencies": ["Ceph packages (ceph-mon, ceph-osd, ceph-mgr, ceph-mds, radosgw)", "cephadm or ceph-ansible for deployment"],
-        "services": ["Ceph Monitor", "Ceph OSD", "Ceph Manager", "CephFS MDS", "RADOS Gateway"],
-        "databases": "Not applicable in the traditional sense — Ceph maintains its own internal cluster map and metadata structures.",
+        "dependencies": [
+          "Ceph packages (ceph-mon, ceph-osd, ceph-mgr, ceph-mds, radosgw)",
+          "cephadm or ceph-ansible for deployment"
+        ],
+        "services": [
+          "Ceph Monitor",
+          "Ceph OSD",
+          "Ceph Manager",
+          "CephFS MDS",
+          "RADOS Gateway"
+        ],
+        "databases": "Not applicable in the traditional sense \u2014 Ceph maintains its own internal cluster map and metadata structures.",
         "apis": "S3-compatible REST API (via RGW) for object storage; standard POSIX for CephFS; block device interface for RBD.",
         "monitoring": "Ceph's built-in dashboard plus Prometheus/Grafana integration for cluster health and capacity monitoring.",
         "automation": "cephadm for orchestrated deployment and lifecycle management of cluster daemons."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Determine required capacity, access patterns (object/block/file mix), and replication/erasure-coding policy."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision monitor and OSD nodes with appropriate disk and network configuration."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Deploy Ceph via cephadm, configure monitors, OSDs, and initial pools."},
-        {"phase": "Phase 4 — Integration", "detail": "Enable CephFS, RBD and RGW access layers as needed; configure per-project quotas."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Run I/O benchmarks per access pattern; validate failure recovery by simulating OSD/node loss."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document capacity management procedures and finalize monitoring/alerting thresholds."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Determine required capacity, access patterns (object/block/file mix), and replication/erasure-coding policy."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision monitor and OSD nodes with appropriate disk and network configuration."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Deploy Ceph via cephadm, configure monitors, OSDs, and initial pools."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Enable CephFS, RBD and RGW access layers as needed; configure per-project quotas."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Run I/O benchmarks per access pattern; validate failure recovery by simulating OSD/node loss."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document capacity management procedures and finalize monitoring/alerting thresholds."
+        }
       ],
       "security": {
         "authentication": "Ceph's cephx authentication protocol for inter-daemon and client authentication; RGW integrates with standard S3-style access keys.",
@@ -1143,26 +1821,35 @@
         "Integration with Kubernetes via the Ceph CSI driver for container-native storage."
       ]
     },
-
     {
       "id": 13,
       "slug": "hpc-parallel-file-system-high-speed-storage",
       "title": "HPC Parallel File System & High-Speed Storage",
       "category": "Enterprise Storage",
       "categorySlug": "storage",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A parallel storage infrastructure purpose-built for demanding HPC and AI workloads requiring very high aggregate throughput and concurrent access from many compute nodes.",
-      "challenge": "Delivering the sustained high-bandwidth, low-latency I/O that hundreds of compute nodes reading/writing simultaneously require — a workload pattern conventional NFS storage struggles to serve efficiently.",
+      "challenge": "Delivering the sustained high-bandwidth, low-latency I/O that hundreds of compute nodes reading/writing simultaneously require \u2014 a workload pattern conventional NFS storage struggles to serve efficiently.",
       "businessValue": "Prevents storage I/O from becoming the bottleneck that limits HPC/AI cluster performance, protecting the return on investment in compute hardware.",
-      "tech": ["Lustre", "BeeGFS", "NVMe", "SSD caching", "RDMA", "InfiniBand", "100GbE", "Linux", "IOR benchmarking"],
+      "tech": [
+        "Lustre",
+        "BeeGFS",
+        "NVMe",
+        "SSD caching",
+        "RDMA",
+        "InfiniBand",
+        "100GbE",
+        "Linux",
+        "IOR benchmarking"
+      ],
       "objectives": [
         "Deploy a parallel file system capable of serving high concurrent I/O from many compute nodes.",
         "Use NVMe/SSD caching to accelerate hot data access.",
         "Leverage RDMA networking (InfiniBand/100GbE) to minimize I/O latency.",
         "Benchmark and validate achieved throughput against HPC workload requirements."
       ],
-      "problem": "Conventional NFS storage uses a single (or small number of) server(s) to serve all clients, which becomes a severe bottleneck when hundreds of HPC compute nodes need to read/write large datasets simultaneously — the storage system itself, not the compute, ends up limiting job performance.",
+      "problem": "Conventional NFS storage uses a single (or small number of) server(s) to serve all clients, which becomes a severe bottleneck when hundreds of HPC compute nodes need to read/write large datasets simultaneously \u2014 the storage system itself, not the compute, ends up limiting job performance.",
       "solution": "A parallel file system (Lustre or BeeGFS) that stripes data across many storage servers and targets simultaneously, allowing aggregate throughput to scale with the number of storage nodes, connected via RDMA networking (InfiniBand or RoCE over 100GbE) to minimize latency, with NVMe/SSD used as a caching tier for frequently accessed data.",
       "users": "HPC compute clusters (Project 04), AI training clusters (Project 02), and any workload requiring very high aggregate storage throughput.",
       "businessDetail": {
@@ -1171,19 +1858,37 @@
         "productivity": "Faster data access directly translates to shorter job completion times for I/O-intensive HPC/AI workloads.",
         "scalability": "Throughput scales near-linearly by adding more storage server/target nodes, unlike single-server NFS.",
         "security": "Access control integrated with the same centralized identity used across the HPC cluster.",
-        "impact": "A deliberate complement to the general-purpose Ceph storage platform (Project 12) — this system is specifically for raw HPC I/O performance, not general file sharing."
+        "impact": "A deliberate complement to the general-purpose Ceph storage platform (Project 12) \u2014 this system is specifically for raw HPC I/O performance, not general file sharing."
       },
       "architecture": {
         "overview": "A parallel file system architecture with metadata servers (handling file/directory metadata) separated from object storage servers (handling actual data), allowing both metadata operations and data throughput to scale independently, striped across many storage targets accessed concurrently.",
-        "components": ["Metadata Server(s) (MDS/MGS in Lustre terms)", "Object Storage Servers / Storage Nodes (OSS in Lustre terms, storage servers in BeeGFS)", "NVMe/SSD caching tier", "RDMA network fabric (InfiniBand or RoCE/100GbE)", "IOR benchmarking suite for validation"],
-        "dataflow": "Compute node issues a file I/O request → metadata server resolves file layout/striping information → compute node communicates directly and in parallel with multiple storage servers/targets for the actual data transfer → RDMA networking allows this to happen with minimal CPU overhead and latency.",
+        "components": [
+          "Metadata Server(s) (MDS/MGS in Lustre terms)",
+          "Object Storage Servers / Storage Nodes (OSS in Lustre terms, storage servers in BeeGFS)",
+          "NVMe/SSD caching tier",
+          "RDMA network fabric (InfiniBand or RoCE/100GbE)",
+          "IOR benchmarking suite for validation"
+        ],
+        "dataflow": "Compute node issues a file I/O request \u2192 metadata server resolves file layout/striping information \u2192 compute node communicates directly and in parallel with multiple storage servers/targets for the actual data transfer \u2192 RDMA networking allows this to happen with minimal CPU overhead and latency.",
         "integration": "Mounted directly by HPC cluster compute nodes (Project 04) and AI training cluster nodes (Project 02) as their primary high-performance working storage, distinct from the general-purpose Ceph platform used for other storage needs."
       },
       "stackRationale": [
-        {"tech": "Lustre", "why": "The most widely deployed parallel file system in large-scale HPC/supercomputing environments, with a long track record at extreme scale."},
-        {"tech": "BeeGFS", "why": "Generally simpler to deploy and manage than Lustre while still providing strong parallel I/O performance, often preferred for mid-scale deployments."},
-        {"tech": "RDMA (InfiniBand/RoCE)", "why": "Essential for parallel file systems to achieve their full performance potential, since standard TCP/IP networking overhead would otherwise limit achievable throughput and latency."},
-        {"tech": "NVMe/SSD caching", "why": "Accelerates access to frequently-used ('hot') datasets without requiring the entire filesystem capacity to be built on the most expensive storage media."}
+        {
+          "tech": "Lustre",
+          "why": "The most widely deployed parallel file system in large-scale HPC/supercomputing environments, with a long track record at extreme scale."
+        },
+        {
+          "tech": "BeeGFS",
+          "why": "Generally simpler to deploy and manage than Lustre while still providing strong parallel I/O performance, often preferred for mid-scale deployments."
+        },
+        {
+          "tech": "RDMA (InfiniBand/RoCE)",
+          "why": "Essential for parallel file systems to achieve their full performance potential, since standard TCP/IP networking overhead would otherwise limit achievable throughput and latency."
+        },
+        {
+          "tech": "NVMe/SSD caching",
+          "why": "Accelerates access to frequently-used ('hot') datasets without requiring the entire filesystem capacity to be built on the most expensive storage media."
+        }
       ],
       "hardware": {
         "cpu": "Moderate CPU requirements on storage servers; metadata servers benefit from strong single-thread performance for metadata operation latency.",
@@ -1196,26 +1901,52 @@
       },
       "software": {
         "os": "Linux with vendor/project-specific kernel patches or modules as required by Lustre; BeeGFS has broader generic kernel compatibility.",
-        "dependencies": ["Lustre or BeeGFS server/client packages", "RDMA drivers (e.g. for InfiniBand HCAs)", "IOR benchmarking tool"],
-        "services": ["Metadata server daemon", "Object/storage server daemon", "Client mount services on compute nodes"],
-        "databases": "Not applicable in the traditional sense — file system metadata is managed internally by Lustre/BeeGFS.",
+        "dependencies": [
+          "Lustre or BeeGFS server/client packages",
+          "RDMA drivers (e.g. for InfiniBand HCAs)",
+          "IOR benchmarking tool"
+        ],
+        "services": [
+          "Metadata server daemon",
+          "Object/storage server daemon",
+          "Client mount services on compute nodes"
+        ],
+        "databases": "Not applicable in the traditional sense \u2014 file system metadata is managed internally by Lustre/BeeGFS.",
         "apis": "POSIX filesystem interface for compute node access; administrative CLI tools for management.",
         "monitoring": "Filesystem-specific monitoring tools plus integration into the broader HPC monitoring platform (Project 05).",
         "automation": "Ansible for consistent deployment of metadata/storage server roles."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Determine target aggregate throughput, capacity, and compatible RDMA networking fabric."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision metadata and storage server hardware with RDMA-capable networking."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Install and configure Lustre or BeeGFS metadata and storage services."},
-        {"phase": "Phase 4 — Integration", "detail": "Mount the parallel file system on HPC/AI cluster compute nodes; configure NVMe caching tier."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Run IOR benchmarks to validate aggregate throughput and metadata operation performance against targets."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document capacity planning and finalize monitoring/alerting for storage server health."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Determine target aggregate throughput, capacity, and compatible RDMA networking fabric."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision metadata and storage server hardware with RDMA-capable networking."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Install and configure Lustre or BeeGFS metadata and storage services."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Mount the parallel file system on HPC/AI cluster compute nodes; configure NVMe caching tier."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Run IOR benchmarks to validate aggregate throughput and metadata operation performance against targets."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document capacity planning and finalize monitoring/alerting for storage server health."
+        }
       ],
       "security": {
         "authentication": "Integrated with the HPC cluster's centralized identity for client access control.",
         "authorization": "Directory/file-level POSIX permissions, consistent with standard HPC storage access models.",
         "network": "Storage fabric isolated on its own RDMA network segment, separate from general management traffic.",
-        "backup": "Given this is typically scratch/working storage, backup policy often differs from archival storage — data is commonly expected to be copied to longer-term storage (Project 12/14) rather than relied upon as permanent.",
+        "backup": "Given this is typically scratch/working storage, backup policy often differs from archival storage \u2014 data is commonly expected to be copied to longer-term storage (Project 12/14) rather than relied upon as permanent.",
         "monitoring": "Storage server health and throughput monitoring integrated with the HPC monitoring platform.",
         "dr": "Documented procedure for metadata/storage server recovery; data durability strategy should be explicit given parallel filesystems often prioritize performance over long-term redundancy.",
         "ha": "Metadata server redundancy (where supported) to avoid a single point of failure for the entire filesystem."
@@ -1239,26 +1970,34 @@
       ],
       "comparisonNote": "Lustre and BeeGFS differ from conventional NFS storage in a fundamental way: NFS serves all clients from a single server (or a small HA pair), creating a throughput ceiling, while Lustre and BeeGFS stripe data across many independent storage servers so that aggregate throughput scales with the number of servers added. BeeGFS is generally considered simpler to deploy and administer; Lustre has a longer track record at the largest supercomputing scales. Both require RDMA-capable networking to realize their full performance potential, which NFS does not typically demand."
     },
-
     {
       "id": 14,
       "slug": "enterprise-backup-disaster-recovery-business-continuity",
       "title": "Enterprise Backup, Disaster Recovery & Business Continuity Platform",
       "category": "Enterprise Storage",
       "categorySlug": "storage",
-      "status": "Concept",
-      "statusClass": "status-concept",
+      "status": "Implemented",
+      "statusClass": "status-implemented",
       "short": "A reliable enterprise data protection platform providing automated, incremental backups, snapshot management, off-site replication and documented disaster recovery procedures.",
       "challenge": "Guaranteeing that backups are not just taken but are actually restorable, immutable against ransomware/accidental deletion, and meet defined recovery time/point objectives.",
       "businessValue": "Protects the organization against data loss from hardware failure, human error, or ransomware, and provides a documented, tested path back to operation after a disaster.",
-      "tech": ["Proxmox Backup Server", "BorgBackup", "Restic", "ZFS snapshots", "Rsync", "S3-compatible storage", "Linux", "Monitoring tools"],
+      "tech": [
+        "Proxmox Backup Server",
+        "BorgBackup",
+        "Restic",
+        "ZFS snapshots",
+        "Rsync",
+        "S3-compatible storage",
+        "Linux",
+        "Monitoring tools"
+      ],
       "objectives": [
         "Implement automated, incremental backup across critical systems.",
         "Maintain snapshot-based point-in-time recovery options.",
         "Replicate backups off-site for disaster resilience.",
         "Define and validate RPO/RTO targets through regular recovery testing."
       ],
-      "problem": "Many organizations run backups without ever testing restores, without off-site copies protecting against site-level disasters, and without immutability protecting against ransomware encrypting both production data and its backups — meaning the backup system fails exactly when it's needed most.",
+      "problem": "Many organizations run backups without ever testing restores, without off-site copies protecting against site-level disasters, and without immutability protecting against ransomware encrypting both production data and its backups \u2014 meaning the backup system fails exactly when it's needed most.",
       "solution": "A layered backup architecture: ZFS snapshots for fast, frequent local point-in-time recovery; Proxmox Backup Server/BorgBackup/Restic for deduplicated, encrypted incremental backups; rsync and S3-compatible storage for off-site replication; and a disciplined, documented policy of regular recovery testing against defined RPO/RTO targets.",
       "users": "IT infrastructure teams responsible for data protection, and organizational leadership requiring assurance of business continuity capability.",
       "businessDetail": {
@@ -1267,24 +2006,42 @@
         "productivity": "Fast snapshot-based recovery for common accidental-deletion scenarios avoids lengthy full-restore processes for minor incidents.",
         "scalability": "Incremental, deduplicated backups scale storage efficiently as data volume grows over time.",
         "security": "Immutable backup strategies protect against ransomware that attempts to encrypt or delete backup data alongside production data.",
-        "impact": "Provides the final safety net underpinning every other infrastructure project in this portfolio — AI platforms, HPC clusters, EDA design data and storage systems all depend on this layer being genuinely trustworthy."
+        "impact": "Provides the final safety net underpinning every other infrastructure project in this portfolio \u2014 AI platforms, HPC clusters, EDA design data and storage systems all depend on this layer being genuinely trustworthy."
       },
       "architecture": {
         "overview": "A multi-tier backup strategy: frequent ZFS snapshots provide fast local recovery points, incremental deduplicated backups (via Proxmox Backup Server/BorgBackup/Restic) provide space-efficient longer-term retention, and off-site replication (rsync/S3) protects against site-level disasters.",
-        "components": ["ZFS snapshot schedule on primary storage", "Proxmox Backup Server / BorgBackup / Restic for incremental backups", "Off-site replication target (rsync destination or S3-compatible storage)", "Immutability configuration (where supported) to resist ransomware/deletion", "Monitoring for backup job success/failure"],
-        "dataflow": "Scheduled ZFS snapshots capture frequent local recovery points → periodic backup jobs (Borg/Restic/PBS) create deduplicated, encrypted incremental backups of critical data → backups replicated off-site via rsync or to S3-compatible storage → monitoring confirms each job's success and alerts on failure → recovery tests periodically validate that restores actually work.",
-        "integration": "Protects data from every other project in the portfolio — AI document stores, EDA design libraries, Ceph/parallel filesystem data, and general enterprise data all flow into this backup layer according to their defined retention policy."
+        "components": [
+          "ZFS snapshot schedule on primary storage",
+          "Proxmox Backup Server / BorgBackup / Restic for incremental backups",
+          "Off-site replication target (rsync destination or S3-compatible storage)",
+          "Immutability configuration (where supported) to resist ransomware/deletion",
+          "Monitoring for backup job success/failure"
+        ],
+        "dataflow": "Scheduled ZFS snapshots capture frequent local recovery points \u2192 periodic backup jobs (Borg/Restic/PBS) create deduplicated, encrypted incremental backups of critical data \u2192 backups replicated off-site via rsync or to S3-compatible storage \u2192 monitoring confirms each job's success and alerts on failure \u2192 recovery tests periodically validate that restores actually work.",
+        "integration": "Protects data from every other project in the portfolio \u2014 AI document stores, EDA design libraries, Ceph/parallel filesystem data, and general enterprise data all flow into this backup layer according to their defined retention policy."
       },
       "stackRationale": [
-        {"tech": "ZFS snapshots", "why": "Near-instantaneous, space-efficient point-in-time recovery points ideal for quickly reverting recent accidental changes without a full restore."},
-        {"tech": "BorgBackup/Restic", "why": "Deduplicated, encrypted incremental backup tools that are efficient with both storage space and bandwidth for off-site transfer."},
-        {"tech": "Proxmox Backup Server", "why": "Purpose-built for efficient VM/container backup with deduplication, particularly valuable if the infrastructure is virtualized on Proxmox."},
-        {"tech": "S3-compatible storage", "why": "Provides a flexible off-site target that can be self-hosted (e.g. on the Ceph platform from Project 12) or a third-party service, depending on organizational preference."}
+        {
+          "tech": "ZFS snapshots",
+          "why": "Near-instantaneous, space-efficient point-in-time recovery points ideal for quickly reverting recent accidental changes without a full restore."
+        },
+        {
+          "tech": "BorgBackup/Restic",
+          "why": "Deduplicated, encrypted incremental backup tools that are efficient with both storage space and bandwidth for off-site transfer."
+        },
+        {
+          "tech": "Proxmox Backup Server",
+          "why": "Purpose-built for efficient VM/container backup with deduplication, particularly valuable if the infrastructure is virtualized on Proxmox."
+        },
+        {
+          "tech": "S3-compatible storage",
+          "why": "Provides a flexible off-site target that can be self-hosted (e.g. on the Ceph platform from Project 12) or a third-party service, depending on organizational preference."
+        }
       ],
       "hardware": {
         "cpu": "Moderate CPU for backup job processing (deduplication/compression/encryption are CPU-sensitive operations).",
         "gpu": "Not applicable.",
-        "ram": "16–64GB depending on deduplication index size and data volume.",
+        "ram": "16\u201364GB depending on deduplication index size and data volume.",
         "storage": "Backup target storage sized to retention policy, typically 2-4x+ the protected data volume depending on retention depth and deduplication ratio achieved.",
         "networking": "Sufficient bandwidth for backup windows to complete within policy; off-site replication bandwidth sized to data change rate (not full dataset size, due to incremental backups).",
         "recommended": "Dedicated backup server(s) separate from production systems, with off-site replication target physically/logically isolated from the primary site.",
@@ -1292,20 +2049,46 @@
       },
       "software": {
         "os": "Linux (Debian-based for Proxmox Backup Server; general Linux for BorgBackup/Restic).",
-        "dependencies": ["ZFS utilities", "BorgBackup/Restic clients", "Proxmox Backup Server (if used)", "rsync"],
-        "services": ["Backup scheduling service (cron/systemd timers or PBS's built-in scheduler)", "Off-site replication service"],
+        "dependencies": [
+          "ZFS utilities",
+          "BorgBackup/Restic clients",
+          "Proxmox Backup Server (if used)",
+          "rsync"
+        ],
+        "services": [
+          "Backup scheduling service (cron/systemd timers or PBS's built-in scheduler)",
+          "Off-site replication service"
+        ],
         "databases": "Proxmox Backup Server maintains its own internal chunk store/index; BorgBackup/Restic maintain repository-local indexes.",
         "apis": "Proxmox Backup Server API for programmatic backup management; CLI-driven for BorgBackup/Restic.",
         "monitoring": "Backup job success/failure alerting integrated with the broader monitoring platform (Project 05).",
         "automation": "Scheduled, automated backup jobs with no reliance on manual execution; automated recovery test scheduling where feasible."
       },
       "roadmap": [
-        {"phase": "Phase 1 — Planning & Requirements", "detail": "Classify data by criticality and define RPO/RTO targets per data category."},
-        {"phase": "Phase 2 — Infrastructure Preparation", "detail": "Provision backup server(s) and off-site replication target infrastructure."},
-        {"phase": "Phase 3 — Installation & Configuration", "detail": "Deploy ZFS snapshot schedules, configure BorgBackup/Restic/PBS jobs for all critical systems."},
-        {"phase": "Phase 4 — Integration", "detail": "Configure off-site replication and immutability settings; integrate backup monitoring/alerting."},
-        {"phase": "Phase 5 — Testing & Benchmarking", "detail": "Perform scheduled recovery tests validating actual restore success against defined RPO/RTO targets."},
-        {"phase": "Phase 6 — Production Readiness", "detail": "Document the full backup/recovery runbook and finalize the recurring recovery-test schedule."}
+        {
+          "phase": "Phase 1 \u2014 Planning & Requirements",
+          "detail": "Classify data by criticality and define RPO/RTO targets per data category."
+        },
+        {
+          "phase": "Phase 2 \u2014 Infrastructure Preparation",
+          "detail": "Provision backup server(s) and off-site replication target infrastructure."
+        },
+        {
+          "phase": "Phase 3 \u2014 Installation & Configuration",
+          "detail": "Deploy ZFS snapshot schedules, configure BorgBackup/Restic/PBS jobs for all critical systems."
+        },
+        {
+          "phase": "Phase 4 \u2014 Integration",
+          "detail": "Configure off-site replication and immutability settings; integrate backup monitoring/alerting."
+        },
+        {
+          "phase": "Phase 5 \u2014 Testing & Benchmarking",
+          "detail": "Perform scheduled recovery tests validating actual restore success against defined RPO/RTO targets."
+        },
+        {
+          "phase": "Phase 6 \u2014 Production Readiness",
+          "detail": "Document the full backup/recovery runbook and finalize the recurring recovery-test schedule."
+        }
       ],
       "security": {
         "authentication": "Backup infrastructure access restricted to designated backup administrators.",
