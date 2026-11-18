@@ -64,7 +64,6 @@ def footer(depth=""):
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
-      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
     </div>
   </div>
 </footer>"""
