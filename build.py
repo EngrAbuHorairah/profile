@@ -12,7 +12,7 @@ PROJECTS = DATA["projects"]
 
 SITE_NAME = "ABU HORAIRAH | ENGINEERING PORTFOLIO"
 SITE_DESC = "Designing, building and optimizing AI, HPC, semiconductor EDA, enterprise networking and advanced storage infrastructure."
-BASE_URL = "https://YOUR_USERNAME.github.io/YOUR_REPO"  # EDIT before deploying
+BASE_URL = "https://engrabuhorairah.github.io/profile"  # confirmed live GitHub Pages URL
 
 def esc(s): return html.escape(str(s), quote=True)
 
@@ -57,8 +57,8 @@ def footer(depth=""):
       <div>
         <h4>Connect</h4>
         <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
-        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
-        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="https://www.linkedin.com/in/engrabuhorairahsandhu" id="footer-linkedin" target="_blank" rel="noopener">LinkedIn — engrabuhorairahsandhu</a>
+        <a href="mailto:engr.abuhorairahsandhu@gmail.com" id="footer-email">Email — engr.abuhorairahsandhu@gmail.com</a>
         <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
       </div>
     </div>
@@ -204,32 +204,71 @@ def build_home():
 # ABOUT PAGE
 # ---------------------------------------------------------------------------
 def build_about():
+    experience = [
+        {"role": "IT Manager (HPC &amp; Chip Designing)", "org": "NUST Chip Design Centre", "period": "November 2025 &mdash; Present", "loc": "Islamabad, Pakistan",
+         "points": [
+            "Provides hands-on training to students and engineers on HPC workflows, ARM architecture, EDA deployment, Linux administration and semiconductor design infrastructure.",
+            "Manages high-performance clusters optimized for ARM-based silicon design, including Slurm/LSF workloads, resource allocation, simulation scheduling and performance tuning.",
+            "Administers Cadence ICADVM, Virtuoso, Spectre and ADE platforms for analog/mixed-signal IC design flows.",
+            "Designed and deployed a secure, air-gapped private AI engineering platform using vLLM, Qwen3-Coder, Qdrant, BGE-M3, FastAPI and Open WebUI for AI-assisted engineering and knowledge retrieval.",
+            "Implemented RBAC, audit logging, mTLS, secrets management, network isolation, monitoring, backup, disaster recovery and GPU failover for secure, resilient engineering services."
+         ]},
+        {"role": "AI/HPC System and Network Engineer (Dev/MLOps)", "org": "AS-Softlayer Technologies", "period": "December 2023 &mdash; September 2025", "loc": "Islamabad, Pakistan",
+         "points": [
+            "Designed and built a complete data center infrastructure from scratch, including virtualization with Proxmox, OpenStack and VMware ESXi.",
+            "Architected and deployed the ATTOM Data Center, handling full build-out, configuration and monitoring solution implementation.",
+            "Deployed NVIDIA Mellanox SN3700 switches for HA-enabled production networking (MLAG, CLAG, LACP, OSPF, VRF).",
+            "Worked with NVIDIA GPUs including RTX 4090, M10, 4050 and DGX H200 servers for AI workloads and deep learning training.",
+            "Deployed and managed Dell EMC ECS (2PB) and PowerScale NAS for large-scale object and file storage infrastructure."
+         ]},
+        {"role": "Senior HPC Support Specialist / Slurm Engineer", "org": "Redfort Technologies", "period": "February 2024 &mdash; January 2025", "loc": "United States (Remote)",
+         "points": [
+            "Delivered advanced support for HPC clusters, optimizing performance and managing storage systems.",
+            "Configured and optimized SLURM for efficient HPC cluster management, including accounting, database and Node Health Checks (NHC).",
+            "Resolved scheduling issues, enhanced resource utilization and trained team members on SLURM tools and best practices."
+         ]},
+        {"role": "HPC &amp; MLOps Engineer (Freelance)", "org": "NexGen IT Hub", "period": "April 2022 &mdash; February 2024", "loc": "Okara District, Punjab, Pakistan",
+         "points": [
+            "Designed, deployed and maintained multiple HPC clusters using Lustre, BeeGFS and NFS for compute-intensive scientific and AI workloads.",
+            "Implemented SLURM, PBS and Torque job scheduling with full resource partitioning and QoS policies.",
+            "Integrated real-world HPC applications: OpenFOAM, GROMACS, Abaqus, LAMMPS, NAMD, ANSYS, Gaussian, Quantum ESPRESSO.",
+            "Developed MLOps pipelines using MLflow, Kubeflow, GitHub Actions and Docker for full model lifecycle management."
+         ]},
+        {"role": "Linux System Administrator / DevOps (Freelance)", "org": "Self-employed", "period": "February 2021 &mdash; March 2022", "loc": "Okara District, Punjab, Pakistan",
+         "points": [
+            "Maintained secure, stable and optimized Linux environments across Debian, Ubuntu, Rocky Linux, CentOS, Red Hat and FreeBSD.",
+            "Deployed and managed VMs, containers and services on AWS (EC2, S3, VPC) and Azure.",
+            "Implemented automated backup and disaster recovery strategies."
+         ]},
+        {"role": "Computer Science Lecturer", "org": "Johar Educational Complex", "period": "June 2021 &mdash; November 2023", "loc": "Okara District, Punjab, Pakistan",
+         "points": ["Planned lessons, delivered lectures and conducted laboratory sessions in Information Technology and Computer Science."]},
+        {"role": "Online HPC Instructor", "org": "Chalmers University of Technology", "period": "September 2022 &mdash; August 2023", "loc": "Sweden (Remote)",
+         "points": ["Delivered virtual instruction on OpenMP, MPI, OpenCL, memory optimization and performance tuning; mentored students through parallel programming assignments."]},
+    ]
+    exp_html = "".join(f"""
+      <div class="card" style="margin-bottom:18px;">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <h3 style="font-size:1.05rem;">{e['role']}</h3>
+          <span class="text-muted" style="font-size:0.85rem;">{e['period']}</span>
+        </div>
+        <div class="text-muted" style="margin-bottom:10px;font-size:0.9rem;">{e['org']} &middot; {e['loc']}</div>
+        <ul style="font-size:0.9rem;">{''.join(f'<li>{pt}</li>' for pt in e['points'])}</ul>
+      </div>""" for e in experience)
+
     body = f"""
 <section class="hero" style="padding-top:64px;padding-bottom:40px;">
   <div class="container">
     <span class="eyebrow">About</span>
     <h1 style="margin-top:14px;">Engineering Profile</h1>
-    <p class="lead">AI / HPC / System &amp; Network Engineer focused on designing and operating the infrastructure that powers intelligent computing.</p>
+    <p class="lead">AI/HPC Solutions Architect &amp; MLOps Consultant &mdash; EDA Tools, GPU Infrastructure, Cloud Computing, Kubernetes, Terraform, SLURM, Cadence, Xilinx, Synopsys, Enterprise Storage &amp; Networking, ARM.</p>
   </div>
 </section>
 
 <section class="section-tight">
   <div class="container">
-    <div class="grid grid-2">
-      <div class="card">
-        <h3>Professional Introduction</h3>
-        <p class="text-muted" style="margin-top:12px;">[EDITABLE: Add a short professional introduction here — your background, how you got into AI/HPC/EDA/networking/storage engineering, and what drives your technical focus.]</p>
-      </div>
-      <div class="card">
-        <h3>Engineering Interests</h3>
-        <ul style="margin-top:12px;">
-          <li>Private, on-premises AI infrastructure</li>
-          <li>High-performance computing and distributed systems</li>
-          <li>Semiconductor EDA infrastructure and automation</li>
-          <li>High-speed networking (RDMA, RoCE, InfiniBand)</li>
-          <li>Distributed and parallel storage architectures</li>
-        </ul>
-      </div>
+    <div class="card">
+      <h3>Professional Introduction</h3>
+      <p class="text-muted" style="margin-top:12px;">I'm Abu Horairah Sandhu, an AI/HPC Solutions Architect and MLOps Consultant based in Islamabad, Pakistan, specializing in eliminating infrastructure bottlenecks for engineering and R&amp;D teams &mdash; from chip-design EDA clusters to GPU-accelerated AI training pipelines. Over 3+ years, I've architected HPC environments integrating SLURM/PBS job scheduling, parallel file systems (BeeGFS, Lustre, Panasas), NVIDIA GPU clusters (including DGX H200 and RTX 4090), and end-to-end MLOps pipelines (Kubeflow, MLflow, PyTorch). I've also built EDA-integrated HPC infrastructure for Cadence Virtuoso and Xilinx Vivado workflows with high-availability FlexLM licensing, deployed secure air-gapped private AI platforms for internal engineering teams, and managed enterprise storage exceeding 2PB (Dell EMC ECS, PowerScale) alongside high-performance networking (InfiniBand, Mellanox). I'm open to consulting projects worldwide, remote or on-site &mdash; if your team is dealing with slow simulations, GPU underutilization, storage bottlenecks, or license contention, let's talk.</p>
     </div>
   </div>
 </section>
@@ -238,25 +277,46 @@ def build_about():
   <div class="container">
     <h2 style="margin-bottom:30px;">Technical Specializations</h2>
     <div class="grid grid-3">
-      <div class="card"><h3 style="font-size:1.05rem;">Linux Systems Administration</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">Enterprise Linux (Rocky/RHEL/Ubuntu Server) administration, automation and hardening.</p></div>
-      <div class="card"><h3 style="font-size:1.05rem;">GPU Infrastructure</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">CUDA environments, driver/toolkit management, multi-GPU scheduling.</p></div>
-      <div class="card"><h3 style="font-size:1.05rem;">EDA Environment Management</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">License servers (FLEXlm), PDK/library management, compute farm operations.</p></div>
-      <div class="card"><h3 style="font-size:1.05rem;">Enterprise Networking</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">VLAN segmentation, RDMA/RoCE/InfiniBand design, firewall/Zero Trust architecture.</p></div>
-      <div class="card"><h3 style="font-size:1.05rem;">Storage Architecture</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">Distributed storage (Ceph), parallel file systems (Lustre/BeeGFS), backup/DR design.</p></div>
-      <div class="card"><h3 style="font-size:1.05rem;">Automation &amp; Monitoring</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">Ansible-based provisioning, Prometheus/Grafana observability stacks.</p></div>
+      <div class="card"><h3 style="font-size:1.05rem;">HPC Cluster Design &amp; Deployment</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">SLURM, PBS/Torque, LSF, xCAT, Bright Cluster Manager, Node Health Checks.</p></div>
+      <div class="card"><h3 style="font-size:1.05rem;">GPU &amp; AI Infrastructure</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">CUDA, NVIDIA DGX H200/RTX 4090 clusters, MLOps with Kubeflow/MLflow/PyTorch.</p></div>
+      <div class="card"><h3 style="font-size:1.05rem;">EDA Infrastructure</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">Cadence (Virtuoso, Spectre, ICADVM, ADE), Xilinx Vivado, Synopsys, high-availability FlexLM licensing.</p></div>
+      <div class="card"><h3 style="font-size:1.05rem;">Enterprise Storage</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">2PB+ Dell EMC ECS, PowerScale NAS, Lustre, BeeGFS, Panasas, NFS.</p></div>
+      <div class="card"><h3 style="font-size:1.05rem;">HPC &amp; Enterprise Networking</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">InfiniBand, Mellanox (SN3700, MLAG/CLAG/LACP/OSPF/VRF), Cisco, Nexus, Aruba.</p></div>
+      <div class="card"><h3 style="font-size:1.05rem;">Automation &amp; Monitoring</h3><p class="text-muted" style="margin-top:8px;font-size:0.9rem;">Ansible, Terraform, Kubernetes, Grafana, Prometheus, Zabbix, Netdata.</p></div>
     </div>
   </div>
 </section>
 
 <section class="section" style="background:var(--bg-secondary);">
   <div class="container">
-    <div class="note-box">
-      <strong>Note:</strong> Academic qualifications, employment history, certifications and awards are intentionally left out of this profile pending your input. Edit the <code>build_about()</code> function in <code>build.py</code> (or this page directly) to add verified details — nothing here is fabricated.
+    <h2 style="margin-bottom:30px;">Experience</h2>
+    {exp_html}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Education</h3>
+        <p style="margin-top:10px;"><strong>BS, Computer Science</strong><br><span class="text-muted">University of Okara &middot; November 2021 &mdash; June 2025</span></p>
+        <p style="margin-top:10px;"><strong>Associate Engineer</strong><br><span class="text-muted">Punjab Board of Technical Education (PBTE), Lahore</span></p>
+      </div>
+      <div class="card">
+        <h3>Certifications</h3>
+        <ul style="margin-top:10px;">
+          <li>Linux and Private Cloud Administration on IBM Power Systems (Specialization)</li>
+          <li>Linux System Administration with IBM Power Systems</li>
+          <li>Private Cloud Management on IBM Power Systems</li>
+          <li>Cisco Industrial Networking Essentials (CINE)</li>
+          <li>Computer Vision App with Azure Cognitive Services</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 """
-    write("about.html", page_shell("About", "Engineering profile of Abu Horairah — AI, HPC, EDA, networking and storage specialist.", "about", body))
+    write("about.html", page_shell("About", "Engineering profile of Abu Horairah Sandhu — AI/HPC Solutions Architect & MLOps Consultant specializing in EDA, GPU infrastructure, enterprise storage and networking.", "about", body))
 
 # ---------------------------------------------------------------------------
 # PROJECTS OVERVIEW PAGE
@@ -401,8 +461,8 @@ def build_contact():
     <p class="lead">Interested in developing similar infrastructure for your organization? Reach out below.</p>
     <div class="grid grid-2" style="margin-top:40px;max-width:720px;">
       <div class="card"><h3 style="font-size:1rem;">GitHub</h3><p class="text-muted" style="margin-top:8px;">[YOUR_GITHUB_URL]</p></div>
-      <div class="card"><h3 style="font-size:1rem;">LinkedIn</h3><p class="text-muted" style="margin-top:8px;">[YOUR_LINKEDIN_URL]</p></div>
-      <div class="card"><h3 style="font-size:1rem;">Email</h3><p class="text-muted" style="margin-top:8px;">[YOUR_EMAIL_ADDRESS]</p></div>
+      <div class="card"><h3 style="font-size:1rem;">LinkedIn</h3><p class="text-muted" style="margin-top:8px;"><a href="https://www.linkedin.com/in/engrabuhorairahsandhu" target="_blank" rel="noopener" style="color:var(--accent-cyan);">engrabuhorairahsandhu</a></p></div>
+      <div class="card"><h3 style="font-size:1rem;">Email</h3><p class="text-muted" style="margin-top:8px;"><a href="mailto:engr.abuhorairahsandhu@gmail.com" style="color:var(--accent-cyan);">engr.abuhorairahsandhu@gmail.com</a></p></div>
       <div class="card"><h3 style="font-size:1rem;">Website</h3><p class="text-muted" style="margin-top:8px;">[YOUR_PERSONAL_SITE]</p></div>
     </div>
   </div>
