@@ -56,10 +56,10 @@ def footer(depth=""):
       </div>
       <div>
         <h4>Connect</h4>
-        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
-        <a href="https://www.linkedin.com/in/engrabuhorairahsandhu" id="footer-linkedin" target="_blank" rel="noopener">LinkedIn — engrabuhorairahsandhu</a>
-        <a href="mailto:engr.abuhorairahsandhu@gmail.com" id="footer-email">Email — engr.abuhorairahsandhu@gmail.com</a>
-        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+        <a href="https://github.com/EngrAbuHorairah" id="footer-github" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/engrabuhorairahsandhu" id="footer-linkedin" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:engr.abuhorairahsandhu@gmail.com" id="footer-email">Email</a>
+        <a href="{depth}contact.html" id="footer-contact">Contact No. +92 (302) 7966942</a>
       </div>
     </div>
     <div class="footer-bottom">
