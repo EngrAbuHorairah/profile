@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>High-Speed Data Center Networking Infrastructure | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="A scalable, high-throughput network fabric designed to support AI, HPC, EDA and general enterprise workloads with appropriate redundancy and traffic engineering.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="High-Speed Data Center Networking Infrastructure">
+<meta property="og:description" content="A scalable, high-throughput network fabric designed to support AI, HPC, EDA and general enterprise workloads with appropriate redundancy and traffic engineering.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / High-Speed Data Center Networking Infrastructure</div>
+    <span class="eyebrow">PROJECT 10 &middot; High-Performance Networking</span>
+    <h1 style="margin:14px 0 16px;">High-Speed Data Center Networking Infrastructure</h1>
+    <p class="lead">A scalable, high-throughput network fabric designed to support AI, HPC, EDA and general enterprise workloads with appropriate redundancy and traffic engineering.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">10GbE/25GbE/40GbE/100GbE</span><span class="tag">Fiber optics</span><span class="tag">VLAN</span><span class="tag">LACP</span><span class="tag">MTU optimization</span><span class="tag">RDMA</span><span class="tag">RoCE</span><span class="tag">InfiniBand</span><span class="tag">Linux networking</span><span class="tag">Network monitoring</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>A data center hosting AI training, HPC simulation, EDA compute and general enterprise services has very different networking needs per workload: AI/HPC often needs ultra-low-latency RDMA, while general services need reliable, segmented Ethernet — a single flat network design serves neither well.</p>
+          <h4>Proposed Solution</h4><p>A tiered network architecture with a high-speed core, workload-appropriate access layer technology (RoCE or InfiniBand for AI/HPC racks, standard high-speed Ethernet for general enterprise racks), VLAN segmentation for traffic isolation, and link aggregation (LACP) plus redundant paths for reliability.</p>
+          <h4>Objectives</h4><ul><li>Design a tiered network topology (core/access) suitable for mixed workloads.</li><li>Provide high-speed server connectivity appropriate to each workload type.</li><li>Implement VLAN segmentation and link redundancy.</li><li>Support RDMA-based low-latency networking where required (AI/HPC).</li></ul>
+          <h4>Intended Users</h4><p>AI/HPC/EDA compute clusters requiring low-latency interconnect, enterprise IT services requiring reliable general-purpose networking, and network administrators managing the overall fabric.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Matches network investment to actual workload needs instead of over- or under-provisioning uniformly.</td></tr>
+            <tr><th>Cost Optimization</th><td>Avoids costly InfiniBand/RoCE deployment where standard Ethernet would suffice, while ensuring it&#x27;s available where genuinely needed.</td></tr>
+            <tr><th>Productivity</th><td>Prevents network bottlenecks from undermining the performance of expensive compute/storage hardware.</td></tr>
+            <tr><th>Scalability</th><td>Tiered design allows new racks/pods to be added to whichever tier matches their workload profile.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>VLAN segmentation isolates workload traffic types from each other.</td></tr>
+            <tr><th>Organizational Impact</th><td>Provides the networking backbone that every other infrastructure project (AI, HPC, EDA, storage) ultimately depends on for performance.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>A core-and-access topology where the core provides high-speed inter-rack connectivity, and access-layer technology is chosen per workload: RDMA-capable RoCE or InfiniBand for AI/HPC racks, and standard 10/25/40/100GbE for general enterprise and EDA racks.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[High-Speed Data Center Netwo Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>Core switches (high port-density, high-speed backbone)</li><li>Access switches (per-rack, workload-appropriate speed)</li><li>RDMA-capable NICs for AI/HPC nodes (RoCE) or InfiniBand HCAs</li><li>VLAN segmentation for traffic isolation</li><li>LACP link aggregation for redundancy and bandwidth</li></ul>
+          <h4>Data Flow</h4><p>Server traffic enters the access switch for its rack → access switch forwards to the core based on destination → core routes between racks/pods → for RDMA-enabled workloads, data paths bypass the standard TCP/IP stack for lower latency and CPU overhead.</p>
+          <h4>Integration Architecture</h4><p>Underpins every compute-heavy project in this portfolio (Projects 02, 04, 06, 09) and the parallel storage platform (Project 13), which both depend on this networking layer for performance.</p>
+          <div class="note-box"><strong>When to use each:</strong> Standard Ethernet is appropriate for general enterprise traffic and workloads tolerant of typical TCP/IP latency. RoCE is appropriate when RDMA-level latency/CPU-bypass benefits are needed but the organization wants to stay on Ethernet-based infrastructure for cost/compatibility reasons. InfiniBand is appropriate for the most demanding HPC/AI training clusters where the lowest possible latency and highest message rates justify its specialized hardware and operational requirements.</div>
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>RoCE (RDMA over Converged Ethernet)</strong></td><td>Delivers InfiniBand-like low latency and CPU-bypass benefits while running over standard Ethernet infrastructure, lowering cost versus a dedicated InfiniBand fabric.</td></tr><tr><td><strong>InfiniBand</strong></td><td>Still the gold standard for the lowest possible latency and highest message rates in the most demanding HPC/AI training scenarios, at higher cost and specialized hardware requirements.</td></tr><tr><td><strong>LACP</strong></td><td>Standard link aggregation protocol providing both bandwidth increase and redundancy without proprietary vendor lock-in.</td></tr><tr><td><strong>VLAN segmentation</strong></td><td>Isolates different traffic types (management, storage, compute, general enterprise) on shared physical infrastructure for both security and traffic engineering reasons.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>Not primarily CPU-bound; relevant CPU consideration is NIC offload capability reducing host CPU overhead.</td></tr>
+            <tr><th>GPU</th><td>Not applicable directly, though GPU-to-GPU traffic (e.g. multi-node AI training) is a primary driver for RDMA network design.</td></tr>
+            <tr><th>RAM</th><td>Not a primary sizing factor for networking equipment; switch buffer memory is vendor-specific.</td></tr>
+            <tr><th>Storage</th><td>Not applicable to networking equipment itself.</td></tr>
+            <tr><th>Networking</th><td>Core: 100GbE+ backbone recommended for mixed-workload data centers. AI/HPC access: RoCE-capable 100GbE+ NICs or InfiniBand HDR/NDR. General enterprise access: 10GbE/25GbE commonly sufficient.</td></tr>
+            <tr><th>Recommended Configuration</th><td>Design should be workload-driven: start with a core sized for aggregate bandwidth needs, then size each access tier to its specific workload&#x27;s latency/throughput requirements.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> Exact speed/technology selection depends on specific workload profiling; figures given are general industry guidance, not a benchmarked design for a specific deployment.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Switch OS (vendor-specific, e.g. Cumulus Linux or vendor NOS) and Linux networking stack on servers.</td></tr>
+            <tr><th>Dependencies</th><td>RDMA drivers/libraries (e.g. libibverbs) on RDMA-enabled hosts.</td></tr>
+            <tr><th>Services</th><td>Network monitoring/telemetry agents on switches and servers.</td></tr>
+            <tr><th>Databases</th><td>Not applicable directly; network telemetry may feed into Prometheus/Grafana (Project 05).</td></tr>
+            <tr><th>APIs</th><td>Switch management APIs (vendor-specific) for configuration automation.</td></tr>
+            <tr><th>Monitoring</th><td>Network monitoring tools tracking link utilization, error rates, and latency per segment.</td></tr>
+            <tr><th>Automation</th><td>Network configuration automation (e.g. Ansible network modules) for consistent VLAN/LACP configuration.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Profile workload types (AI/HPC/EDA/enterprise) and their bandwidth/latency requirements.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Select core/access switch hardware and cabling (fiber optics) matching the target speeds.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Configure VLANs, LACP bonds, and RDMA/RoCE or InfiniBand settings per access tier.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Connect compute/storage clusters to their appropriate access tier; validate end-to-end connectivity.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Run throughput benchmarks (e.g. iperf3, RDMA bandwidth/latency tools) per tier against design targets.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document the network topology and finalize redundancy/failover testing.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Switch management access secured via centralized authentication (RADIUS/TACACS+ or LDAP where supported).</td></tr>
+            <tr><th>Authorization</th><td>VLAN-based segmentation restricting which traffic types can reach which network zones.</td></tr>
+            <tr><th>Network Security</th><td>Management network separated from data-plane traffic.</td></tr>
+            <tr><th>Backup</th><td>Switch configuration backups maintained and version-controlled.</td></tr>
+            <tr><th>Monitoring</th><td>Continuous link utilization and error-rate monitoring to detect degradation before failure.</td></tr>
+            <tr><th>Disaster Recovery</th><td>Documented switch configuration restore procedure.</td></tr>
+            <tr><th>High Availability</th><td>Redundant core switches and multi-path access connectivity to avoid single points of failure.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>Throughput test: validate each tier achieves its designed bandwidth under load (e.g. iperf3).</li><li>Latency test: measure RDMA/RoCE/InfiniBand latency against expected figures for the chosen technology.</li><li>Failover test: confirm traffic reroutes correctly when a link or switch fails.</li><li>Segmentation test: verify VLAN isolation prevents unintended cross-traffic between zones.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>Documented network topology diagram and VLAN/segmentation plan.</li><li>Operational core/access network fabric sized to workload needs.</li><li>Benchmark report validating achieved throughput/latency per tier.</li><li>Network configuration backup and change management process.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>Migration path to higher speeds (200GbE/400GbE) as workload demands grow.</li><li>Software-defined networking (SDN) overlay for more dynamic traffic engineering.</li><li>Expanded telemetry integration with the AIOps platform (Project 03).</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

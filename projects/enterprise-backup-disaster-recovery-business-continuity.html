@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Enterprise Backup, Disaster Recovery &amp; Business Continuity Platform | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="A reliable enterprise data protection platform providing automated, incremental backups, snapshot management, off-site replication and documented disaster recovery procedures.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="Enterprise Backup, Disaster Recovery &amp; Business Continuity Platform">
+<meta property="og:description" content="A reliable enterprise data protection platform providing automated, incremental backups, snapshot management, off-site replication and documented disaster recovery procedures.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / Enterprise Backup, Disaster Recovery &amp; Business Continuity Platform</div>
+    <span class="eyebrow">PROJECT 14 &middot; Enterprise Storage</span>
+    <h1 style="margin:14px 0 16px;">Enterprise Backup, Disaster Recovery &amp; Business Continuity Platform</h1>
+    <p class="lead">A reliable enterprise data protection platform providing automated, incremental backups, snapshot management, off-site replication and documented disaster recovery procedures.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">Proxmox Backup Server</span><span class="tag">BorgBackup</span><span class="tag">Restic</span><span class="tag">ZFS snapshots</span><span class="tag">Rsync</span><span class="tag">S3-compatible storage</span><span class="tag">Linux</span><span class="tag">Monitoring tools</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Many organizations run backups without ever testing restores, without off-site copies protecting against site-level disasters, and without immutability protecting against ransomware encrypting both production data and its backups — meaning the backup system fails exactly when it&#x27;s needed most.</p>
+          <h4>Proposed Solution</h4><p>A layered backup architecture: ZFS snapshots for fast, frequent local point-in-time recovery; Proxmox Backup Server/BorgBackup/Restic for deduplicated, encrypted incremental backups; rsync and S3-compatible storage for off-site replication; and a disciplined, documented policy of regular recovery testing against defined RPO/RTO targets.</p>
+          <h4>Objectives</h4><ul><li>Implement automated, incremental backup across critical systems.</li><li>Maintain snapshot-based point-in-time recovery options.</li><li>Replicate backups off-site for disaster resilience.</li><li>Define and validate RPO/RTO targets through regular recovery testing.</li></ul>
+          <h4>Intended Users</h4><p>IT infrastructure teams responsible for data protection, and organizational leadership requiring assurance of business continuity capability.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Converts backup from a theoretical safety net into a verified, regularly-tested capability.</td></tr>
+            <tr><th>Cost Optimization</th><td>Built on open-source tooling (BorgBackup, Restic, Proxmox Backup Server), minimizing licensing cost relative to commercial backup appliances.</td></tr>
+            <tr><th>Productivity</th><td>Fast snapshot-based recovery for common accidental-deletion scenarios avoids lengthy full-restore processes for minor incidents.</td></tr>
+            <tr><th>Scalability</th><td>Incremental, deduplicated backups scale storage efficiently as data volume grows over time.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>Immutable backup strategies protect against ransomware that attempts to encrypt or delete backup data alongside production data.</td></tr>
+            <tr><th>Organizational Impact</th><td>Provides the final safety net underpinning every other infrastructure project in this portfolio — AI platforms, HPC clusters, EDA design data and storage systems all depend on this layer being genuinely trustworthy.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>A multi-tier backup strategy: frequent ZFS snapshots provide fast local recovery points, incremental deduplicated backups (via Proxmox Backup Server/BorgBackup/Restic) provide space-efficient longer-term retention, and off-site replication (rsync/S3) protects against site-level disasters.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[Enterprise Backup, Disaster  Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>ZFS snapshot schedule on primary storage</li><li>Proxmox Backup Server / BorgBackup / Restic for incremental backups</li><li>Off-site replication target (rsync destination or S3-compatible storage)</li><li>Immutability configuration (where supported) to resist ransomware/deletion</li><li>Monitoring for backup job success/failure</li></ul>
+          <h4>Data Flow</h4><p>Scheduled ZFS snapshots capture frequent local recovery points → periodic backup jobs (Borg/Restic/PBS) create deduplicated, encrypted incremental backups of critical data → backups replicated off-site via rsync or to S3-compatible storage → monitoring confirms each job&#x27;s success and alerts on failure → recovery tests periodically validate that restores actually work.</p>
+          <h4>Integration Architecture</h4><p>Protects data from every other project in the portfolio — AI document stores, EDA design libraries, Ceph/parallel filesystem data, and general enterprise data all flow into this backup layer according to their defined retention policy.</p>
+          
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>ZFS snapshots</strong></td><td>Near-instantaneous, space-efficient point-in-time recovery points ideal for quickly reverting recent accidental changes without a full restore.</td></tr><tr><td><strong>BorgBackup/Restic</strong></td><td>Deduplicated, encrypted incremental backup tools that are efficient with both storage space and bandwidth for off-site transfer.</td></tr><tr><td><strong>Proxmox Backup Server</strong></td><td>Purpose-built for efficient VM/container backup with deduplication, particularly valuable if the infrastructure is virtualized on Proxmox.</td></tr><tr><td><strong>S3-compatible storage</strong></td><td>Provides a flexible off-site target that can be self-hosted (e.g. on the Ceph platform from Project 12) or a third-party service, depending on organizational preference.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>Moderate CPU for backup job processing (deduplication/compression/encryption are CPU-sensitive operations).</td></tr>
+            <tr><th>GPU</th><td>Not applicable.</td></tr>
+            <tr><th>RAM</th><td>16–64GB depending on deduplication index size and data volume.</td></tr>
+            <tr><th>Storage</th><td>Backup target storage sized to retention policy, typically 2-4x+ the protected data volume depending on retention depth and deduplication ratio achieved.</td></tr>
+            <tr><th>Networking</th><td>Sufficient bandwidth for backup windows to complete within policy; off-site replication bandwidth sized to data change rate (not full dataset size, due to incremental backups).</td></tr>
+            <tr><th>Recommended Configuration</th><td>Dedicated backup server(s) separate from production systems, with off-site replication target physically/logically isolated from the primary site.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> Storage and bandwidth sizing depend heavily on data volume, change rate and retention policy; figures are general planning guidance.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Linux (Debian-based for Proxmox Backup Server; general Linux for BorgBackup/Restic).</td></tr>
+            <tr><th>Dependencies</th><td>ZFS utilities, BorgBackup/Restic clients, Proxmox Backup Server (if used), rsync</td></tr>
+            <tr><th>Services</th><td>Backup scheduling service (cron/systemd timers or PBS&#x27;s built-in scheduler), Off-site replication service</td></tr>
+            <tr><th>Databases</th><td>Proxmox Backup Server maintains its own internal chunk store/index; BorgBackup/Restic maintain repository-local indexes.</td></tr>
+            <tr><th>APIs</th><td>Proxmox Backup Server API for programmatic backup management; CLI-driven for BorgBackup/Restic.</td></tr>
+            <tr><th>Monitoring</th><td>Backup job success/failure alerting integrated with the broader monitoring platform (Project 05).</td></tr>
+            <tr><th>Automation</th><td>Scheduled, automated backup jobs with no reliance on manual execution; automated recovery test scheduling where feasible.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Classify data by criticality and define RPO/RTO targets per data category.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Provision backup server(s) and off-site replication target infrastructure.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Deploy ZFS snapshot schedules, configure BorgBackup/Restic/PBS jobs for all critical systems.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Configure off-site replication and immutability settings; integrate backup monitoring/alerting.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Perform scheduled recovery tests validating actual restore success against defined RPO/RTO targets.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document the full backup/recovery runbook and finalize the recurring recovery-test schedule.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Backup infrastructure access restricted to designated backup administrators.</td></tr>
+            <tr><th>Authorization</th><td>Least-privilege access to backup repositories; separation of duties between backup administration and production system administration where feasible.</td></tr>
+            <tr><th>Network Security</th><td>Backup traffic isolated on its own network segment where practical.</td></tr>
+            <tr><th>Backup</th><td>This project is itself the backup layer; its own configuration (job definitions, schedules) is version-controlled.</td></tr>
+            <tr><th>Monitoring</th><td>Automated alerting on backup job failure, with escalation if failures are not resolved within a defined window.</td></tr>
+            <tr><th>Disaster Recovery</th><td>This project directly implements disaster recovery capability for the rest of the infrastructure; its own DR plan covers backup server/configuration loss.</td></tr>
+            <tr><th>High Availability</th><td>Off-site replication inherently provides site-level resilience; backup server redundancy optional depending on criticality.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>Restore test: periodically perform full restores and validate data integrity against source.</li><li>RPO validation: confirm actual backup frequency meets the defined recovery point objective per data category.</li><li>RTO validation: measure actual time-to-restore against the defined recovery time objective.</li><li>Immutability test: confirm backups cannot be altered/deleted within their configured retention window, even with compromised production credentials.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>Operational automated backup system covering all critical infrastructure.</li><li>Off-site replicated backup copies meeting defined disaster recovery requirements.</li><li>Documented, tested recovery runbook with validated RPO/RTO figures.</li><li>Ongoing recovery test schedule and reporting.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>Automated, orchestrated full-site disaster recovery drills.</li><li>Extension of immutability policies across all backup tiers.</li><li>Integration with the AIOps platform (Project 03) for intelligent backup failure triage.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

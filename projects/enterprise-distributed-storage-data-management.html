@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Enterprise Distributed Storage &amp; Data Management System | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="A highly scalable, distributed storage architecture built on Ceph, providing object, block and file storage with replication, quotas and high availability for enterprise and research infrastructure.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="Enterprise Distributed Storage &amp; Data Management System">
+<meta property="og:description" content="A highly scalable, distributed storage architecture built on Ceph, providing object, block and file storage with replication, quotas and high availability for enterprise and research infrastructure.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / Enterprise Distributed Storage &amp; Data Management System</div>
+    <span class="eyebrow">PROJECT 12 &middot; Enterprise Storage</span>
+    <h1 style="margin:14px 0 16px;">Enterprise Distributed Storage &amp; Data Management System</h1>
+    <p class="lead">A highly scalable, distributed storage architecture built on Ceph, providing object, block and file storage with replication, quotas and high availability for enterprise and research infrastructure.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">Ceph</span><span class="tag">RADOS</span><span class="tag">CephFS</span><span class="tag">RBD</span><span class="tag">S3-compatible object storage</span><span class="tag">NFS</span><span class="tag">SMB</span><span class="tag">ZFS</span><span class="tag">Linux</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Traditional single-controller storage arrays create both a capacity ceiling and a single point of failure, and organizations increasingly need to serve multiple access patterns (S3-style object storage for applications, block storage for VMs, file storage for general use) from one coherent platform.</p>
+          <h4>Proposed Solution</h4><p>A Ceph cluster providing RADOS as the underlying distributed object store, with CephFS (file), RBD (block) and S3-compatible object gateway access layered on top, replicated across multiple OSD nodes for durability, with ZFS used on individual nodes where local data integrity features are valuable.</p>
+          <h4>Objectives</h4><ul><li>Deploy a distributed storage cluster supporting object, block and file access patterns.</li><li>Implement data replication/erasure coding for durability.</li><li>Provide per-user/project storage quotas.</li><li>Enable centralized, monitored, highly-available storage access.</li></ul>
+          <h4>Intended Users</h4><p>IT infrastructure teams, application teams needing object/block storage, and general users needing shared file storage with quotas.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Consolidates what might otherwise be several separate storage systems (NAS, SAN, object store) into one unified, centrally managed platform.</td></tr>
+            <tr><th>Cost Optimization</th><td>Scales by adding commodity storage nodes rather than replacing an entire proprietary array at a capacity ceiling.</td></tr>
+            <tr><th>Productivity</th><td>Application teams get self-service S3-compatible object storage without needing a separate cloud storage dependency.</td></tr>
+            <tr><th>Scalability</th><td>Designed from the ground up for horizontal scaling — capacity and performance grow by adding OSD nodes.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>Per-pool/user access controls and quotas prevent any single project from consuming all available capacity.</td></tr>
+            <tr><th>Organizational Impact</th><td>Provides the general-purpose storage foundation that complements the specialized parallel filesystem (Project 13) used for raw HPC I/O performance.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>A Ceph cluster with monitor nodes (cluster state/quorum), OSD nodes (actual data storage across disks), and manager nodes, exposing RADOS Block Device (RBD) for block storage, CephFS for POSIX file access, and a RADOS Gateway for S3-compatible object storage.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[Enterprise Distributed Stora Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>Ceph Monitors (MON) for cluster quorum/state</li><li>Ceph OSDs (object storage daemons) across storage nodes</li><li>Ceph Manager (MGR) for cluster metrics/management</li><li>CephFS Metadata Servers (MDS) for file access</li><li>RADOS Gateway (RGW) for S3-compatible object access</li><li>ZFS on individual node-local storage where applicable</li></ul>
+          <h4>Data Flow</h4><p>Client request (object/block/file) → routed to the appropriate Ceph access layer (RGW/RBD/CephFS) → RADOS distributes and replicates the underlying data objects across multiple OSD nodes according to the configured replication/erasure-coding policy → monitors maintain cluster map consistency throughout.</p>
+          <h4>Integration Architecture</h4><p>Can serve as the general-purpose storage backend for the AI platform&#x27;s document store (Project 01), general file sharing, and VM/container block storage needs across the infrastructure.</p>
+          
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>Ceph</strong></td><td>A mature, widely-deployed distributed storage system supporting object, block and file access from a single underlying cluster, avoiding the need for separate siloed storage systems.</td></tr><tr><td><strong>RADOS</strong></td><td>The reliable autonomic distributed object store underlying all of Ceph&#x27;s access methods, providing self-healing replication/rebalancing.</td></tr><tr><td><strong>S3-compatible Object Gateway</strong></td><td>Gives application teams a familiar, widely-supported object storage API without dependency on a public cloud provider.</td></tr><tr><td><strong>ZFS</strong></td><td>Where used at the node level, provides strong local data integrity checks (checksumming) complementing Ceph&#x27;s cluster-level replication.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>Moderate core counts per OSD node; Ceph performance scales with both CPU and disk I/O parallelism.</td></tr>
+            <tr><th>GPU</th><td>Not applicable.</td></tr>
+            <tr><th>RAM</th><td>Significant RAM per OSD node (commonly 4–8GB per OSD daemon as a planning guideline) for cache and metadata performance.</td></tr>
+            <tr><th>Storage</th><td>Multiple disks per OSD node (HDD for capacity tiers, SSD/NVMe for performance tiers or as a cache layer); total capacity planned with replication/erasure-coding overhead factored in.</td></tr>
+            <tr><th>Networking</th><td>10GbE minimum between OSD nodes; 25GbE+ recommended for larger clusters to avoid replication traffic becoming a bottleneck.</td></tr>
+            <tr><th>Recommended Configuration</th><td>Minimum viable production cluster: 3+ monitor nodes (odd number for quorum) and typically a minimum of several OSD nodes for meaningful redundancy.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> Exact sizing depends heavily on target capacity, replication factor and performance requirements; figures are general Ceph deployment guidance.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Linux (Ubuntu Server or Rocky Linux, both well-supported by Ceph).</td></tr>
+            <tr><th>Dependencies</th><td>Ceph packages (ceph-mon, ceph-osd, ceph-mgr, ceph-mds, radosgw), cephadm or ceph-ansible for deployment</td></tr>
+            <tr><th>Services</th><td>Ceph Monitor, Ceph OSD, Ceph Manager, CephFS MDS, RADOS Gateway</td></tr>
+            <tr><th>Databases</th><td>Not applicable in the traditional sense — Ceph maintains its own internal cluster map and metadata structures.</td></tr>
+            <tr><th>APIs</th><td>S3-compatible REST API (via RGW) for object storage; standard POSIX for CephFS; block device interface for RBD.</td></tr>
+            <tr><th>Monitoring</th><td>Ceph&#x27;s built-in dashboard plus Prometheus/Grafana integration for cluster health and capacity monitoring.</td></tr>
+            <tr><th>Automation</th><td>cephadm for orchestrated deployment and lifecycle management of cluster daemons.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Determine required capacity, access patterns (object/block/file mix), and replication/erasure-coding policy.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Provision monitor and OSD nodes with appropriate disk and network configuration.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Deploy Ceph via cephadm, configure monitors, OSDs, and initial pools.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Enable CephFS, RBD and RGW access layers as needed; configure per-project quotas.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Run I/O benchmarks per access pattern; validate failure recovery by simulating OSD/node loss.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document capacity management procedures and finalize monitoring/alerting thresholds.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Ceph&#x27;s cephx authentication protocol for inter-daemon and client authentication; RGW integrates with standard S3-style access keys.</td></tr>
+            <tr><th>Authorization</th><td>Per-pool and per-user capability restrictions limiting access scope.</td></tr>
+            <tr><th>Network Security</th><td>Separate public and cluster (replication) network segments recommended for performance and security isolation.</td></tr>
+            <tr><th>Backup</th><td>Cross-site replication or periodic snapshots/exports for disaster recovery beyond in-cluster redundancy.</td></tr>
+            <tr><th>Monitoring</th><td>Continuous cluster health monitoring (OSD status, placement group health, capacity thresholds).</td></tr>
+            <tr><th>Disaster Recovery</th><td>Documented procedures for OSD/node failure recovery and, where configured, multi-site disaster recovery.</td></tr>
+            <tr><th>High Availability</th><td>Inherent high availability through replication/erasure coding and monitor quorum; no single node failure should cause data loss or unavailability when properly sized.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>Durability test: simulate OSD/node failure and confirm automatic rebalancing/recovery without data loss.</li><li>Performance test: benchmark object/block/file I/O throughput against target workload profiles.</li><li>Quota test: verify per-project/user storage quotas are correctly enforced.</li><li>Failover test: validate monitor quorum behavior when a monitor node becomes unavailable.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>Operational distributed storage cluster supporting object, block and file access.</li><li>Documented capacity and quota management procedures.</li><li>Monitoring dashboards for cluster health and capacity.</li><li>Benchmark report validating performance against target workloads.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>Multi-site replication for geographic disaster recovery.</li><li>Tiered storage (hot NVMe / cold HDD) policy automation.</li><li>Integration with Kubernetes via the Ceph CSI driver for container-native storage.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

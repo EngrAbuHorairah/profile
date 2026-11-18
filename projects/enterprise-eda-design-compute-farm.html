@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Enterprise EDA Design &amp; Compute Farm | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="Centralized semiconductor design infrastructure providing shared EDA applications, PDK management, license services and secure design data storage for VLSI/IC design teams.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="Enterprise EDA Design &amp; Compute Farm">
+<meta property="og:description" content="Centralized semiconductor design infrastructure providing shared EDA applications, PDK management, license services and secure design data storage for VLSI/IC design teams.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / Enterprise EDA Design &amp; Compute Farm</div>
+    <span class="eyebrow">PROJECT 07 &middot; Electronic Design Automation</span>
+    <h1 style="margin:14px 0 16px;">Enterprise EDA Design &amp; Compute Farm</h1>
+    <p class="lead">Centralized semiconductor design infrastructure providing shared EDA applications, PDK management, license services and secure design data storage for VLSI/IC design teams.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">Cadence Virtuoso</span><span class="tag">Cadence Spectre</span><span class="tag">Xcelium</span><span class="tag">Tempus</span><span class="tag">Pegasus</span><span class="tag">Conformal</span><span class="tag">Linux</span><span class="tag">NFS</span><span class="tag">LDAP/Active Directory</span><span class="tag">FLEXlm</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Semiconductor design teams depend on expensive, license-controlled commercial EDA tools (Cadence Virtuoso, Spectre, Xcelium, etc.) and highly sensitive foundry PDKs; running these per-workstation leads to license contention, inconsistent tool versions, and weak control over where design IP physically resides.</p>
+          <h4>Proposed Solution</h4><p>A centralized compute farm model: EDA applications and PDKs are installed once on shared, access-controlled storage, FLEXlm license servers are centralized, and engineers access the environment via remote sessions rather than copying design data to local machines.</p>
+          <h4>Objectives</h4><ul><li>Centralize EDA application installation and version management.</li><li>Manage shared Process Design Kit (PDK) access securely.</li><li>Operate centralized FLEXlm license servers for commercial EDA tools.</li><li>Enforce strict access control over sensitive design data.</li></ul>
+          <h4>Intended Users</h4><p>IC/VLSI design engineers, verification engineers, physical design teams, and CAD/EDA infrastructure administrators.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Removes per-workstation EDA tool installation and version-mismatch issues across a design team.</td></tr>
+            <tr><th>Cost Optimization</th><td>Centralized licensing improves FLEXlm license utilization versus statically assigning licenses per seat.</td></tr>
+            <tr><th>Productivity</th><td>Engineers get consistent tool versions and PDK access without manual setup per machine.</td></tr>
+            <tr><th>Scalability</th><td>Additional compute nodes can be added to the farm as design team headcount or project load grows.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>Design data and PDKs never need to leave centralized, access-controlled storage, reducing IP leakage risk.</td></tr>
+            <tr><th>Organizational Impact</th><td>Establishes the infrastructure foundation required before automation like Project 08 (license-aware scheduling) or Project 09 (RTL-to-GDSII pipelines) can be layered on top.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>A compute farm of Linux servers running EDA applications against centrally-stored PDKs and design libraries over NFS, with FLEXlm license servers brokering tool access and LDAP/Active Directory providing identity.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[Enterprise EDA Design & Comp Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>EDA compute nodes (Linux)</li><li>Centralized NFS storage for PDKs and design libraries</li><li>FLEXlm/FlexNet license server(s)</li><li>LDAP/Active Directory identity service</li><li>Remote access layer (e.g. VNC/NX/Citrix-style remote desktop) for GUI tools like Virtuoso</li></ul>
+          <h4>Data Flow</h4><p>Engineer authenticates via LDAP/AD → connects to a compute node via remote session → loads project environment pointing to centralized PDK/library paths on NFS → runs Virtuoso/Spectre/Xcelium, which checks out a license from the FLEXlm server for the session duration → design data remains on central storage throughout.</p>
+          <h4>Integration Architecture</h4><p>Provides the base platform that license-aware scheduling (Project 08) and automated digital flows (Project 09) build upon.</p>
+          
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>FLEXlm/FlexNet</strong></td><td>The standard license management protocol used by virtually all major commercial EDA vendors (Cadence, Synopsys, Siemens); centralizing it is mandatory, not optional, for these tools.</td></tr><tr><td><strong>NFS</strong></td><td>Provides a shared filesystem view of PDKs and libraries across all compute nodes, which EDA tools expect for consistent path references.</td></tr><tr><td><strong>LDAP/Active Directory</strong></td><td>Enterprise design teams require centralized, auditable identity management, especially given IP sensitivity.</td></tr><tr><td><strong>Linux</strong></td><td>The near-universal operating system target for commercial EDA tool qualification and support.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>High single-thread performance and large core counts for simulation/synthesis jobs; EDA tools vary widely in parallelism support.</td></tr>
+            <tr><th>GPU</th><td>Generally not required for traditional EDA tools, though some newer simulation/ML-assisted EDA features may benefit from GPU acceleration.</td></tr>
+            <tr><th>RAM</th><td>Large RAM per node (128GB–1TB+) as tools like Virtuoso/Spectre/Tempus can be memory-intensive on large designs.</td></tr>
+            <tr><th>Storage</th><td>High-capacity, high-IOPS centralized storage for PDKs, libraries and active design data.</td></tr>
+            <tr><th>Networking</th><td>10GbE minimum between compute nodes and storage to avoid NFS becoming a bottleneck for large design databases.</td></tr>
+            <tr><th>Recommended Configuration</th><td>Minimum viable farm: license server + 2–4 compute nodes; production farms scale with design team size and project parallelism needs.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> EDA tool resource requirements vary significantly by vendor and tool; figures are general planning estimates, not vendor-certified specs.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Linux distribution matching vendor-qualified support matrices for the specific EDA tool versions in use.</td></tr>
+            <tr><th>Dependencies</th><td>Cadence Virtuoso/Spectre/Xcelium/Tempus/Pegasus/Conformal (licensed separately), FLEXlm/FlexNet license daemon</td></tr>
+            <tr><th>Services</th><td>FLEXlm license server, NFS server, LDAP/Active Directory, Remote desktop/session broker</td></tr>
+            <tr><th>Databases</th><td>Not typically required beyond license server state and LDAP/AD directory data.</td></tr>
+            <tr><th>APIs</th><td>Vendor tool CLIs/APIs for scripted flows (e.g. Virtuoso SKILL, Tcl interfaces for synthesis/verification tools).</td></tr>
+            <tr><th>Monitoring</th><td>License usage and compute node health monitoring (see Project 08 for dedicated license analytics).</td></tr>
+            <tr><th>Automation</th><td>Ansible for consistent compute node provisioning and PDK/library path configuration.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Catalog required EDA tools, license counts, and design team size/growth expectations.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Provision compute nodes, centralized storage, and license server infrastructure.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Install EDA applications, configure FLEXlm license servers, set up PDK/library storage structure.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Connect LDAP/AD authentication, configure remote access sessions, set storage permissions.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Validate tool launches, license checkout/release behavior, and design data access permissions.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document engineer onboarding process and finalize design data backup/retention policy.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Centralized via LDAP/Active Directory; no local tool access without directory authentication.</td></tr>
+            <tr><th>Authorization</th><td>Fine-grained NFS/filesystem permissions restricting PDK and design library access by project/team.</td></tr>
+            <tr><th>Network Security</th><td>EDA farm network segment isolated from general corporate network; remote access brokered rather than direct exposure.</td></tr>
+            <tr><th>Backup</th><td>Regular backup of design libraries and PDK repositories, with versioning for design data.</td></tr>
+            <tr><th>Monitoring</th><td>Access logging for design data and license checkout activity.</td></tr>
+            <tr><th>Disaster Recovery</th><td>Documented recovery procedure for license servers and centralized storage.</td></tr>
+            <tr><th>High Availability</th><td>Optional redundant license servers and storage for environments where design downtime is costly.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>License checkout test: confirm tools correctly acquire and release FLEXlm licenses.</li><li>Access control test: verify project-level storage permissions correctly restrict unauthorized PDK/library access.</li><li>Remote session test: validate GUI tool (e.g. Virtuoso) performance over the remote access layer.</li><li>Failover test: validate behavior when the primary license server is unavailable (if redundant licensing configured).</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>Centralized, access-controlled EDA compute farm.</li><li>Documented PDK and design library storage structure.</li><li>Operational FLEXlm license infrastructure.</li><li>Engineer onboarding and remote access guide.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>License-aware job scheduling layer (Project 08).</li><li>Integration with automated digital design flows (Project 09).</li><li>Expanded remote access for distributed/international design teams.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

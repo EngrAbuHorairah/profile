@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Automated RTL-to-GDSII Semiconductor Design Pipeline | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="An automated open-source digital design flow taking Verilog RTL through synthesis, place-and-route and timing analysis to final GDSII layout, built on OpenROAD/OpenLane tooling.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="Automated RTL-to-GDSII Semiconductor Design Pipeline">
+<meta property="og:description" content="An automated open-source digital design flow taking Verilog RTL through synthesis, place-and-route and timing analysis to final GDSII layout, built on OpenROAD/OpenLane tooling.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / Automated RTL-to-GDSII Semiconductor Design Pipeline</div>
+    <span class="eyebrow">PROJECT 09 &middot; Electronic Design Automation</span>
+    <h1 style="margin:14px 0 16px;">Automated RTL-to-GDSII Semiconductor Design Pipeline</h1>
+    <p class="lead">An automated open-source digital design flow taking Verilog RTL through synthesis, place-and-route and timing analysis to final GDSII layout, built on OpenROAD/OpenLane tooling.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">OpenROAD</span><span class="tag">OpenLane</span><span class="tag">Yosys</span><span class="tag">Verilator</span><span class="tag">Icarus Verilog</span><span class="tag">OpenSTA</span><span class="tag">Magic</span><span class="tag">KLayout</span><span class="tag">SkyWater PDK</span><span class="tag">Python</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Commercial RTL-to-GDSII flows (Cadence/Synopsys) are powerful but expensive and license-gated, making them inaccessible for education, open-source hardware projects, and rapid low-risk prototyping; an automated open-source alternative fills this gap.</p>
+          <h4>Proposed Solution</h4><p>An OpenLane-orchestrated flow chaining Yosys (synthesis), OpenROAD (floorplanning, placement, CTS, routing), OpenSTA (static timing analysis), and Magic/KLayout (DRC/LVS and layout viewing), targeting the open SkyWater 130nm PDK, with functional verification via Verilator/Icarus Verilog prior to synthesis.</p>
+          <h4>Objectives</h4><ul><li>Automate the full RTL-to-GDSII flow using open-source digital design tools.</li><li>Validate functional correctness via simulation before synthesis.</li><li>Perform synthesis, floorplanning, placement, clock tree synthesis and routing.</li><li>Produce a DRC-clean GDSII layout targeting an open PDK (e.g. SkyWater 130nm).</li></ul>
+          <h4>Intended Users</h4><p>Digital IC design students/educators, open-source silicon hobbyist projects, and engineering teams prototyping designs before committing to costly commercial flows.</p>
+          <div class="note-box">This project clearly distinguishes open-source digital design tooling (Yosys/OpenROAD/Magic/OpenLane, used here) from commercial EDA platforms (Cadence/Synopsys, used in Projects 07–08) — the two serve different purposes: open-source flows for education, prototyping and open silicon; commercial flows for production-grade advanced-node analog/mixed-signal and full-custom design.</div>
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Provides a repeatable, scriptable design flow that doesn&#x27;t depend on commercial license availability.</td></tr>
+            <tr><th>Cost Optimization</th><td>Zero tool licensing cost versus commercial EDA suites, at the tradeoff of reduced feature set and typically older/larger process nodes.</td></tr>
+            <tr><th>Productivity</th><td>Full automation means a design can go from RTL to layout with minimal manual intervention once the flow is configured.</td></tr>
+            <tr><th>Scalability</th><td>The same flow structure can be adapted to other open PDKs as they become available.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>All tooling is open-source and can be fully audited; no external license server dependency.</td></tr>
+            <tr><th>Organizational Impact</th><td>Builds deep, transferable understanding of the full digital design flow — valuable both for training engineers and for genuine open-source chip projects.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>A staged pipeline orchestrated by OpenLane, where each stage consumes the previous stage&#x27;s output: RTL → synthesized netlist → floorplan → placed design → clock-tree-inserted design → routed design → GDSII, with verification and timing checks interleaved.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[Automated RTL-to-GDSII Semic Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>Verilator/Icarus Verilog (RTL simulation)</li><li>Yosys (logic synthesis)</li><li>OpenROAD (floorplanning, placement, CTS, routing)</li><li>OpenSTA (static timing analysis)</li><li>Magic (DRC, layout)</li><li>KLayout (layout viewing/verification)</li><li>SkyWater 130nm open PDK</li></ul>
+          <h4>Data Flow</h4><p>Verilog RTL → functional simulation (Verilator/Icarus) confirms correctness → Yosys synthesizes RTL to a gate-level netlist using PDK standard cells → OpenROAD performs floorplanning, placement and clock tree synthesis → OpenROAD routing produces a fully routed design → OpenSTA verifies timing closure → Magic/KLayout perform DRC/LVS and generate final GDSII.</p>
+          <h4>Integration Architecture</h4><p>Can run as standalone scripted jobs on the HPC cluster (Project 04) compute nodes, since these are open-source CLI tools with no license server dependency.</p>
+          
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>OpenLane</strong></td><td>Provides pre-built orchestration gluing together Yosys/OpenROAD/Magic into a coherent flow, avoiding the need to hand-script every stage transition.</td></tr><tr><td><strong>OpenROAD</strong></td><td>The leading open-source place-and-route engine, actively maintained and capable of producing tape-out-quality results for supported open PDKs.</td></tr><tr><td><strong>SkyWater 130nm PDK</strong></td><td>The most mature fully open-source PDK available, enabling genuinely manufacturable (via efabless/Skywater shuttle programs) open-source silicon.</td></tr><tr><td><strong>Yosys</strong></td><td>The standard open-source RTL synthesis tool, well integrated with the rest of the open EDA ecosystem.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>Multi-core CPU for parallelizable stages (placement/routing can be CPU-intensive on larger designs).</td></tr>
+            <tr><th>GPU</th><td>Not required — the open-source digital flow tooling (Yosys/OpenROAD/Magic) is CPU-based.</td></tr>
+            <tr><th>RAM</th><td>16–64GB depending on design size; larger designs with more standard cells need more memory for placement/routing.</td></tr>
+            <tr><th>Storage</th><td>Moderate storage for PDK files, intermediate design databases (netlists, DEF/LEF files) and GDSII outputs.</td></tr>
+            <tr><th>Networking</th><td>Standard LAN sufficient; no special interconnect requirements for single-node flow execution.</td></tr>
+            <tr><th>Recommended Configuration</th><td>A single capable workstation/server node is typically sufficient for small-to-moderate digital designs on this flow.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> Runtime and resource needs scale with design complexity (cell/gate count); figures are general estimates for small-to-moderate designs.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Linux (Ubuntu is the most commonly documented/tested base for OpenLane).</td></tr>
+            <tr><th>Dependencies</th><td>Docker (OpenLane is commonly distributed as a container), Yosys, OpenROAD, Magic, KLayout, Verilator/Icarus Verilog</td></tr>
+            <tr><th>Services</th><td>Not applicable — this is a batch/pipeline flow rather than a persistent service.</td></tr>
+            <tr><th>Databases</th><td>Not applicable; design data is file-based (Verilog, DEF/LEF, GDSII).</td></tr>
+            <tr><th>APIs</th><td>OpenLane/OpenROAD provide Tcl/Python scripting interfaces for flow customization.</td></tr>
+            <tr><th>Monitoring</th><td>Flow run logs reviewed for stage success/failure and timing/DRC violations.</td></tr>
+            <tr><th>Automation</th><td>Fully scriptable end-to-end via OpenLane configuration files, suitable for CI-style automated runs per RTL change.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Define target design(s), target PDK, and performance/area goals.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Provision a Linux host/container environment and install OpenLane/OpenROAD toolchain.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Configure PDK setup, flow configuration files, and design-specific constraints (SDC).</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Integrate RTL simulation (Verilator/Icarus) as a pre-synthesis verification gate in the flow.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Run the full flow on representative test designs; verify timing closure and DRC-clean GDSII output.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document the flow configuration and known limitations versus commercial tools for future users.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Not applicable in a single-user flow context; relevant only if hosted as a shared service.</td></tr>
+            <tr><th>Authorization</th><td>File-level permissions on design data if shared across a team.</td></tr>
+            <tr><th>Network Security</th><td>No external network dependency once PDK and tools are locally installed.</td></tr>
+            <tr><th>Backup</th><td>Version control (git) for RTL and flow configuration; backup of generated GDSII outputs.</td></tr>
+            <tr><th>Monitoring</th><td>Flow run logs retained for debugging failed stages.</td></tr>
+            <tr><th>Disaster Recovery</th><td>Flow is fully reproducible from version-controlled RTL and configuration, simplifying recovery.</td></tr>
+            <tr><th>High Availability</th><td>Not applicable — this is a batch pipeline, not a continuously available service.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>Functional test: RTL simulation must pass before synthesis proceeds.</li><li>Timing test: OpenSTA must report timing closure against the target clock constraint.</li><li>DRC/LVS test: Magic-generated layout must pass design rule and layout-vs-schematic checks.</li><li>Regression test: confirm flow produces consistent results across repeated runs of the same RTL.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>Automated, reproducible RTL-to-GDSII flow for the target open PDK.</li><li>DRC-clean GDSII layout output for completed designs.</li><li>Timing and DRC/LVS verification reports.</li><li>Documented flow configuration for reuse on future designs.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>Extension to additional open PDKs as they mature.</li><li>CI-integrated flow triggering automatically on RTL commits.</li><li>Comparison benchmarking against commercial flow results on the same design where feasible.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

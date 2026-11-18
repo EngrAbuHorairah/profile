@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scientific Computing &amp; Distributed Simulation Platform | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="A high-performance scientific computing environment supporting parallel processing, distributed simulation and reproducible software environments for engineering and research workloads.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="Scientific Computing &amp; Distributed Simulation Platform">
+<meta property="og:description" content="A high-performance scientific computing environment supporting parallel processing, distributed simulation and reproducible software environments for engineering and research workloads.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / Scientific Computing &amp; Distributed Simulation Platform</div>
+    <span class="eyebrow">PROJECT 06 &middot; High-Performance Computing</span>
+    <h1 style="margin:14px 0 16px;">Scientific Computing &amp; Distributed Simulation Platform</h1>
+    <p class="lead">A high-performance scientific computing environment supporting parallel processing, distributed simulation and reproducible software environments for engineering and research workloads.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">MPI</span><span class="tag">OpenMP</span><span class="tag">GCC</span><span class="tag">Intel oneAPI</span><span class="tag">Spack</span><span class="tag">BLAS</span><span class="tag">LAPACK</span><span class="tag">FFTW</span><span class="tag">Python</span><span class="tag">Rocky Linux</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Scientific and engineering simulation codes (CFD, structural analysis, numerical modeling) require carefully tuned compiler toolchains and numerical libraries, and inconsistent environments across machines lead to non-reproducible results and wasted debugging time.</p>
+          <h4>Proposed Solution</h4><p>A dedicated scientific computing environment layered on the HPC cluster (Project 04), using Spack to manage multiple compiler (GCC, Intel oneAPI) and library (BLAS, LAPACK, FFTW) versions side-by-side, with MPI/OpenMP providing the parallel execution models applications need.</p>
+          <h4>Objectives</h4><ul><li>Support parallel computation via MPI (distributed) and OpenMP (shared-memory) models.</li><li>Provide optimized numerical libraries (BLAS/LAPACK/FFTW) for scientific applications.</li><li>Maintain reproducible, version-controlled software environments.</li><li>Benchmark application performance across different compiler/library configurations.</li></ul>
+          <h4>Intended Users</h4><p>Computational scientists, simulation engineers, and research groups running CFD, FEA, or other numerically intensive codes.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Removes the burden of each researcher manually compiling and managing their own library stack.</td></tr>
+            <tr><th>Cost Optimization</th><td>Optimized numerical libraries can meaningfully reduce simulation runtime, directly reducing compute-hour costs.</td></tr>
+            <tr><th>Productivity</th><td>Reproducible environments mean results are comparable across runs and across team members.</td></tr>
+            <tr><th>Scalability</th><td>New applications and library versions can be added via Spack without disrupting existing environments.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>Environment modules are centrally managed and vetted rather than individually compiled by each user.</td></tr>
+            <tr><th>Organizational Impact</th><td>Provides the numerical computing foundation that research credibility depends on — consistent, documented environments.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>Built on top of the HPC cluster&#x27;s compute nodes, this platform adds a managed software environment layer (via Spack and environment modules) plus parallel runtime libraries (MPI/OpenMP) used by scientific applications.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[Scientific Computing & Distr Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>Spack package manager</li><li>Environment Modules / Lmod</li><li>MPI implementation (OpenMPI)</li><li>OpenMP runtime (bundled with compilers)</li><li>Optimized numerical libraries: BLAS, LAPACK, FFTW</li><li>GCC and Intel oneAPI compiler toolchains</li></ul>
+          <h4>Data Flow</h4><p>Researcher loads a specific software environment (module load) → compiles or runs a simulation code linked against the chosen BLAS/LAPACK/FFTW build → MPI distributes the computation across cluster nodes → OpenMP parallelizes within each node&#x27;s cores.</p>
+          <h4>Integration Architecture</h4><p>Runs on the same Slurm-managed cluster (Project 04) and is monitored through the same observability platform (Project 05).</p>
+          
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>Spack</strong></td><td>Allows multiple versions of compilers and libraries to coexist cleanly, which is essential since different scientific codes require different, sometimes conflicting, dependency versions.</td></tr><tr><td><strong>Intel oneAPI</strong></td><td>Provides highly optimized math kernels (MKL) that often significantly outperform generic library builds on Intel hardware.</td></tr><tr><td><strong>FFTW</strong></td><td>The standard high-performance library for fast Fourier transforms, used across many simulation and signal-processing codes.</td></tr><tr><td><strong>MPI + OpenMP (hybrid)</strong></td><td>Combining distributed-memory (MPI) and shared-memory (OpenMP) parallelism is the standard approach for scaling scientific codes efficiently across multi-node, multi-core clusters.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>High core-count CPUs with strong per-core performance, as most scientific codes are CPU-bound.</td></tr>
+            <tr><th>GPU</th><td>Optional, only for applications with GPU-accelerated solvers.</td></tr>
+            <tr><th>RAM</th><td>Memory sized to the largest expected simulation working set; scientific workloads are often memory-bandwidth sensitive.</td></tr>
+            <tr><th>Storage</th><td>Fast shared storage for simulation input/output datasets, which can be large for CFD/FEA workloads.</td></tr>
+            <tr><th>Networking</th><td>Low-latency interconnect (InfiniBand/RoCE) important for MPI-heavy codes with frequent inter-node communication.</td></tr>
+            <tr><th>Recommended Configuration</th><td>Leverages the same compute nodes as Project 04; no separate hardware required beyond compiler/library installation.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> Actual performance is highly application-dependent; benchmarking with representative codes is required before capacity planning.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Rocky Linux/RHEL, matching the base HPC cluster OS.</td></tr>
+            <tr><th>Dependencies</th><td>GCC, Intel oneAPI, OpenMPI, Spack, BLAS/LAPACK/FFTW builds</td></tr>
+            <tr><th>Services</th><td>Environment Modules/Lmod service for environment switching.</td></tr>
+            <tr><th>Databases</th><td>Not applicable — this platform is compute/library focused rather than data-service focused.</td></tr>
+            <tr><th>APIs</th><td>Not applicable; interaction is via CLI/module system and application-level APIs (e.g. MPI API within codes).</td></tr>
+            <tr><th>Monitoring</th><td>Shares the HPC monitoring platform (Project 05) for job-level resource tracking.</td></tr>
+            <tr><th>Automation</th><td>Spack environment definitions version-controlled and deployed via Ansible/CI.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Catalog target scientific applications and their compiler/library requirements.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Confirm compute node CPU/interconnect suitability for target workloads.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Install Spack, build required compiler and library combinations.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Deploy environment modules; integrate with Slurm job submission templates.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Run representative scientific benchmarks (e.g. standard MPI/OpenMP test suites) across configurations.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document available environments and publish usage guides for researchers.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Inherits the cluster&#x27;s centralized authentication (Project 04).</td></tr>
+            <tr><th>Authorization</th><td>Module access can be scoped by group if certain software has licensing restrictions.</td></tr>
+            <tr><th>Network Security</th><td>No additional network exposure beyond the base cluster.</td></tr>
+            <tr><th>Backup</th><td>Spack build cache and environment definitions version-controlled and backed up.</td></tr>
+            <tr><th>Monitoring</th><td>Job-level resource usage tracked via the HPC monitoring platform.</td></tr>
+            <tr><th>Disaster Recovery</th><td>Software environments can be rebuilt from version-controlled Spack recipes if lost.</td></tr>
+            <tr><th>High Availability</th><td>Not typically applicable; availability follows the underlying cluster&#x27;s HA posture.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>Correctness test: validate numerical library outputs against known reference results.</li><li>Performance test: benchmark representative codes across different compiler/library builds.</li><li>Scaling test: measure MPI strong/weak scaling behavior for representative simulation codes.</li><li>Reproducibility test: confirm identical results across repeated runs with the same environment.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>A catalog of validated, reproducible software environments for scientific computing.</li><li>Benchmark report comparing compiler/library performance options.</li><li>Documentation for researchers on selecting and loading environments.</li><li>Version-controlled Spack environment definitions.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>GPU-accelerated solver support for applicable codes.</li><li>Containerized environment distribution (e.g. Singularity/Apptainer) for portability.</li><li>Automated regression testing of environments after library updates.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

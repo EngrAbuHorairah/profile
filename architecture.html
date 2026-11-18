@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Architecture | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="How AI, HPC, EDA, networking and storage infrastructure domains interconnect.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/">
+<meta property="og:title" content="Architecture">
+<meta property="og:description" content="How AI, HPC, EDA, networking and storage infrastructure domains interconnect.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="">Home</a>
+<a href="about.html" class="">About</a>
+<a href="projects.html" class="">Projects</a>
+<a href="technologies.html" class="">Technologies</a>
+<a href="architecture.html" class="active">Architecture</a>
+<a href="contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" style="padding-top:64px;padding-bottom:32px;">
+  <div class="container">
+    <span class="eyebrow">Architecture</span>
+    <h1 style="margin-top:14px;">Infrastructure Architecture Showcase</h1>
+    <p class="lead">A high-level view of how the five engineering domains in this portfolio relate to one another.</p>
+  </div>
+</section>
+<section class="section-tight">
+  <div class="container">
+    <div class="mermaid">
+graph TD
+  A[Enterprise Networking Fabric] --> B[HPC Compute Cluster]
+  A --> C[AI Training & Inference Cluster]
+  A --> D[EDA Compute Farm]
+  B --> E[Parallel File System]
+  C --> E
+  D --> F[Distributed Storage - Ceph]
+  E --> G[Backup & Disaster Recovery]
+  F --> G
+  B --> H[Monitoring & AIOps]
+  C --> H
+  D --> H
+  A --> H
+    </div>
+    <p class="text-muted" style="margin-top:24px;">Networking (Project 10/11) underlies every compute domain. HPC and AI workloads (Projects 02, 04, 06) rely on the parallel file system (Project 13) for high-throughput I/O, while EDA (Projects 07-09) relies on the distributed storage platform (Project 12) and centralized licensing. Every domain feeds into unified monitoring/AIOps (Project 03/05) and is protected by the backup &amp; DR platform (Project 14).</p>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="projects.html">Projects</a>
+        <a href="technologies.html">Technologies</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

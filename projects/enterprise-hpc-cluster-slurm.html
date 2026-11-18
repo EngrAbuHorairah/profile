@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Enterprise HPC Cluster with Slurm Workload Manager | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="A centralized, multi-user HPC computing cluster with Slurm-based job scheduling, shared storage and centralized authentication for research and engineering workloads.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="Enterprise HPC Cluster with Slurm Workload Manager">
+<meta property="og:description" content="A centralized, multi-user HPC computing cluster with Slurm-based job scheduling, shared storage and centralized authentication for research and engineering workloads.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / Enterprise HPC Cluster with Slurm Workload Manager</div>
+    <span class="eyebrow">PROJECT 04 &middot; High-Performance Computing</span>
+    <h1 style="margin:14px 0 16px;">Enterprise HPC Cluster with Slurm Workload Manager</h1>
+    <p class="lead">A centralized, multi-user HPC computing cluster with Slurm-based job scheduling, shared storage and centralized authentication for research and engineering workloads.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">Rocky Linux/RHEL</span><span class="tag">Slurm</span><span class="tag">OpenMPI</span><span class="tag">Munge</span><span class="tag">LDAP/FreeIPA</span><span class="tag">NFS</span><span class="tag">Spack</span><span class="tag">Ansible</span><span class="tag">Grafana</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Research and engineering teams often rely on individually-owned workstations for compute-intensive work, leading to poor resource utilization, no fair-share policy, and no centralized job history or accounting.</p>
+          <h4>Proposed Solution</h4><p>A Slurm-managed cluster with dedicated head (controller), login, and compute nodes, shared storage via NFS, centralized identity via FreeIPA/LDAP, and software environments managed through Spack for reproducibility.</p>
+          <h4>Objectives</h4><ul><li>Deploy a head/login/compute node HPC architecture.</li><li>Implement Slurm-based job scheduling with partitions and queues.</li><li>Provide centralized authentication and user accounting.</li><li>Support CPU and GPU resource allocation per job.</li></ul>
+          <h4>Intended Users</h4><p>Research scientists, engineering simulation teams, and any group needing shared, scheduled access to compute resources.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Converts scattered individual compute resources into a single schedulable pool with visibility into usage.</td></tr>
+            <tr><th>Cost Optimization</th><td>Improves hardware utilization versus dedicated per-user workstations sitting idle outside business hours.</td></tr>
+            <tr><th>Productivity</th><td>Users submit jobs instead of manually managing contention for shared machines.</td></tr>
+            <tr><th>Scalability</th><td>Compute nodes can be added to the Slurm pool without disrupting running workloads.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>Centralized authentication and per-user job isolation.</td></tr>
+            <tr><th>Organizational Impact</th><td>Establishes the operational foundation (identity, scheduling, accounting) required before any advanced HPC workload (AI training, EDA compute, simulation) can run reliably at scale.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>Classic HPC topology: a controller node runs the Slurm scheduler, login nodes provide user access points, and compute nodes execute scheduled jobs, all sharing a common filesystem and identity service.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[Enterprise HPC Cluster with  Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>Slurm controller (slurmctld)</li><li>Login node(s)</li><li>Compute nodes (slurmd)</li><li>Munge for authentication between nodes</li><li>NFS shared storage for home directories and software</li><li>FreeIPA/LDAP for centralized identity</li><li>Spack for software environment management</li></ul>
+          <h4>Data Flow</h4><p>User logs into login node → submits job via Slurm CLI → slurmctld schedules job to available compute node(s) based on partition/queue policy and requested resources → job executes with access to shared NFS storage → results returned to user&#x27;s home directory.</p>
+          <h4>Integration Architecture</h4><p>Spack-managed software stacks allow consistent application environments across all compute nodes without manual per-node installation.</p>
+          
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>Slurm</strong></td><td>Industry-standard HPC workload manager with mature support for partitions, fair-share scheduling, and GPU/CPU resource allocation.</td></tr><tr><td><strong>Munge</strong></td><td>Lightweight authentication mechanism required by Slurm for secure inter-node communication.</td></tr><tr><td><strong>FreeIPA/LDAP</strong></td><td>Centralizes user/group identity across all cluster nodes instead of managing local accounts per machine.</td></tr><tr><td><strong>Spack</strong></td><td>Purpose-built HPC package manager that handles complex scientific software dependency trees and multiple compiler/library versions cleanly.</td></tr><tr><td><strong>NFS</strong></td><td>Simple, well-understood shared storage suitable for home directories and moderate-scale shared software/data access.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>Multi-core server CPUs on compute nodes sized to anticipated job parallelism (e.g. 32–128 cores per node).</td></tr>
+            <tr><th>GPU</th><td>Optional NVIDIA GPUs on select compute nodes for GPU-accelerated jobs.</td></tr>
+            <tr><th>RAM</th><td>Sized per expected per-job memory needs; 128GB–512GB per compute node is a common range for mixed workloads.</td></tr>
+            <tr><th>Storage</th><td>NFS server with sufficient capacity and IOPS for home directories and shared application installs.</td></tr>
+            <tr><th>Networking</th><td>1GbE/10GbE minimum; higher-bandwidth low-latency interconnect (InfiniBand/RoCE) recommended for MPI-heavy workloads (see Project 10).</td></tr>
+            <tr><th>Recommended Configuration</th><td>Minimum viable cluster: 1 controller/login node + 2–4 compute nodes; production clusters scale to many more nodes.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> These are planning-stage sizing estimates; actual requirements should be validated against target workloads before procurement.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Rocky Linux or RHEL across all nodes for long-term stability and enterprise support compatibility.</td></tr>
+            <tr><th>Dependencies</th><td>Slurm + Munge, OpenMPI, Spack</td></tr>
+            <tr><th>Services</th><td>slurmctld (controller), slurmd (compute nodes), NFS server, FreeIPA/LDAP server</td></tr>
+            <tr><th>Databases</th><td>Slurm accounting database (slurmdbd, typically MySQL/MariaDB).</td></tr>
+            <tr><th>APIs</th><td>Slurm CLI/REST API for job submission and status queries.</td></tr>
+            <tr><th>Monitoring</th><td>Grafana dashboards fed by node_exporter and the Slurm exporter (see Project 05).</td></tr>
+            <tr><th>Automation</th><td>Ansible playbooks for consistent node provisioning and configuration drift prevention.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Determine expected job types, user count, and partition/queue policy needs.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Provision controller, login and compute nodes; configure base OS and networking.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Install and configure Slurm, Munge, NFS, and FreeIPA/LDAP.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Deploy Spack environments, integrate accounting database, connect monitoring.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Submit test jobs across partitions; validate fair-share scheduling and resource limits.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Finalize user onboarding documentation and backup policy for shared storage.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Centralized via FreeIPA/LDAP; no local-only accounts on compute nodes.</td></tr>
+            <tr><th>Authorization</th><td>Slurm partitions and QoS policies enforce per-group/user resource limits.</td></tr>
+            <tr><th>Network Security</th><td>Cluster internal network isolated from general office network where practical.</td></tr>
+            <tr><th>Backup</th><td>Regular backup of NFS home directories and the Slurm accounting database.</td></tr>
+            <tr><th>Monitoring</th><td>Node health and job queue monitoring via Grafana.</td></tr>
+            <tr><th>Disaster Recovery</th><td>Documented rebuild procedure for the controller node and restoration of accounting data.</td></tr>
+            <tr><th>High Availability</th><td>Optional secondary Slurm controller for environments requiring scheduler high availability.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>Scheduling test: verify jobs are correctly queued and dispatched per partition policy.</li><li>Resource limit test: confirm per-user/group quotas are enforced.</li><li>Failover test: validate behavior when a compute node goes offline mid-job.</li><li>Software environment test: verify Spack-built applications run identically across all compute nodes.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>Operational Slurm-managed HPC cluster.</li><li>Documented job submission guide for end users.</li><li>Centralized authentication integrated across all nodes.</li><li>Accounting reports of cluster usage by user/group.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>Integration with the HPC monitoring platform (Project 05) for full observability.</li><li>GPU partition expansion to support AI training workloads (Project 02).</li><li>Burst-to-cloud capability for peak demand periods.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

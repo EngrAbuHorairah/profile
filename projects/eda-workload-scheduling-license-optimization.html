@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EDA Workload Scheduling &amp; License Optimization System | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="An intelligent scheduling and analytics platform that correlates compute job scheduling with EDA license availability to reduce license bottlenecks and improve utilization visibility.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="EDA Workload Scheduling &amp; License Optimization System">
+<meta property="og:description" content="An intelligent scheduling and analytics platform that correlates compute job scheduling with EDA license availability to reduce license bottlenecks and improve utilization visibility.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / EDA Workload Scheduling &amp; License Optimization System</div>
+    <span class="eyebrow">PROJECT 08 &middot; Electronic Design Automation</span>
+    <h1 style="margin:14px 0 16px;">EDA Workload Scheduling &amp; License Optimization System</h1>
+    <p class="lead">An intelligent scheduling and analytics platform that correlates compute job scheduling with EDA license availability to reduce license bottlenecks and improve utilization visibility.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">Slurm</span><span class="tag">FLEXlm/FlexNet</span><span class="tag">Python</span><span class="tag">REST APIs</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">PostgreSQL</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Standard HPC schedulers (like Slurm) allocate CPU/GPU/memory but have no native concept of software license availability, so EDA jobs can be dispatched to compute resources only to immediately stall waiting for a FLEXlm license token, wasting both compute allocation and engineer time.</p>
+          <h4>Proposed Solution</h4><p>A Python-based middleware layer that polls FLEXlm license server status, exposes license availability as a schedulable resource to Slurm (via Slurm&#x27;s licenses resource feature or a custom plugin), and logs usage data to PostgreSQL for Grafana-based analytics and bottleneck reporting.</p>
+          <h4>Objectives</h4><ul><li>Monitor real-time license availability and usage across all FLEXlm-managed EDA tools.</li><li>Make job scheduling license-aware so jobs aren&#x27;t dispatched to wait indefinitely on unavailable licenses.</li><li>Provide per-user/team license utilization analytics.</li><li>Identify license bottlenecks to inform purchasing or reallocation decisions.</li></ul>
+          <h4>Intended Users</h4><p>EDA infrastructure administrators, CAD/IT managers responsible for license budget decisions, and design engineers submitting license-gated jobs.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Prevents jobs from occupying compute slots while stalled on unavailable licenses, improving overall farm throughput.</td></tr>
+            <tr><th>Cost Optimization</th><td>Usage analytics reveal whether license bottlenecks are chronic (justifying purchase) or occasional (justifying better scheduling instead), avoiding unnecessary license spend.</td></tr>
+            <tr><th>Productivity</th><td>Engineers get more predictable job start times since licenses are checked before dispatch, not after.</td></tr>
+            <tr><th>Scalability</th><td>Additional license pools/tools can be added to the monitoring and scheduling layer incrementally.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>Read-only license server queries; no changes to the underlying FLEXlm authorization model.</td></tr>
+            <tr><th>Organizational Impact</th><td>Turns license management from a reactive support issue into a data-driven capacity planning function.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>A middleware service polls FLEXlm license servers for real-time token availability, exposes this data via REST API and to Slurm as a licenses resource, and persists historical usage to PostgreSQL for analytics dashboards.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[EDA Workload Scheduling & Li Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>FLEXlm license server(s)</li><li>Python polling/middleware service</li><li>Slurm scheduler (license-aware resource configuration)</li><li>PostgreSQL (historical usage data)</li><li>Prometheus/Grafana (dashboards and alerting)</li><li>REST API (for programmatic license status queries)</li></ul>
+          <h4>Data Flow</h4><p>Middleware service queries FLEXlm status periodically → updates Slurm&#x27;s configured license resource counts → Slurm only dispatches license-gated jobs when both compute and license resources are available → usage snapshots logged to PostgreSQL → Grafana visualizes utilization trends and bottlenecks.</p>
+          <h4>Integration Architecture</h4><p>Sits on top of the EDA compute farm (Project 07), adding an intelligence layer without requiring changes to how engineers submit jobs.</p>
+          
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>Slurm licenses resource</strong></td><td>Slurm natively supports tracking arbitrary &#x27;license&#x27; resources, making it the natural integration point rather than building a scheduler from scratch.</td></tr><tr><td><strong>Python</strong></td><td>Flexible for writing FLEXlm status parsers (lmstat output) and REST middleware quickly and maintainably.</td></tr><tr><td><strong>PostgreSQL</strong></td><td>Reliable relational storage for time-series-like usage logs that need relational querying (by user, tool, project).</td></tr><tr><td><strong>Prometheus/Grafana</strong></td><td>Reuses the same observability stack as other HPC projects (Project 05) for consistency and lower operational overhead.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>Lightweight — the middleware service itself has minimal compute requirements (a few cores sufficient).</td></tr>
+            <tr><th>GPU</th><td>Not applicable.</td></tr>
+            <tr><th>RAM</th><td>8–16GB typically sufficient for the middleware and database services.</td></tr>
+            <tr><th>Storage</th><td>Modest storage for PostgreSQL historical usage logs; grows slowly over time.</td></tr>
+            <tr><th>Networking</th><td>Standard internal LAN access to FLEXlm license servers and the Slurm controller.</td></tr>
+            <tr><th>Recommended Configuration</th><td>Can run as a single lightweight service, potentially co-located with existing monitoring infrastructure (Project 05).</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> Resource needs are minimal relative to the compute farm itself; this is a coordination layer, not a compute-heavy service.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Linux, matching the EDA compute farm environment.</td></tr>
+            <tr><th>Dependencies</th><td>Python 3.10+, lmutil/lmstat (FLEXlm utilities), Slurm client tools</td></tr>
+            <tr><th>Services</th><td>Python middleware/polling service, PostgreSQL database</td></tr>
+            <tr><th>Databases</th><td>PostgreSQL for historical license usage records.</td></tr>
+            <tr><th>APIs</th><td>REST API exposing current and historical license availability for dashboards and user-facing tools.</td></tr>
+            <tr><th>Monitoring</th><td>Grafana dashboards for license utilization trends and bottleneck alerts.</td></tr>
+            <tr><th>Automation</th><td>Scheduled polling jobs; alerting rules for sustained license exhaustion.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Inventory all FLEXlm-managed tools and license pool sizes requiring monitoring.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Provision the middleware service host and confirm network access to license servers.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Build and deploy the FLEXlm polling service; configure Slurm license resources.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Connect PostgreSQL logging and Grafana dashboards; expose REST API for status queries.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Validate scheduling behavior under simulated license exhaustion; verify analytics accuracy against known usage.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document bottleneck reporting process and finalize alert thresholds with CAD management.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Middleware service uses read-only, scoped access to query FLEXlm status.</td></tr>
+            <tr><th>Authorization</th><td>Dashboard access role-restricted to CAD/IT administrators and management.</td></tr>
+            <tr><th>Network Security</th><td>Middleware communicates only with internal license servers and the Slurm controller.</td></tr>
+            <tr><th>Backup</th><td>PostgreSQL usage history backed up on a standard schedule.</td></tr>
+            <tr><th>Monitoring</th><td>Self-monitoring to ensure the polling service itself stays healthy and current.</td></tr>
+            <tr><th>Disaster Recovery</th><td>Service can be redeployed quickly from version-controlled configuration if lost.</td></tr>
+            <tr><th>High Availability</th><td>Optional redundant polling service for environments where license visibility must stay continuous.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>Polling accuracy test: compare middleware-reported license counts against raw lmstat output.</li><li>Scheduling test: confirm Slurm withholds license-gated jobs when tokens are exhausted.</li><li>Analytics test: validate historical usage reports against known usage windows.</li><li>Alert test: confirm sustained license exhaustion triggers the configured alert.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>License-aware job scheduling integrated with the existing Slurm/EDA farm.</li><li>Historical license utilization dashboards and bottleneck reports.</li><li>REST API for programmatic license status queries.</li><li>Documented recommendations process for license purchase decisions.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>Predictive license demand forecasting based on project pipeline.</li><li>Per-project cost-attribution reporting for license usage.</li><li>Integration with the AIOps platform (Project 03) for intelligent bottleneck alerts.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

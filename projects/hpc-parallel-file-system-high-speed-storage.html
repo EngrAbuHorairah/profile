@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HPC Parallel File System &amp; High-Speed Storage | ABU HORAIRAH | ENGINEERING PORTFOLIO</title>
+<meta name="description" content="A parallel storage infrastructure purpose-built for demanding HPC and AI workloads requiring very high aggregate throughput and concurrent access from many compute nodes.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR_USERNAME.github.io/YOUR_REPO/../">
+<meta property="og:title" content="HPC Parallel File System &amp; High-Speed Storage">
+<meta property="og:description" content="A parallel storage infrastructure purpose-built for demanding HPC and AI workloads requiring very high aggregate throughput and concurrent access from many compute nodes.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ABU HORAIRAH | ENGINEERING PORTFOLIO">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230a0e17%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%2322d3ee%22 font-family=%22monospace%22 font-weight=%22bold%22>AH</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="../index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html" class="">Home</a>
+<a href="../about.html" class="">About</a>
+<a href="../projects.html" class="active">Projects</a>
+<a href="../technologies.html" class="">Technologies</a>
+<a href="../architecture.html" class="">Architecture</a>
+<a href="../contact.html" class="">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../projects.html">Projects</a> / HPC Parallel File System &amp; High-Speed Storage</div>
+    <span class="eyebrow">PROJECT 13 &middot; Enterprise Storage</span>
+    <h1 style="margin:14px 0 16px;">HPC Parallel File System &amp; High-Speed Storage</h1>
+    <p class="lead">A parallel storage infrastructure purpose-built for demanding HPC and AI workloads requiring very high aggregate throughput and concurrent access from many compute nodes.</p>
+    <div style="margin:18px 0;">
+      <span class="badge-status status-concept"><span class="dot"></span>Concept</span>
+    </div>
+    <div><span class="tag">Lustre</span><span class="tag">BeeGFS</span><span class="tag">NVMe</span><span class="tag">SSD caching</span><span class="tag">RDMA</span><span class="tag">InfiniBand</span><span class="tag">100GbE</span><span class="tag">Linux</span><span class="tag">IOR benchmarking</span></div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="grid" style="grid-template-columns: 220px 1fr; gap:40px;" id="projectLayout">
+      <aside class="toc-sticky">
+        <strong style="display:block;margin-bottom:8px;font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;">On this page</strong>
+        <a href="#overview">Overview</a>
+        <a href="#business-value">Business Value</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#stack">Technology Stack</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#security">Security &amp; Reliability</a>
+        <a href="#testing">Testing &amp; Validation</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#future">Future Enhancements</a>
+        <a href="../projects.html">&larr; Back to Projects</a>
+      </aside>
+
+      <div>
+        <div class="detail-section" id="overview">
+          <h2>A. Project Overview</h2>
+          <h4>Problem Statement</h4><p>Conventional NFS storage uses a single (or small number of) server(s) to serve all clients, which becomes a severe bottleneck when hundreds of HPC compute nodes need to read/write large datasets simultaneously — the storage system itself, not the compute, ends up limiting job performance.</p>
+          <h4>Proposed Solution</h4><p>A parallel file system (Lustre or BeeGFS) that stripes data across many storage servers and targets simultaneously, allowing aggregate throughput to scale with the number of storage nodes, connected via RDMA networking (InfiniBand or RoCE over 100GbE) to minimize latency, with NVMe/SSD used as a caching tier for frequently accessed data.</p>
+          <h4>Objectives</h4><ul><li>Deploy a parallel file system capable of serving high concurrent I/O from many compute nodes.</li><li>Use NVMe/SSD caching to accelerate hot data access.</li><li>Leverage RDMA networking (InfiniBand/100GbE) to minimize I/O latency.</li><li>Benchmark and validate achieved throughput against HPC workload requirements.</li></ul>
+          <h4>Intended Users</h4><p>HPC compute clusters (Project 04), AI training clusters (Project 02), and any workload requiring very high aggregate storage throughput.</p>
+          
+        </div>
+
+        <div class="detail-section" id="business-value">
+          <h2>B. Business Value</h2>
+          <table class="spec-table">
+            <tr><th>Operational Benefits</th><td>Eliminates the storage bottleneck pattern common with single-server NFS under heavy concurrent HPC access.</td></tr>
+            <tr><th>Cost Optimization</th><td>Higher upfront cost than simple NFS storage, justified when compute cluster scale makes storage I/O the limiting factor on overall cluster utilization.</td></tr>
+            <tr><th>Productivity</th><td>Faster data access directly translates to shorter job completion times for I/O-intensive HPC/AI workloads.</td></tr>
+            <tr><th>Scalability</th><td>Throughput scales near-linearly by adding more storage server/target nodes, unlike single-server NFS.</td></tr>
+            <tr><th>Security &amp; Reliability</th><td>Access control integrated with the same centralized identity used across the HPC cluster.</td></tr>
+            <tr><th>Organizational Impact</th><td>A deliberate complement to the general-purpose Ceph storage platform (Project 12) — this system is specifically for raw HPC I/O performance, not general file sharing.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="architecture">
+          <h2>C. Technical Architecture</h2>
+          <h4>Architecture Overview</h4><p>A parallel file system architecture with metadata servers (handling file/directory metadata) separated from object storage servers (handling actual data), allowing both metadata operations and data throughput to scale independently, striped across many storage targets accessed concurrently.</p>
+          <div class="mermaid">graph LR
+  U[User / Client] --> GW[Application / Gateway Layer]
+  GW --> CORE[HPC Parallel File System & H Core Services]
+  CORE --> DATA[(Data / Storage Layer)]
+  CORE --> MON[Monitoring & Observability]
+  MON --> ADMIN[Administrator]</div>
+          <h4>Components</h4><ul><li>Metadata Server(s) (MDS/MGS in Lustre terms)</li><li>Object Storage Servers / Storage Nodes (OSS in Lustre terms, storage servers in BeeGFS)</li><li>NVMe/SSD caching tier</li><li>RDMA network fabric (InfiniBand or RoCE/100GbE)</li><li>IOR benchmarking suite for validation</li></ul>
+          <h4>Data Flow</h4><p>Compute node issues a file I/O request → metadata server resolves file layout/striping information → compute node communicates directly and in parallel with multiple storage servers/targets for the actual data transfer → RDMA networking allows this to happen with minimal CPU overhead and latency.</p>
+          <h4>Integration Architecture</h4><p>Mounted directly by HPC cluster compute nodes (Project 04) and AI training cluster nodes (Project 02) as their primary high-performance working storage, distinct from the general-purpose Ceph platform used for other storage needs.</p>
+          <div class="note-box"><strong>Technology Comparison:</strong> Lustre and BeeGFS differ from conventional NFS storage in a fundamental way: NFS serves all clients from a single server (or a small HA pair), creating a throughput ceiling, while Lustre and BeeGFS stripe data across many independent storage servers so that aggregate throughput scales with the number of servers added. BeeGFS is generally considered simpler to deploy and administer; Lustre has a longer track record at the largest supercomputing scales. Both require RDMA-capable networking to realize their full performance potential, which NFS does not typically demand.</div>
+        </div>
+
+        <div class="detail-section" id="stack">
+          <h2>D. Technology Stack &amp; Rationale</h2>
+          <table class="spec-table"><tr><th>Technology</th><th>Why It Was Selected</th></tr><tr><td><strong>Lustre</strong></td><td>The most widely deployed parallel file system in large-scale HPC/supercomputing environments, with a long track record at extreme scale.</td></tr><tr><td><strong>BeeGFS</strong></td><td>Generally simpler to deploy and manage than Lustre while still providing strong parallel I/O performance, often preferred for mid-scale deployments.</td></tr><tr><td><strong>RDMA (InfiniBand/RoCE)</strong></td><td>Essential for parallel file systems to achieve their full performance potential, since standard TCP/IP networking overhead would otherwise limit achievable throughput and latency.</td></tr><tr><td><strong>NVMe/SSD caching</strong></td><td>Accelerates access to frequently-used (&#x27;hot&#x27;) datasets without requiring the entire filesystem capacity to be built on the most expensive storage media.</td></tr></table>
+        </div>
+
+        <div class="detail-section" id="hardware">
+          <h2>E. Hardware Requirements</h2>
+          <table class="spec-table">
+            <tr><th>CPU</th><td>Moderate CPU requirements on storage servers; metadata servers benefit from strong single-thread performance for metadata operation latency.</td></tr>
+            <tr><th>GPU</th><td>Not applicable.</td></tr>
+            <tr><th>RAM</th><td>Substantial RAM on metadata servers for caching file system metadata; storage servers benefit from RAM for data caching.</td></tr>
+            <tr><th>Storage</th><td>NVMe/SSD for caching/hot tier; high-capacity HDD or SSD arrays for the bulk capacity tier, striped across many storage targets.</td></tr>
+            <tr><th>Networking</th><td>RDMA-capable network fabric (InfiniBand or 100GbE with RoCE) is effectively mandatory to realize the performance benefits of a parallel file system.</td></tr>
+            <tr><th>Recommended Configuration</th><td>Minimum practical deployment: dedicated metadata server(s) plus multiple storage server nodes; scales by adding storage servers for both capacity and throughput.</td></tr>
+          </table>
+          <div class="note-box"><strong>Estimated, not tested:</strong> Achieved throughput is highly dependent on network fabric, storage media and node count; IOR benchmarking against the specific deployment is required for validated figures.</div>
+        </div>
+
+        <div class="detail-section" id="software">
+          <h2>F. Software Architecture</h2>
+          <table class="spec-table">
+            <tr><th>Operating System</th><td>Linux with vendor/project-specific kernel patches or modules as required by Lustre; BeeGFS has broader generic kernel compatibility.</td></tr>
+            <tr><th>Dependencies</th><td>Lustre or BeeGFS server/client packages, RDMA drivers (e.g. for InfiniBand HCAs), IOR benchmarking tool</td></tr>
+            <tr><th>Services</th><td>Metadata server daemon, Object/storage server daemon, Client mount services on compute nodes</td></tr>
+            <tr><th>Databases</th><td>Not applicable in the traditional sense — file system metadata is managed internally by Lustre/BeeGFS.</td></tr>
+            <tr><th>APIs</th><td>POSIX filesystem interface for compute node access; administrative CLI tools for management.</td></tr>
+            <tr><th>Monitoring</th><td>Filesystem-specific monitoring tools plus integration into the broader HPC monitoring platform (Project 05).</td></tr>
+            <tr><th>Automation</th><td>Ansible for consistent deployment of metadata/storage server roles.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="roadmap">
+          <h2>G. Implementation Roadmap</h2>
+          <div class="mermaid">flowchart TD
+  P1[Phase 1: Planning] --> P2[Phase 2: Infrastructure Prep]
+  P2 --> P3[Phase 3: Install & Configure]
+  P3 --> P4[Phase 4: Integration]
+  P4 --> P5[Phase 5: Testing & Benchmarking]
+  P5 --> P6[Phase 6: Production Readiness]</div>
+          
+      <div class="roadmap-phase">
+        <div class="pnum2">1</div>
+        <div><strong>Phase 1 — Planning &amp; Requirements</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Determine target aggregate throughput, capacity, and compatible RDMA networking fabric.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">2</div>
+        <div><strong>Phase 2 — Infrastructure Preparation</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Provision metadata and storage server hardware with RDMA-capable networking.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">3</div>
+        <div><strong>Phase 3 — Installation &amp; Configuration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Install and configure Lustre or BeeGFS metadata and storage services.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">4</div>
+        <div><strong>Phase 4 — Integration</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Mount the parallel file system on HPC/AI cluster compute nodes; configure NVMe caching tier.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">5</div>
+        <div><strong>Phase 5 — Testing &amp; Benchmarking</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Run IOR benchmarks to validate aggregate throughput and metadata operation performance against targets.</p></div>
+      </div>
+      <div class="roadmap-phase">
+        <div class="pnum2">6</div>
+        <div><strong>Phase 6 — Production Readiness</strong><p class="text-muted" style="margin-top:4px;font-size:0.9rem;">Document capacity planning and finalize monitoring/alerting for storage server health.</p></div>
+      </div>
+        </div>
+
+        <div class="detail-section" id="security">
+          <h2>H. Security &amp; Reliability</h2>
+          <table class="spec-table">
+            <tr><th>Authentication</th><td>Integrated with the HPC cluster&#x27;s centralized identity for client access control.</td></tr>
+            <tr><th>Authorization</th><td>Directory/file-level POSIX permissions, consistent with standard HPC storage access models.</td></tr>
+            <tr><th>Network Security</th><td>Storage fabric isolated on its own RDMA network segment, separate from general management traffic.</td></tr>
+            <tr><th>Backup</th><td>Given this is typically scratch/working storage, backup policy often differs from archival storage — data is commonly expected to be copied to longer-term storage (Project 12/14) rather than relied upon as permanent.</td></tr>
+            <tr><th>Monitoring</th><td>Storage server health and throughput monitoring integrated with the HPC monitoring platform.</td></tr>
+            <tr><th>Disaster Recovery</th><td>Documented procedure for metadata/storage server recovery; data durability strategy should be explicit given parallel filesystems often prioritize performance over long-term redundancy.</td></tr>
+            <tr><th>High Availability</th><td>Metadata server redundancy (where supported) to avoid a single point of failure for the entire filesystem.</td></tr>
+          </table>
+        </div>
+
+        <div class="detail-section" id="testing">
+          <h2>I. Testing &amp; Validation</h2>
+          <ul><li>IOR benchmark test: validate aggregate read/write throughput against target performance goals.</li><li>Metadata performance test: measure file creation/stat operation rates under concurrent load.</li><li>Failover test: validate behavior when a storage server becomes unavailable (data availability depends on configured redundancy).</li><li>Integration test: confirm HPC/AI cluster compute nodes can mount and use the filesystem under real job workloads.</li></ul>
+          <div class="note-box">Test scenarios describe planned validation criteria for this project's current status (Concept). No completed test results are claimed here.</div>
+        </div>
+
+        <div class="detail-section" id="deliverables">
+          <h2>J. Deliverables</h2>
+          <ul><li>Operational parallel file system integrated with HPC/AI compute clusters.</li><li>IOR benchmark report validating achieved throughput and latency.</li><li>Documented capacity planning and data lifecycle policy (scratch vs archival).</li><li>Monitoring dashboards for storage server health.</li></ul>
+        </div>
+
+        <div class="detail-section" id="future">
+          <h2>K. Future Enhancements</h2>
+          <ul><li>Automated data lifecycle management moving cold data to the Ceph platform (Project 12) or backup system (Project 14).</li><li>Expansion of the NVMe caching tier as hot-data working sets grow.</li><li>Evaluation of newer parallel filesystem technologies as they mature.</li></ul>
+        </div>
+
+        <div class="detail-section" id="status">
+          <h2>L. Project Status</h2>
+          <span class="badge-status status-concept" style="font-size:0.95rem;padding:10px 20px;"><span class="dot"></span>Concept</span>
+          <p class="text-muted" style="margin-top:14px;">This status reflects the current development stage honestly; it will be updated as work progresses.</p>
+        </div>
+
+        <div class="detail-section" id="cta" style="border-bottom:none;">
+          <div class="cta-box">
+            <h2 style="margin-bottom:14px;">Interested in developing similar infrastructure for your organization?</h2>
+            <p class="lead" style="margin:0 auto 24px;">Let's discuss your technical requirements.</p>
+            <a href="../contact.html" class="btn btn-primary">Contact / Collaborate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+<style>@media (max-width:880px){#projectLayout{grid-template-columns:1fr !important;} .toc-sticky{position:static;}}</style>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <a href="../projects.html">Projects</a>
+        <a href="../technologies.html">Technologies</a>
+        <a href="../architecture.html">Architecture</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" id="footer-github">GitHub — [YOUR_GITHUB_URL]</a>
+        <a href="#" id="footer-linkedin">LinkedIn — [YOUR_LINKEDIN_URL]</a>
+        <a href="#" id="footer-email">Email — [YOUR_EMAIL_ADDRESS]</a>
+        <a href="#" id="footer-website">Website — [YOUR_PERSONAL_SITE]</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Abu Horairah. All rights reserved.</span>
+      <span>Built with HTML5, CSS3 &amp; JavaScript — deployed on GitHub Pages.</span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>
