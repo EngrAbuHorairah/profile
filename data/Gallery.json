@@ -1,0 +1,19 @@
+{
+  "photos": [
+    {
+      "filename": "sample-1.jpg",
+      "title": "HPC Cluster Floor",
+      "description": "[EDITABLE: Replace this with a real photo filename placed in assets/img/gallery/, and describe what the photo shows — e.g. a data center, a project you worked on, or a training session.]"
+    },
+    {
+      "filename": "sample-2.jpg",
+      "title": "EDA Lab Session",
+      "description": "[EDITABLE: Add your real photo and description here.]"
+    },
+    {
+      "filename": "sample-3.jpg",
+      "title": "Network Deployment",
+      "description": "[EDITABLE: Add your real photo and description here.]"
+    }
+  ]
+}

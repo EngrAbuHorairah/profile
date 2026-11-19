@@ -1,0 +1,13 @@
+{
+  "posts": [
+    {
+      "slug": "welcome-to-my-engineering-blog",
+      "title": "Welcome to My Engineering Blog",
+      "date": "2026-11-18",
+      "cover": "",
+      "excerpt": "An example post showing every formatting option available — headings, images, quotes, code blocks and lists. Replace this with your first real post.",
+      "tags": ["Welcome", "HPC", "AI"],
+      "content": "<p>This is an example blog post demonstrating every formatting option you can use. Delete this post once you've added your own, or keep it as a style reference.</p><h2>Headings</h2><p>Use <code>&lt;h2&gt;</code> and <code>&lt;h3&gt;</code> tags for section headings inside your post content.</p><h3>Adding an image</h3><p>Place your image file in <code>assets/img/blog/</code> and reference it like this:</p><p><img src=\"../assets/img/blog/example.jpg\" alt=\"Description of the image\"></p><h3>Quotes</h3><blockquote>A blockquote looks like this — useful for highlighting a key point or a client quote.</blockquote><h3>Code blocks</h3><pre><code>sinfo -N -l\nsqueue --me</code></pre><h3>Lists</h3><ul><li>First point</li><li>Second point</li><li>Third point</li></ul><p>See <strong>BLOG_GUIDE.md</strong> in the project root for the full step-by-step on writing and publishing a new post.</p>"
+    }
+  ]
+}
