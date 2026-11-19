@@ -6,9 +6,22 @@ Run: python3 build.py
 import json, os, html
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+DIST = os.path.join(ROOT, "dist")  # build output goes here — this is the ONLY folder pushed to the public repo
 with open(os.path.join(ROOT, "data", "projects.json")) as f:
     DATA = json.load(f)
 PROJECTS = DATA["projects"]
+
+def _load(name, default):
+    path = os.path.join(ROOT, "data", name)
+    if os.path.isfile(path):
+        with open(path) as f:
+            return json.load(f)
+    return default
+
+SERVICES = _load("services.json", {"categories": []})
+GALLERY = _load("gallery.json", {"photos": []})
+BLOG = _load("blog.json", {"posts": []})
+TESTIMONIALS = _load("testimonials.json", {"testimonials": []})
 
 SITE_NAME = "ABU HORAIRAH | ENGINEERING PORTFOLIO"
 SITE_DESC = "Designing, building and optimizing AI, HPC, semiconductor EDA, enterprise networking and advanced storage infrastructure."
@@ -18,8 +31,9 @@ def esc(s): return html.escape(str(s), quote=True)
 
 def nav(active, depth=""):
     pages = [("Home", "index.html", "home"), ("About", "about.html", "about"),
-             ("Projects", "projects.html", "projects"), ("Technologies", "technologies.html", "tech"),
-             ("Architecture", "architecture.html", "arch"), ("Contact", "contact.html", "contact")]
+             ("Projects", "projects.html", "projects"), ("Services", "services.html", "services"),
+             ("Technologies", "technologies.html", "tech"), ("Blog", "blog.html", "blog"),
+             ("Gallery", "gallery.html", "gallery"), ("Contact", "contact.html", "contact")]
     links = "\n".join(
         f'<a href="{depth}{href}" class="{"active" if key==active else ""}">{label}</a>'
         for label, href, key in pages
@@ -130,6 +144,32 @@ def build_home():
         </div>
       </a>""" for p in featured)
 
+    photos = GALLERY.get("photos", [])
+    carousel_html = ""
+    if photos:
+        items = "".join(f"""
+          <div class="carousel-item">
+            <img src="assets/img/gallery/{esc(ph['filename'])}" alt="{esc(ph['title'])}" loading="lazy">
+            <div class="carousel-caption">{esc(ph['title'])}</div>
+          </div>""" for ph in photos)
+        # duplicate the track once so the CSS animation loops seamlessly
+        carousel_html = f"""
+<section class="section-tight">
+  <div class="container">
+    <span class="eyebrow">Gallery Preview</span>
+    <h2 style="margin:14px 0 28px;">On-Site &amp; Project Moments</h2>
+  </div>
+  <div class="carousel-outer">
+    <div class="carousel-track">
+      {items}
+      {items}
+    </div>
+  </div>
+  <div class="container" style="margin-top:20px;">
+    <a href="gallery.html" class="btn btn-outline">View Full Gallery &rarr;</a>
+  </div>
+</section>"""
+
     body = f"""
 <section class="hero">
   <div class="container">
@@ -171,7 +211,7 @@ def build_home():
     <div style="margin-top:32px;"><a href="projects.html" class="btn btn-outline">View All 14 Projects &rarr;</a></div>
   </div>
 </section>
-
+{carousel_html}
 <section class="section">
   <div class="container">
     <span class="eyebrow">Capability</span>
@@ -255,11 +295,15 @@ def build_about():
       </div>""" for e in experience)
 
     body = f"""
-<section class="hero" style="padding-top:64px;padding-bottom:40px;">
+<section class="hero" style="padding-top:64px;padding-bottom:40px;text-align:center;">
   <div class="container">
+    <div class="profile-photo-wrap">
+      <img src="assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="profile-photo"
+           onerror="this.outerHTML='&lt;div class=&quot;profile-photo-fallback&quot;&gt;AH&lt;/div&gt;';">
+    </div>
     <span class="eyebrow">About</span>
     <h1 style="margin-top:14px;">Engineering Profile</h1>
-    <p class="lead">AI/HPC Solutions Architect &amp; MLOps Consultant &mdash; EDA Tools, GPU Infrastructure, Cloud Computing, Kubernetes, Terraform, SLURM, Cadence, Xilinx, Synopsys, Enterprise Storage &amp; Networking, ARM.</p>
+    <p class="lead" style="margin-left:auto;margin-right:auto;">AI/HPC Solutions Architect &amp; MLOps Consultant &mdash; EDA Tools, GPU Infrastructure, Cloud Computing, Kubernetes, Terraform, SLURM, Cadence, Xilinx, Synopsys, Enterprise Storage &amp; Networking, ARM.</p>
   </div>
 </section>
 
@@ -412,46 +456,133 @@ def build_technologies():
     write("technologies.html", page_shell("Technologies", "Technology stack across AI, HPC, EDA, networking and storage projects.", "tech", body))
 
 # ---------------------------------------------------------------------------
-# ARCHITECTURE PAGE
+# SERVICES PAGE
 # ---------------------------------------------------------------------------
-def build_architecture():
-    body = """
+def build_services():
+    total = sum(len(c["services"]) for c in SERVICES.get("categories", []))
+    sections = "\n".join(f"""
+      <div style="margin-bottom:44px;">
+        <h2 style="margin-bottom:22px;">{esc(cat['name'])}</h2>
+        <div class="grid grid-3">
+          {''.join(f'''<div class="card"><h3 style="font-size:1rem;">{esc(s["name"])}</h3><p class="text-muted" style="margin-top:8px;font-size:0.88rem;">{esc(s["desc"])}</p></div>''' for s in cat["services"])}
+        </div>
+      </div>""" for cat in SERVICES.get("categories", []))
+
+    body = f"""
 <section class="hero" style="padding-top:64px;padding-bottom:32px;">
   <div class="container">
-    <span class="eyebrow">Architecture</span>
-    <h1 style="margin-top:14px;">Infrastructure Architecture Showcase</h1>
-    <p class="lead">A high-level view of how the five engineering domains in this portfolio relate to one another.</p>
+    <span class="eyebrow">Services</span>
+    <h1 style="margin-top:14px;">{total}+ Infrastructure Engineering Services</h1>
+    <p class="lead">A full menu of AI, HPC, semiconductor EDA, enterprise networking and storage services &mdash; available for consulting engagements worldwide, remote or on-site.</p>
+    <div class="btn-row" style="margin-top:24px;"><a href="contact.html" class="btn btn-primary">Discuss a Project</a></div>
+  </div>
+</section>
+<section class="section-tight">
+  <div class="container">{sections}</div>
+</section>
+"""
+    write("services.html", page_shell("Services", f"{total}+ AI, HPC, EDA, networking and storage engineering services offered by Abu Horairah Sandhu.", "services", body))
+
+# ---------------------------------------------------------------------------
+# GALLERY PAGE
+# ---------------------------------------------------------------------------
+def build_gallery():
+    photos = GALLERY.get("photos", [])
+    cards = "".join(f"""
+      <div class="gallery-card">
+        <img src="assets/img/gallery/{esc(ph['filename'])}" alt="{esc(ph['title'])}" loading="lazy"
+             onerror="this.style.display='none';">
+        <div class="gcaption"><h4>{esc(ph['title'])}</h4><p>{esc(ph['description'])}</p></div>
+      </div>""" for ph in photos) or '<p class="text-muted">No photos added yet — see PHOTO_GUIDE.md to add your first ones.</p>'
+
+    body = f"""
+<section class="hero" style="padding-top:64px;padding-bottom:32px;">
+  <div class="container">
+    <span class="eyebrow">Gallery</span>
+    <h1 style="margin-top:14px;">Photo Gallery</h1>
+    <p class="lead">A look at projects, deployments and milestones along the way.</p>
   </div>
 </section>
 <section class="section-tight">
   <div class="container">
-    <div class="mermaid">
-graph TD
-  A[Enterprise Networking Fabric] --> B[HPC Compute Cluster]
-  A --> C[AI Training & Inference Cluster]
-  A --> D[EDA Compute Farm]
-  B --> E[Parallel File System]
-  C --> E
-  D --> F[Distributed Storage - Ceph]
-  E --> G[Backup & Disaster Recovery]
-  F --> G
-  B --> H[Monitoring & AIOps]
-  C --> H
-  D --> H
-  A --> H
-    </div>
-    <p class="text-muted" style="margin-top:24px;">Networking (Project 10/11) underlies every compute domain. HPC and AI workloads (Projects 02, 04, 06) rely on the parallel file system (Project 13) for high-throughput I/O, while EDA (Projects 07-09) relies on the distributed storage platform (Project 12) and centralized licensing. Every domain feeds into unified monitoring/AIOps (Project 03/05) and is protected by the backup &amp; DR platform (Project 14).</p>
+    <div class="gallery-grid">{cards}</div>
   </div>
 </section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
-<script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 """
-    write("architecture.html", page_shell("Architecture", "How AI, HPC, EDA, networking and storage infrastructure domains interconnect.", "arch", body))
+    write("gallery.html", page_shell("Gallery", "Photo gallery of infrastructure projects, deployments and milestones.", "gallery", body))
+
+# ---------------------------------------------------------------------------
+# BLOG PAGES
+# ---------------------------------------------------------------------------
+def build_blog():
+    posts = sorted(BLOG.get("posts", []), key=lambda p: p["date"], reverse=True)
+    cards = "".join(f"""
+      <a href="blog/{esc(p['slug'])}.html" class="blog-card">
+        {f'<img src="assets/img/blog/{esc(p["cover"])}" alt="{esc(p["title"])}" loading="lazy">' if p.get('cover') else ''}
+        <div class="bcontent">
+          <div class="bdate">{esc(p['date'])}</div>
+          <h3 style="margin:8px 0 10px;font-size:1.1rem;">{esc(p['title'])}</h3>
+          <p class="text-muted" style="font-size:0.9rem;">{esc(p['excerpt'])}</p>
+          <div style="margin-top:12px;">{''.join(f'<span class="tag">{esc(t)}</span>' for t in p.get('tags', []))}</div>
+        </div>
+      </a>""" for p in posts) or '<p class="text-muted">No posts yet — see BLOG_GUIDE.md to publish your first one.</p>'
+
+    body = f"""
+<section class="hero" style="padding-top:64px;padding-bottom:32px;">
+  <div class="container">
+    <span class="eyebrow">Blog</span>
+    <h1 style="margin-top:14px;">Engineering Notes &amp; Writeups</h1>
+    <p class="lead">Thoughts, walkthroughs and lessons from building AI, HPC, EDA, networking and storage infrastructure.</p>
+  </div>
+</section>
+<section class="section-tight">
+  <div class="container">
+    <div class="grid grid-3">{cards}</div>
+  </div>
+</section>
+"""
+    write("blog.html", page_shell("Blog", "Engineering notes and writeups on AI, HPC, EDA, networking and storage infrastructure.", "blog", body))
+
+    for p in posts:
+        build_blog_post(p)
+
+def build_blog_post(p):
+    body = f"""
+<section class="project-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../blog.html">Blog</a> / {esc(p['title'])}</div>
+    <span class="eyebrow">{esc(p['date'])}</span>
+    <h1 style="margin:14px 0 16px;">{esc(p['title'])}</h1>
+    <div>{''.join(f'<span class="tag">{esc(t)}</span>' for t in p.get('tags', []))}</div>
+  </div>
+</section>
+<section class="section-tight">
+  <div class="container">
+    {f'<img src="../assets/img/blog/{esc(p["cover"])}" alt="{esc(p["title"])}" style="width:100%;border-radius:var(--radius-md);margin-bottom:32px;max-width:760px;display:block;margin-left:auto;margin-right:auto;">' if p.get('cover') else ''}
+    <div class="blog-post-body">
+      {p['content']}
+    </div>
+    <div style="max-width:760px;margin:40px auto 0;">
+      <a href="../blog.html" class="btn btn-outline">&larr; Back to Blog</a>
+    </div>
+  </div>
+</section>
+"""
+    out = page_shell(p["title"], p.get("excerpt", ""), "blog", body, depth="../")
+    write(f"blog/{p['slug']}.html", out)
 
 # ---------------------------------------------------------------------------
 # CONTACT PAGE
 # ---------------------------------------------------------------------------
 def build_contact():
+    testimonials = TESTIMONIALS.get("testimonials", [])
+    t_cards = "".join(f"""
+      <div class="card testimonial-card">
+        <div class="testimonial-stars">{'★' * t['rating']}{'☆' * (5 - t['rating'])}</div>
+        <p class="quote">&ldquo;{esc(t['quote'])}&rdquo;</p>
+        <div class="who">{esc(t['name'])} &middot; {esc(t['role'])}</div>
+      </div>""" for t in testimonials) or '<p class="text-muted">No testimonials published yet.</p>'
+
     body = """
 <section class="hero" style="padding-top:64px;padding-bottom:40px;">
   <div class="container">
@@ -466,8 +597,62 @@ def build_contact():
     </div>
   </div>
 </section>
+
+<section class="section-tight" style="background:var(--bg-secondary);">
+  <div class="container">
+    <span class="eyebrow">Feedback</span>
+    <h2 style="margin:14px 0 10px;">Leave a Rating &amp; Review</h2>
+    <p class="text-muted" style="margin-bottom:28px;max-width:600px;">Pick a star rating and write a short message. This opens your email app pre-filled — nothing is posted automatically, so there's no spam risk, and I'll add it to the reviews below once received.</p>
+    <div class="card" style="max-width:560px;">
+      <div class="star-rating" id="starRating">
+        <span class="star" data-v="1">&#9733;</span><span class="star" data-v="2">&#9733;</span><span class="star" data-v="3">&#9733;</span><span class="star" data-v="4">&#9733;</span><span class="star" data-v="5">&#9733;</span>
+      </div>
+      <textarea id="feedbackText" placeholder="Your feedback..." style="width:100%;margin-top:16px;padding:12px;border-radius:8px;border:1px solid var(--border-strong);background:var(--bg-primary);color:var(--text-primary);font-family:inherit;min-height:100px;"></textarea>
+      <input id="feedbackName" placeholder="Your name / organization" style="width:100%;margin-top:10px;padding:12px;border-radius:8px;border:1px solid var(--border-strong);background:var(--bg-primary);color:var(--text-primary);font-family:inherit;">
+      <button class="btn btn-primary" style="margin-top:16px;" onclick="submitFeedback()">Send Feedback</button>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <span class="eyebrow">Reviews</span>
+    <h2 style="margin:14px 0 28px;">What People Say</h2>
+    <div class="grid grid-3">__TESTIMONIALS__</div>
+  </div>
+</section>
+
+<script>
+  let selectedRating = 0;
+  const stars = document.querySelectorAll('#starRating .star');
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.getAttribute('data-v'));
+      stars.forEach(s => s.classList.toggle('filled', parseInt(s.getAttribute('data-v')) <= selectedRating));
+    });
+  });
+  function submitFeedback() {
+    const text = document.getElementById('feedbackText').value.trim();
+    const name = document.getElementById('feedbackName').value.trim() || 'Anonymous';
+    if (!selectedRating || !text) { alert('Please select a star rating and write your feedback.'); return; }
+    const subject = encodeURIComponent('Portfolio Feedback — ' + selectedRating + ' stars');
+    const body = encodeURIComponent('Rating: ' + selectedRating + '/5\\nFrom: ' + name + '\\n\\n' + text);
+    window.location.href = 'mailto:engr.abuhorairahsandhu@gmail.com?subject=' + subject + '&body=' + body;
+  }
+</script>
 """
-    write("contact.html", page_shell("Contact", "Get in touch to discuss AI, HPC, EDA, networking or storage infrastructure projects.", "contact", body))
+    body = body.replace("__TESTIMONIALS__", t_cards)
+    body += """
+<section class="section-tight">
+  <div class="container">
+    <span class="eyebrow">Discussion</span>
+    <h2 style="margin:14px 0 24px;">Public Comments</h2>
+    <p class="text-muted" style="margin-bottom:20px;">Leave a public comment below (requires a free GitHub account to post — viewing comments needs no account).</p>
+    <!-- GISCUS_EMBED_PLACEHOLDER: replace this comment with the <script> snippet from giscus.app once configured. See GISCUS_SETUP.md -->
+  </div>
+</section>
+"""
+    write("contact.html", page_shell("Contact", "Get in touch to discuss AI, HPC, EDA, networking or storage infrastructure projects, or leave a rating and review.", "contact", body))
 
 # ---------------------------------------------------------------------------
 # 404 PAGE
@@ -683,8 +868,9 @@ def build_project_page(p):
 # SEO FILES
 # ---------------------------------------------------------------------------
 def build_seo():
-    urls = ["index.html", "about.html", "projects.html", "technologies.html", "architecture.html", "contact.html"]
+    urls = ["index.html", "about.html", "projects.html", "services.html", "technologies.html", "blog.html", "gallery.html", "contact.html"]
     urls += [f"projects/{p['slug']}.html" for p in PROJECTS]
+    urls += [f"blog/{p['slug']}.html" for p in BLOG.get("posts", [])]
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for u in urls:
         sitemap += f"  <url><loc>{BASE_URL}/{u}</loc></url>\n"
@@ -693,21 +879,38 @@ def build_seo():
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n")
 
 def write(relpath, content):
-    full = os.path.join(ROOT, relpath)
-    os.makedirs(os.path.dirname(full), exist_ok=True)
+    full = os.path.join(DIST, relpath)
+    os.makedirs(os.path.dirname(full) or DIST, exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:
         f.write(content)
     print("wrote", relpath)
 
+def copy_static_assets():
+    """Copy the source assets/ folder (CSS/JS/images) into dist/assets/ so the
+    public output repo has everything it needs to render, without exposing
+    build.py or the data/*.json source files that generated the HTML."""
+    import shutil
+    src = os.path.join(ROOT, "assets")
+    dst = os.path.join(DIST, "assets")
+    if os.path.isdir(dst):
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+    # .nojekyll prevents GitHub Pages from running Jekyll processing on the output
+    with open(os.path.join(DIST, ".nojekyll"), "w") as f:
+        f.write("")
+
 if __name__ == "__main__":
+    copy_static_assets()
     build_home()
     build_about()
     build_projects_overview()
+    build_services()
     build_technologies()
-    build_architecture()
+    build_gallery()
+    build_blog()
     build_contact()
     build_404()
     for p in PROJECTS:
         build_project_page(p)
     build_seo()
-    print(f"\nBuild complete: {len(PROJECTS)} project pages + 7 site pages generated.")
+    print(f"\nBuild complete: {len(PROJECTS)} project pages, {len(BLOG.get('posts', []))} blog post(s) + site pages generated.")
