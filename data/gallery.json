@@ -1,0 +1,29 @@
+{
+  "photos": [
+    {
+      "filename": "photo1.jpg",
+      "title": "Enterprise Private AI Infrastructure",
+      "description": "Hands-on implementation of a private AI platform, including local AI deployment, GPU infrastructure, model inference, and enterprise AI environment configuration."
+    },
+    {
+      "filename": "photo2.jpg",
+      "title": "Distributed AI Training & Inference Cluster",
+      "description": "Engineering and configuring a distributed AI computing environment with GPU nodes, high-speed interconnects, multi-node compute infrastructure, and AI workload deployment."
+    },
+    {
+      "filename": "photo3.jpg",
+      "title": "AI-Powered Infrastructure Operations",
+      "description": "Developing and managing an intelligent infrastructure operations environment for monitoring system health, analyzing logs, visualizing performance metrics, and identifying infrastructure anomalies."
+    },
+    {
+      "filename": "photo4.jpg",
+      "title": "Enterprise HPC Cluster & Slurm",
+      "description": "Hands-on HPC cluster deployment and administration using Linux-based compute nodes, Slurm workload management, job scheduling, and high-performance computing infrastructure."
+    },
+    {
+      "filename": "photo5.jpg",
+      "title": "HPC Resource Management & Monitoring",
+      "description": "Monitoring and analyzing HPC cluster resources, including CPU utilization, memory consumption, node health, job workloads, resource allocation, and cluster performance."
+    }
+  ]
+}
