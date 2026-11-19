@@ -41,7 +41,11 @@ def nav(active, depth=""):
     return f"""
 <nav class="navbar">
   <div class="container">
-    <a href="{depth}index.html" class="brand"><span class="mark">AH</span> ABU HORAIRAH</a>
+    <a href="{depth}index.html" class="brand">
+      <img src="{depth}assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="nav-logo-photo"
+           onerror="this.outerHTML='&lt;span class=&quot;mark&quot;&gt;AH&lt;/span&gt;';">
+      ENGR ABU HORAIRAH SANDHU
+    </a>
     <div class="nav-links" id="navLinks">
       {links}
     </div>
@@ -58,14 +62,18 @@ def footer(depth=""):
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="brand" style="margin-bottom:14px;"><span class="mark">AH</span> ABU HORAIRAH</div>
+        <div class="brand" style="margin-bottom:14px;">
+          <img src="{depth}assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="nav-logo-photo"
+               onerror="this.outerHTML='&lt;span class=&quot;mark&quot;&gt;AH&lt;/span&gt;';">
+          ENGR ABU HORAIRAH SANDHU
+        </div>
         <p class="text-muted" style="max-width:360px;">Engineering intelligent computing infrastructure across AI, HPC, semiconductor EDA, enterprise networking and advanced storage.</p>
       </div>
       <div>
         <h4>Navigate</h4>
         <a href="{depth}projects.html">Projects</a>
+        <a href="{depth}services.html">Services</a>
         <a href="{depth}technologies.html">Technologies</a>
-        <a href="{depth}architecture.html">Architecture</a>
         <a href="{depth}about.html">About</a>
       </div>
       <div>
@@ -173,13 +181,21 @@ def build_home():
     body = f"""
 <section class="hero">
   <div class="container">
-    <div class="hero-badge"><span class="dot"></span> AI / HPC / EDA / Network / Storage Engineering</div>
-    <h1>Building the Infrastructure Behind <span class="gradient-text">Intelligent Computing.</span></h1>
-    <p class="lead">Specializing in AI infrastructure, HPC clusters, semiconductor EDA environments, high-performance networking and enterprise storage solutions.</p>
-    <div class="btn-row">
-      <a href="projects.html" class="btn btn-primary">Explore Projects</a>
-      <a href="technologies.html" class="btn btn-outline">Technical Expertise</a>
-      <a href="contact.html" class="btn btn-ghost">Contact / Collaborate</a>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="dot"></span> AI / HPC / EDA / Network / Storage Engineering</div>
+        <h1>Building the Infrastructure Behind <span class="gradient-text">Intelligent Computing.</span></h1>
+        <p class="lead">Specializing in AI infrastructure, HPC clusters, semiconductor EDA environments, high-performance networking and enterprise storage solutions.</p>
+        <div class="btn-row">
+          <a href="projects.html" class="btn btn-primary">Explore Projects</a>
+          <a href="technologies.html" class="btn btn-outline">Technical Expertise</a>
+          <a href="contact.html" class="btn btn-ghost">Contact / Collaborate</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="hero-photo"
+             onerror="this.outerHTML='&lt;div class=&quot;hero-photo-fallback&quot;&gt;AH&lt;/div&gt;';">
+      </div>
     </div>
   </div>
 </section>
