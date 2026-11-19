@@ -298,7 +298,7 @@ def build_about():
 <section class="hero" style="padding-top:64px;padding-bottom:40px;text-align:center;">
   <div class="container">
     <div class="profile-photo-wrap">
-      <img src="assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="profile-photo"
+      <img src="assets/img/profile-dp.jpg" alt="Abu Horairah Sandhu" class="profile-photo"
            onerror="this.outerHTML='&lt;div class=&quot;profile-photo-fallback&quot;&gt;AH&lt;/div&gt;';">
     </div>
     <p class="lead" style="margin-left:auto;margin-right:auto;">AI/HPC Solutions Architect &amp; MLOps Consultant &mdash; EDA Tools, GPU Infrastructure, Cloud Computing, Kubernetes, Terraform, SLURM, Cadence, Xilinx, Synopsys, Enterprise Storage &amp; Networking, ARM.</p>
