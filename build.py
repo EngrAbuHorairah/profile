@@ -648,7 +648,21 @@ def build_contact():
     <span class="eyebrow">Discussion</span>
     <h2 style="margin:14px 0 24px;">Public Comments</h2>
     <p class="text-muted" style="margin-bottom:20px;">Leave a public comment below (requires a free GitHub account to post — viewing comments needs no account).</p>
-    <!-- GISCUS_EMBED_PLACEHOLDER: replace this comment with the <script> snippet from giscus.app once configured. See GISCUS_SETUP.md -->
+    <script src="https://giscus.app/client.js"
+            data-repo="EngrAbuHorairah/profile"
+            data-repo-id="R_kgDOVyln3w"
+            data-category="Announcements"
+            data-category-id="DIC_kwDOVyln384DLe3a"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="dark"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
   </div>
 </section>
 """

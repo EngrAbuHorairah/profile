@@ -13,6 +13,7 @@
       if (current === 'dark') { root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', 'light'); }
       localStorage.setItem('ahs-theme', current === 'dark' ? '' : 'light');
       setIcon();
+      setGiscusTheme(current);
     });
 
     // Mobile nav
@@ -38,6 +39,19 @@
     });
   });
 })();
+
+// ===================== Giscus theme sync (Contact page comments) =====================
+function setGiscusTheme(theme) {
+  const iframe = document.querySelector('iframe.giscus-frame');
+  if (!iframe) return;
+  iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+}
+window.addEventListener('message', (event) => {
+  if (event.origin !== 'https://giscus.app') return;
+  if (!(typeof event.data === 'object' && event.data.giscus)) return;
+  const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  setGiscusTheme(current);
+});
 
 // ===================== Project Filtering (Projects Overview Page) =====================
 function initProjectFilters(projects) {
