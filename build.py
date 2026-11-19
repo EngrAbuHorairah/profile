@@ -42,7 +42,7 @@ def nav(active, depth=""):
 <nav class="navbar">
   <div class="container">
     <a href="{depth}index.html" class="brand">
-      <img src="{depth}assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="nav-logo-photo"
+      <img src="{depth}assets/img/logo.jpg" alt="Abu Horairah Sandhu" class="nav-logo-photo"
            onerror="this.outerHTML='&lt;span class=&quot;mark&quot;&gt;AH&lt;/span&gt;';">
       ENGR ABU HORAIRAH SANDHU
     </a>
@@ -63,7 +63,7 @@ def footer(depth=""):
     <div class="footer-grid">
       <div>
         <div class="brand" style="margin-bottom:14px;">
-          <img src="{depth}assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="nav-logo-photo"
+          <img src="{depth}assets/img/logo.jpg" alt="Abu Horairah Sandhu" class="nav-logo-photo"
                onerror="this.outerHTML='&lt;span class=&quot;mark&quot;&gt;AH&lt;/span&gt;';">
           ENGR ABU HORAIRAH SANDHU
         </div>
@@ -193,8 +193,7 @@ def build_home():
         </div>
       </div>
       <div class="hero-photo-wrap">
-        <img src="assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="hero-photo"
-             onerror="this.outerHTML='&lt;div class=&quot;hero-photo-fallback&quot;&gt;AH&lt;/div&gt;';">
+        __HERO_ROTATOR__
       </div>
     </div>
   </div>
@@ -252,6 +251,20 @@ def build_home():
   </div>
 </section>
 """
+    photos_for_hero = GALLERY.get("photos", [])[:6]
+    if photos_for_hero:
+        rotator_imgs = "".join(
+            f'<img src="assets/img/gallery/{esc(ph["filename"])}" alt="{esc(ph["title"])}" class="hero-rotator-img{" active" if i == 0 else ""}" onerror="this.remove();">'
+            for i, ph in enumerate(photos_for_hero)
+        )
+        hero_rotator = f'<div class="hero-rotator" id="heroRotator">{rotator_imgs}</div>'
+    else:
+        hero_rotator = ('<div class="hero-rotator" id="heroRotator">'
+                         '<img src="assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="hero-rotator-img active" '
+                         'onerror="this.outerHTML=\'&lt;div class=&quot;hero-photo-fallback&quot;&gt;AH&lt;/div&gt;\';">'
+                         '</div>')
+    body = body.replace("__HERO_ROTATOR__", hero_rotator)
+
     html_out = page_shell("Home", SITE_DESC, "home", body, depth="")
     write("index.html", html_out)
 

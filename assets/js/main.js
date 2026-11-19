@@ -24,6 +24,20 @@
       links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
     }
 
+    // Hero photo rotator (cross-fade between multiple images)
+    const rotator = document.getElementById('heroRotator');
+    if (rotator) {
+      const imgs = rotator.querySelectorAll('.hero-rotator-img');
+      if (imgs.length > 1) {
+        let idx = 0;
+        setInterval(() => {
+          imgs[idx].classList.remove('active');
+          idx = (idx + 1) % imgs.length;
+          imgs[idx].classList.add('active');
+        }, 4000);
+      }
+    }
+
     // Animated counters
     document.querySelectorAll('[data-counter]').forEach(el => {
       const target = parseInt(el.getAttribute('data-counter'), 10);
