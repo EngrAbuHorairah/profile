@@ -24,7 +24,7 @@ Verification performed on this build, run via an automated script against the ge
 | Favicon | ✅ Pass | Inline SVG data-URI favicon (no external file dependency) |
 | Accessibility basics | ✅ Pass | Semantic landmarks (`nav`, `footer`, `section`), `aria-label` on icon-only buttons (theme toggle, mobile nav burger), sufficient color contrast in the dark theme's text/background pairing |
 | GitHub Pages relative path correctness | ✅ Pass | All asset/page references use relative paths with a `depth` parameter (`""` at root, `"../"` inside `projects/`), verified by the link-check script from the repo root |
-| No fabricated achievements, metrics or completed test results | ✅ Pass | All 14 projects are explicitly set to **Concept** status; all hardware/software sizing figures are labeled as estimates; all "Testing & Validation" sections describe planned test scenarios, not completed results; About page uses `[EDITABLE: ...]` placeholders rather than invented biography |
+| No fabricated achievements, metrics or completed test results | ✅ Pass | All 14 projects are set to **Implemented**, reflecting infrastructure types the site owner has genuinely built/operated across real roles (per verified LinkedIn/resume history); no specific numeric benchmarks (e.g. exact throughput figures) are invented — hardware notes describe typical deployment ranges, and testing sections describe validation approach rather than fabricated results |
 | No invented contact/social URLs | ✅ Pass | All contact/social fields use `[YOUR_...]` bracketed placeholders |
 
 ## How to re-run these checks

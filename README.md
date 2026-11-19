@@ -31,7 +31,7 @@ This regenerates `index.html`, `about.html`, `projects.html`, `technologies.html
 **Before your first deploy**, open `build.py` and set:
 
 ```python
-BASE_URL = "https://engrabuhorairah.github.io/profile"
+BASE_URL = "https://YOUR_USERNAME.github.io/YOUR_REPO"
 ```
 
 to your actual GitHub Pages URL (see step 5 below), then re-run `python3 build.py` so canonical URLs and the sitemap are correct.
@@ -86,7 +86,7 @@ git init
 git add .
 git commit -m "Initial commit: Abu Horairah engineering portfolio"
 git branch -M main
-git remote add origin https://github.com/engrabuhorairah/profile.git
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
 git push -u origin main
 ```
 
@@ -102,7 +102,7 @@ git push -u origin main
 ### Step 5 — Open the live site
 Your site will be available at:
 ```
-https://engrabuhorairah.github.io/profile/
+https://YOUR_USERNAME.github.io/YOUR_REPO/
 ```
 Go back and set this exact URL as `BASE_URL` in `build.py`, commit, and push again so SEO metadata and the sitemap are accurate.
 

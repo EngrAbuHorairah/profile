@@ -252,12 +252,15 @@ def build_home():
 </section>
 """
     photos_for_hero = GALLERY.get("photos", [])[:6]
+    nav_arrows = ('<button class="hero-rotator-nav prev" type="button" aria-label="Previous photo" onclick="heroRotatorNav(-1)">&#10094;</button>'
+                  '<button class="hero-rotator-nav next" type="button" aria-label="Next photo" onclick="heroRotatorNav(1)">&#10095;</button>')
     if photos_for_hero:
         rotator_imgs = "".join(
             f'<img src="assets/img/gallery/{esc(ph["filename"])}" alt="{esc(ph["title"])}" class="hero-rotator-img{" active" if i == 0 else ""}" onerror="this.remove();">'
             for i, ph in enumerate(photos_for_hero)
         )
-        hero_rotator = f'<div class="hero-rotator" id="heroRotator">{rotator_imgs}</div>'
+        arrows = nav_arrows if len(photos_for_hero) > 1 else ""
+        hero_rotator = f'<div class="hero-rotator" id="heroRotator">{rotator_imgs}{arrows}</div>'
     else:
         hero_rotator = ('<div class="hero-rotator" id="heroRotator">'
                          '<img src="assets/img/profile.jpg" alt="Abu Horairah Sandhu" class="hero-rotator-img active" '

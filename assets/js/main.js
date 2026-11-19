@@ -24,19 +24,8 @@
       links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
     }
 
-    // Hero photo rotator (cross-fade between multiple images)
-    const rotator = document.getElementById('heroRotator');
-    if (rotator) {
-      const imgs = rotator.querySelectorAll('.hero-rotator-img');
-      if (imgs.length > 1) {
-        let idx = 0;
-        setInterval(() => {
-          imgs[idx].classList.remove('active');
-          idx = (idx + 1) % imgs.length;
-          imgs[idx].classList.add('active');
-        }, 4000);
-      }
-    }
+    // Hero photo rotator (cross-fade between multiple images, with manual arrows)
+    initHeroRotator();
 
     // Animated counters
     document.querySelectorAll('[data-counter]').forEach(el => {
@@ -53,6 +42,27 @@
     });
   });
 })();
+
+// ===================== Hero photo rotator =====================
+let _heroIdx = 0;
+let _heroTimer = null;
+function initHeroRotator() {
+  const rotator = document.getElementById('heroRotator');
+  if (!rotator) return;
+  const imgs = rotator.querySelectorAll('.hero-rotator-img');
+  if (imgs.length <= 1) return;
+  const show = (newIdx) => {
+    imgs[_heroIdx].classList.remove('active');
+    _heroIdx = (newIdx + imgs.length) % imgs.length;
+    imgs[_heroIdx].classList.add('active');
+  };
+  const startAuto = () => {
+    clearInterval(_heroTimer);
+    _heroTimer = setInterval(() => show(_heroIdx + 1), 4000);
+  };
+  startAuto();
+  window.heroRotatorNav = (dir) => { show(_heroIdx + dir); startAuto(); };
+}
 
 // ===================== Giscus theme sync (Contact page comments) =====================
 function setGiscusTheme(theme) {

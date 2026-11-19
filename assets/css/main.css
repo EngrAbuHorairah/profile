@@ -180,21 +180,37 @@ h3 { font-size: 1.4rem; }
 .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-cyan); }
 .hero h1 { margin-bottom: 20px; max-width: 880px; }
 .hero .lead { margin-bottom: 36px; }
-.hero-photo-wrap { display: flex; justify-content: center; perspective: 1200px; }
+.hero-photo-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; perspective: 1200px; }
 .hero-rotator {
   position: relative; width: 100%; max-width: 320px; aspect-ratio: 4/5;
-  border-radius: 22px; overflow: hidden;
+  border-radius: 22px !important; overflow: hidden;
   border: 1px solid var(--border-strong);
   transform: rotateY(-8deg) rotateX(3deg);
   box-shadow: 24px 28px 0 -6px var(--bg-tertiary), 24px 28px 40px rgba(0,0,0,0.45), 0 0 0 1px var(--border-subtle);
   transition: transform .35s ease;
 }
 .hero-rotator:hover { transform: rotateY(-2deg) rotateX(1deg) scale(1.01); }
+.hero-rotator::after {
+  /* glossy reflection highlight overlay */
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 22%, transparent 45%);
+}
 .hero-rotator-img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  opacity: 0; transition: opacity 1.2s ease;
+  border-radius: 22px; opacity: 0; transition: opacity 1.2s ease;
 }
 .hero-rotator-img.active { opacity: 1; }
+.hero-rotator-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 6;
+  width: 38px; height: 38px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(10,14,23,0.55); color: #fff; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .2s ease, background .2s ease;
+}
+.hero-rotator:hover .hero-rotator-nav { opacity: 1; }
+.hero-rotator-nav:hover { background: rgba(10,14,23,0.85); }
+.hero-rotator-nav.prev { left: 12px; }
+.hero-rotator-nav.next { right: 12px; }
 .hero-photo-fallback {
   width: 100%; max-width: 320px; aspect-ratio: 4/5; border-radius: 22px;
   background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
